@@ -52,7 +52,7 @@
     // echo $arr['name'];
 
     // php数组的方法--不用记忆
-    // echo in_array('jack',$arr);//false,空白字符串
+    echo in_array('jack',$arr);//false,空白字符串
     // echo in_array('Jack',$arr);//true,1
     // echo count($arr);//2 
     // echo array_key_exists("name",$arr);//true,1
