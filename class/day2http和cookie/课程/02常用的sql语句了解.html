@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            常用的sql语句
+                + 什么是sql语句
+                    ==> 专门用来操作数据库的语句，语法规范
+                    ==> mysql数据库只能依靠sql语句来操作
+                    ==> 分成 增删改查 的sql语句
+                + 我在操作mysql的时候
+                    ==> 如果我想增加，就执行增加的sql语句
+                    ==> 如果我想删除，就执行删除的sql语句
+                    ==> 如果我想修改，就执行修改的sql语句
+                    ==> 如果我想查询，就执行查询的sql语句
+                    ==> 在php里面可使用mysqli_query(连接信息,sql语句)来操作
+                + 在php里面执行完毕sql语句需不需要解析结果
+                    ==> 增加的sql语句返回的结果就是:true表示成功，false表示增加失败
+                    ==> 删除的sql语句返回的结果就是:true表示成功，false表示增加失败
+                    ==> 修改的sql语句返回的结果就是:true表示成功，false表示增加失败
+                    ==> 查询的sql语句返回的结果就是
+                        --> 是一个查询信息，需要解析
+                        --> 查询不到结果，就是false
+                    ==> 结论
+                        --> 增删改 不需要解析结果，因为结果是true或者false
+                        --> 查询 需要解析结果，因为查询到的数据以后我们看不懂
+
+                sql语句的语法规范(你可以不遵守，建议你遵守)
+                    1 sql语句里面的关键字要大写
+                    2 表名和字段名尽可能使用反引号包裹
+                        --> 注意:这个不是es6的模板字符串，是sql语法规范的一部分
+                sql语句的语法规则(必须遵守，不遵守报错)
+                    当你写一些文本内容的时候，需要使用引号包裹，表示是一个字符串
+        */
+    </script>
+</body>
+</html>
