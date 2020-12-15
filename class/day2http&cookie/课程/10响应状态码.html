@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            响应状态码（了解）
+                + 在响应报文里面的一个重要信息
+                + 表示本次请求的状态
+                    --> 成功(标准成功，删除成功，创建成功，....)
+                    --> 失败(路径不对，参数不对，权限不对,....)
+                    --> 缓存
+                    --> ....
+                + 响应状态码分成五类
+                    ==> 100-199
+                        ==> 表示连接继续，继续请求
+                        ==> 很少出现
+                    ==> 200-299
+                        ==> 各种意义上的成功
+                        ==> 200 标准成功
+                    ==> 300-399
+                        ==> 重定向
+                        ==> 本该请求一个路径，但是由服务器给你换了一个路径
+                        ==> 你看到的路径和你请求的路径不是同一个
+                        ==> 304 缓存
+                        ==> 301 永久重定向
+                        ==> 302 临时重定向
+                    ==> 400-499
+                        ==> 各种客户端错误
+                        ==> 404 请求地址错误
+                        ==> 403 权限不够不允许查看
+                    ==> 500-599
+                        ==> 各种服务端错误
+                        ==> 502服务端维护或者过载
+        */
+
+        
+        var code  = encodeURIComponent("购物车");
+        var str = decodeURIComponent('%E8%B4%AD%E7%89%A9%E8%BD%A6');
+
+        console.log(code)
+        console.log(str)
+
+    </script>
+</body>
+</html>

@@ -13,14 +13,12 @@
     $res = mysqli_query($link,"SELECT * FROM `info` WHERE `username` = '$username' AND `password` = '$password'");
     $re = mysqli_fetch_all($res);
     if($re){
-        //如果存在
-        echo "login success";
+        //如果存在返回登录
+        header('location:./登录.html');
     }else{
-        // echo "login defult";
-        //如果不存在返回重新注册
+        //如果不存在，写入数据库，并返回登录
+        mysqli_query($link,"INSERT INTO `info` (`username`,`password`) VALUES ('$username','$password')");
         header('location:./登录.html');
     }
 
-    //断开链接
-    mysql_close($link);
 ?>
