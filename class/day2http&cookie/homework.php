@@ -32,16 +32,16 @@
     // print_r($jsonser);
 
     // 4 删除所有年纪小于 19 岁 并且 成绩为 60 分以下的学员
-    $sqlDCode = "DELETE FROM `student` WHERE `age`<19 AND `score`<60 ";
-    $ser = mysqli_query($link,$sqlDCode);
-    var_dump($ser);
+    // $sqlDCode = "DELETE FROM `student` WHERE `age`<19 AND `score`<60 ";
+    // $ser = mysqli_query($link,$sqlDCode);
+    // var_dump($ser);
 
-    // 5 把 id 大于 950 的同学的成绩修改为 100 分
-    $sqluCode = "UPDATE `student` SET `score` = 100 WHERE `id`>950";
-    $ser = mysqli_query($link,$sqluCode);
-    var_dump($ser);
+    // // 5 把 id 大于 950 的同学的成绩修改为 100 分
+    // $sqluCode = "UPDATE `student` SET `score` = 100 WHERE `id`>950";
+    // $ser = mysqli_query($link,$sqluCode);
+    // var_dump($ser);
 
-    //6 添加一些学员到数据库里面（学员姓名成绩班级... 自定）
+    // //6 添加一些学员到数据库里面（学员姓名成绩班级... 自定）
     $sqluCode = "INSERT INTO `student` VALUES  (null,'张章长',60,'男','1906',80)";
     $ser = mysqli_query($link,$sqluCode);
     var_dump($ser);
