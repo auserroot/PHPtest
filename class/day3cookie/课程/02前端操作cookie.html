@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            前端操作cookie
+                + 前端你操作cookie是使用js来操作的
+                + 操作(增删改查)
+            增加一条cookie
+                + 语法:document.cookie = 'key=value';
+                + 注意：
+                    ==> 字符串里面写的是一条cookie
+                    ==> 如果你想设置两条cookie，那么就把代码写两边
+                + 设置cookie的时效性
+                    ==> 当你不进行额外的设置的时候，你设置的cookie默认就是会话失效(关闭浏览器)
+                    ==> 你想给一条cookie设置一个过期时间，需要在设置这个cookie的时候额外添加一下修饰信息
+                    ==> 修饰信息怎么添加，就是直接在cookie后书写就可以了
+                        ==> 语法:document.cookie = "a=100;expries=时间对象"
+
+            cookie的简单意义
+                + 假设我登录以后，我在cookie里面保存了一条信息，这个信息信息的过期时间是10天
+                    ==> 不管我是不是关闭浏览器，只要不清楚缓存，这个cookie就会一直留着
+                    ==> 10天以后过期
+                + 当我登录的时候
+                    ==> 我先查看一下cookie里面有没有我之前保存的信息
+                    ==> 如果有，那么我就直接按照登录处理
+                    ==> 如果没有，那么久按照没有登录处理
+                + 只要我登录过一次
+                    ==> 10天以内都会保存这个登录信息
+                    ==> 10天以内就不需要再登录，每次打开网站会自动按照登录处理
+                    ==> 10天以后，就需要重新登录一次
+                    ==> 10天免登录
+
+        */
+
+        // 增加一条cookie
+        document.cookie = 'name=zhangsan';
+
+        // 增加二条cookie
+        document.cookie = 'age=12';
+        document.cookie = 'score=100';
+
+        // 设置一个有过期时间的cookie
+        document.cookie = "a=100";
+
+        // new Date() 就是当前时间的时间对象
+        document.cookie = 'b=200;expires='+new Date()
+
+
+        // 一个合适的时间
+        var time = new Date();//当前时间
+        // time.getTime();//时间戳
+        // time.getTime()-8*60*60*1000;//八个小时前的时间戳
+
+        // 把这个时间戳再从新设置回time时间对象上
+        time.setTime(time.getTime()-8*60*60*1000+15*1000) //当前时间的15秒以后
+
+        // 此时time就是当前时间8个小时以前的时间对象
+        // 设置cookie的时候就使用这个八个小时以前的时间对象
+        // console.log(time)
+
+        // time就是15秒以后的时间
+        document.cookie = "c=300;expires="+time;
+    </script>
+</body>
+</html>

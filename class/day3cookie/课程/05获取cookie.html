@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script src="./cookie.js"></script> -->
+    <script>
+        /* 
+            获取cookie
+                + 在js里面获取cookie
+                + 使用document.cookie 就可以了
+                + 他不能获取单一一条数据
+                    + 只能是把所有的cookie都获取到
+        */
+        console.log(document.cookie)
+        var str = document.cookie;
+        // 把str变成一个数组，数组的每个元素都是一个“key=value”
+        var arr = str.split("; ");
+        console.log(arr)
+
+        // 我想获取age对应的值
+        var key = 'age';
+        for(var i=0;i<arr.length;i++){
+            // 遍历到的每一个元素arr[i] = "key=value"
+            // 把这个"key=value"变成[key,value]
+            var temp = arr[i].split('=');
+            if(temp[0]==key){
+                console.log(temp[1]);
+                break;
+            }
+        }
+        // console.log(getCookie('age'))
+    </script>
+</body>
+</html>

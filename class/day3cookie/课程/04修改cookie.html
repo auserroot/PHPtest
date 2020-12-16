@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>修改cookie</button>
+    <script>
+        /* 
+            修改cookie
+                + 因为cookie的存储不允许同名
+                + 所以你第二次设置同一条cookie的时候就是修改
+        */
+        document.cookie ="a=100";
+
+        var btn = document.querySelector('button');
+        btn.onclick = function(){
+            // 再次设置一遍a这个cookie就是修改
+            document.cookie="a=200"
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>删除cookie</button>
+    <script>
+        /* 
+            删除cookie
+                + cookie是不能删除的
+                + 你如果不想要这个cookie了
+                + 那么就把这个cookie的过期时间设置成当前时间以前，那么就能删除
+        */
+
+        document.cookie = "a=100";//会话级别
+
+        var btn = document.querySelector('button');
+        btn.onclick = function(){
+            var time = new Date();
+            time.setTime(time.getTime()-8*60*60*1000-1000)
+            document.cookie = "a=100;expires="+time;
+            //设置上一秒以后就过期了
+        }
+    </script>
+</body>
+</html>

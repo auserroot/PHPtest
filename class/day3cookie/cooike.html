@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="del">删除cookie</button>
+    <button id="upt">修改cookie</button>
+    <script>
+        /*
+            cookie
+                是一个存在客户端的存储空间
+                运行浏览器时
+                    部分空间用于加载页面
+                    另一部分空间用于存储数据
+                cookie空间中可以以字符串形式存储数据
+                    数据格式必须是 key = value
+                    多条数据之间用 ； 分隔
+                    key1=value1;key2=value2;...
+                    每个cookie可能包含过期时间
+                    时间一到，cookie就过期（消失了）
+                
+                ********************************************************************
+                重点：
+                cookie的特点：
+                    1 按域名存储
+                        在那个域名下存储，就在那个域名下使用
+                        不能用于其他域名，与资源地址没有关系
+                    2 存储大小有限制
+                        4KB左右或50条左右
+                    3 时效性
+                        默认会话级别时效性（浏览器关闭，cookie就销毁了）
+                        可以自定义cookie销毁时间
+                    4 请求自动携带
+                        当cookie空间有内容时
+                        只要是当前域名下的请求，都会携带cookie（携带全部cookie空间数据）
+                        如果cookie空间没有内容，就不会携带
+                    5 前端操作
+                        前端通过js操作cookie空间进行增删改查
+                        后端可以通过任何后端语言进行cookie操作
+                
+               *****************************************************************
+        */
+
+        /*
+            前端操作cookie
+                增加一条cookie
+                    语法： document.cookie = 'key=value';
+                    注意：
+                        设置多条cookie时，需要重复使用 document.cookie
+                    设置时效性
+                        默认：会话级时效
+                        自定义时效：
+                            语法：
+                                document.cookie = 'a = 100 ; expries = 时间对象'
+                cookie简单意义
+                    自定义时效性后，只要不清除浏览器缓存，没到达过期时间前cookie一直存在
+                    到达过期时间时销毁cookie
+                    登录时
+                        浏览器先从cookie中获取之前保存的信息
+                        找到则直接登录
+                        没找到就按没有登录处理
+                            只要登陆过一次
+                                在自定义时间内浏览器都会在cookie中保存登录信息
+                                那么在此期间内，就不需要重复登录
+                                到达过期时间时销毁cookie
+        */
+        //添加cookie
+        document.cookie = 'a=100';
+        //添加多条cookie
+        document.cookie = 'b=200';
+        document.cookie = 'c=300';
+
+        //自定义时效性
+        //获取当前时间(浏览器cookie会将该时间解析为格林威治时间)
+        var getTime = new Date();
+        //获取时间戳
+        var time = getTime.getTime();
+        //获取本地时间戳（时区为东8区）
+        var thisTime = time - 8*3600*1000;
+        //重新赋值time(时效15秒)
+        getTime.setTime(thisTime + 15*1000);
+        //设置时效15s
+        document.cookie = 'd=400;expires='+getTime;
+
+        /*
+            删除cookie
+                cookie不能直接删除
+                要删除cookie的话，可以给cookie添加当前时间之前的时效性
+        */
+       var btn = document.querySelector('#del');
+       btn.onclick = function(){
+           //重新赋值time(时效-1秒,即当前时间前1秒)
+            getTime.setTime(thisTime - 1000);
+            document.cookie = "a=100;expires="+getTime;
+       }
+
+       /*
+            修改cookie
+                cookie的存储有唯一性
+                直接给需要修改的cookie重新赋值即可
+        */
+       var upt = document.querySelector('#upt');
+       upt.onclick = function(){
+           //给需要修改的cookie重新赋值
+           document.cookie = 'b=100';
+       }
+
+       /*
+            获取cookie
+                在js中获取cookie
+                    使用document.cookie（直接获取所有cookie，不能单条获取
+       */
+      var str = document.cookie;
+      console.log(str)
+      //将str转为数组（每个元素都是‘key=value‘）
+      var arr = str.split('; ');
+      console.log(arr);
+
+      //获取单条值
+      function getValue(key){
+          for(var i=0;i<arr.length;i++){
+          //遍历数组得到每个元素arr[i]='key=value'
+          //将其改成[key,value]格式
+          var temp = arr[i].split('=');
+          if(temp[0]==key){
+              console.log(temp[1]);
+              break;
+          }
+        }
+      }
+      
+    </script>
+</body>
+</html>

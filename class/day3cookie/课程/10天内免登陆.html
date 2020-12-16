@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+	<style type="text/css">
+		    body{
+			    background-color:rgb(177, 208,224); font: normal 12px Trebuchet MS; color:#000;
+		    }
+		    .roundedCorners{ 
+			    width:220px; padding:10px;
+			    background-color:#DDEEF6; 
+			    box-shadow: 0px 0px 10px 0px #888888;
+			    border:1px solid #DDEEF6;
+			    border-radius:6px;
+			    margin: auto;
+		    }
+		    .roundedCorners-textbox{ 
+				border:1px solid #999; width:160px;
+		    }
+			.checkbox {
+				margin-left: 30px;
+				border:1px solid #999; width:20px;
+			}
+	</style>
+</head>
+
+<body>
+	<form action="./cart.html" method="get">	
+		<div class="roundedCorners">
+			<label>账号</label>&nbsp;
+			<input id="username" type="text" class="roundedCorners-textbox" /><br /><br />
+			<label>密码</label>&nbsp;
+			<input id="password" type="text" class="roundedCorners-textbox" /><br /><br />	
+		    	<input name="saveNP" type="checkbox" class="checkbox" />
+				<label>10天内免登陆</label>
+		    	<br/><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button id="submitbtn" >确定</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" value="清空" />
+		</div>
+	</form>	
+
+	<script>
+		//获取元素
+		var saveNP = document.querySelector("[type='checkbox']");
+		var reset = document.querySelector("[type='reset']");
+		//清空按钮功能
+		reset.onclick = function(){
+			username.value = "";
+			password.value = "";
+		}
+		//10天内免登陆功能
+		submitbtn.onclick = function(){
+			//获取cookie
+			document.cookie= "username="+username.value;
+			document.cookie= "password="+password.value;
+			//获取当前时间
+			var getTime = new Date();
+			//获取当前时间戳
+			var time = getTime.getTime();
+			//获取本地时间戳（时区为东8区）
+			var thisTime = time - 8*3600*1000;
+        	//重新赋值time(时效10天)
+        	getTime.setTime(thisTime + 10*24*60*60*1000);
+			if(saveNP.checked){
+				//设置时效
+				document.cookie= "username="+username.value+";expires='+getTime";
+				document.cookie= "password="+password.value+";expires='+getTime";
+			}
+		}
+	</script>
+</body>
+</html>
