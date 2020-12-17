@@ -1,11 +1,20 @@
-function setCookie(key,value,time){
+function setCookie(key,value,putTime){
     // key 表示 cookie的键
     // value 表示 cookie的值
-    // time 表示多少天过期，不传默认回话时效
+    // putTime 表示多少天过期，不传默认回话时效
+
+    //获取当前时间
+    var time = new Date();
+    //设置（东8区）时间戳(putTime天后过期)
+    time.setTime(time.getTime()-8*60*60*1000+putTime*24*1000*60*60);
+    document.cookie=key+'='+value+';'+'expires='+time;
 }
 
 function removeCookie(key){
     // key 表示 cookie的键
+    //由于要删除可以将键值赋值为任意值（这里赋值为1）
+    //删除cookie 只需将过期时间调整到当前时间之间即可（这里time=-1）
+    setCookie(key,1,-1);
 }
 
 function getCookie(key){
