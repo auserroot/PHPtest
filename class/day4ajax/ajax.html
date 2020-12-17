@@ -52,25 +52,214 @@
                             innerText
                             innerHtml
                             appendChild等
-        
+            
+            发送一个ajax请求
+                使用js发送请求
+                ajax含义：
+                    a：asynchronous（异步）
+                    j：javascript
+                    a: and
+                    x：XML
+                    释义： 异步的XML和javascript交互手段
+                
+                在浏览器地址栏输入 页面地址 会显示这个页面
+                    页面代码执行，script标签中的代码也会执行
+                    就可以利用js实现向php发送请求
+                
+                发送请求步骤：
+                    1 创建一个ajax对象
+                        new XMLHttpRequest()
+                        实例化一个构造函数
+                    2 配置请求信息
+                        请求方式：  GET POST
+                        请求地址：  请求哪个php文件
+                        发送同步请求还是异步请求
+                        语法：
+                            ajax对象.open(请求方式,请求地址,是否异步)
+                                请求方式：不分大小写
+                                默认异步请求
+                    3 发送请求
+                        语法：
+                            ajax对象.send()
+                            表示将配置好的请求发送
+                            （）中写请求主体
+                    4 接收后响应
+                        此时js和php开始交互
+                        php将输出内容传给js
+                        使用一个事件来接收内容
+                            ajax对象.onload = function(){
+                                //当事件触发时表明得到响应
+                            }
         */
-    </script>
 
-    <!-- 发送一个ajax请求 -->
-    <form>
-        <input type="text" value="001">
-        <input type="text" value="001">
-        <input type="button" value="注册">
-    </form>
-    <h1></h1>
-    <script>
+        // console.log('script start');
+
+        // //创建一个ajax对象
+        // var xhr = new XMLHttpRequest();
+        // //配置请求信息
+        // xhr.open('GET','./study/ajax.php');//以get方式发送请求
+        // //发送请求
+        // xhr.send()
+        // //接收响应
+        // xhr.onload = function(){
+        //     //ajax请求完成，触发函数（获取后端返回数据）
+        //     console.log('请求已经完成了');
+        //     console.log(xhr);
+        // }
+
+        // console.log('script end');
+
+
         /*
-            前端
-                通过页面上的绑定事件获取用户填写的用户名和密码
-                当用户点击注册时，将用户名和密码传递给后端
+            ajax的同步异步
+                open第三个参数
+                    true或不写都是异步
+                    false是同步
+                不管同步还是异步
+                    书写代码的顺序都是： 1 2 4 3 
+                    ajax 最好不要发送同步请求
+
+            同步代码：上一行代码执行完之前， 后面代码不会执行
+            异步代码：遇到异步时，先往后执行同步代码，同步代码执行完后再执行异步代码
+                    如果将ajaxopen中第三个参数写成false 
+                    send变成同步代码 即当执行到send时 就将请求发送结束代码执行了，之后的事件不会触发
+                    因此要调整代码书写顺序
+                        将事件函数写在send之前
+                        保证能触发事件获取后台传值
         */
-       var un = document.querySelectorAll('input')[0];//用户名输入框
-       var pw = document.querySelectorAll('input')[1];//用户名输入框
+
+        /*
+            ajax的状态码
+                http响应状态码
+                    表示本次请求是成功还是失败
+                ajax状态码
+                    表示当前处于ajax的哪个步骤
+
+                获取ajax状态码
+                    ajax对象.readyState
+                状态码
+                    0 表示ajax对象创建成功
+                    1 表示配置请求信息成功（即执行完open）
+                    2 表示响应体已经回到浏览器，此时还无法使用（此时是一个响应报文）
+                    3 浏览器正在解析响应报文（将响应报文从响应主体中分离）
+                    4 浏览器分离响应主体成功，可以使用（本次请求结束）
+                一个ajax事件
+                    onreadystatechange 事件
+                    当ajax状态码发生改变时触发
+        */
+         // 1 创建ajax对象
+        //  var xhr = new XMLHttpRequest();
+        //  console.log(xhr.readyState);
+        //  //ajax状态码改变事件
+        //  xhr.onreadystatechange = function(){
+        //      console.log('*****************'+xhr.readyState+'********************');
+        //      console.log('状态码变为'+xhr.readyState)
+        //  }
+        //  //2 配置请求信息
+        //  xhr.open('get','./study/ajax.php');
+        //  //4 接收响应
+        //  xhr.onload = function(){
+        //      console.log('本次请求结束，响应主体是：'+xhr.responseText);
+        //  }
+        //  //3 发送请求
+        //  xhr.send();
+
+
+        /*
+            兼容处理
+                兼容IE 7 8 
+                创建ajax对象时不兼容
+                    new XMLHttpRequest 高版本浏览器使用
+                    new ActiveXObject ie低版本使用
+                接收响应时不兼容
+                    onload事件 高版本浏览器使用
+                    IE低版本没有onload事件
+                        只有onreadystatechange事件
+                        在此事件中判断
+                            ajax请求结束（状态码为4）
+                            http请求成功状态码（200-299）
+                                xhr.status 就是本次请求的http状态码
+        */
+    // //    创建ajax对象(兼容低版本)
+    // var xhr =  XMLHttpRequest?new XMLHttpRequest():ActiveXObject();
+    // // 配置请求信息
+    // xhr.open('get','./study/ajax.php');
+    // //接收响应（兼容IE低版本）
+    // xhr.onreadystatechange = function(){
+    //     //判断此时ajax状态码是否为4且http请求状态码是否是以2开头的三位数（若是则表示请求结束）
+    //     if(xhr.readyState==4&&/^2\d{2}/.test(xhr.status)){
+    //         console.log('此时状态码为4');
+    //         console.log(xhr.status);
+    //         console.log(xhr.readyState);
+    //         console.log(xhr.responseText);
+    //     }
+    // }
+    // //发送请求
+    // xhr.send();
+    
+
+    /*
+        发送一个带参数的请求
+            get和post发送请求时携带参数的方式不同
+            get 携带参数直接拼接在地址栏后，不是请求体
+            post 携带参数在请求体内
+        get请求
+            在地址栏后拼接参数
+            即在open的第二个参数后拼接
+                参数格式
+                    key=value
+                    多个参数时用&分隔
+                    例： key1=value1&key2=value2
+                在拼接前要先在地址栏后拼接一个？分隔地址与参数
+    */
+        // //创建ajax对象
+        // var xhr = new XMLHttpRequest();
+        // //配置请求信息
+        // xhr.open('get','./study/get.php?a=1&b=2');
+        // //接收响应
+        // xhr.onload=function(){
+        //     console.log(xhr.responseText);
+        // }
+        // //发送请求
+        // xhr.send();
+
+
+
+        /*
+            发送一个带有参数的post请求
+                        由于post请求的时候携带在请求体里
+                        所以我们不需要再地址栏拼接
+                携带参数
+                    在请求体中
+                        xhr.send()这个方法的（）里就是书写请求体的位置
+                        只需将携带参数写在send后面的括号中
+                        参数格式
+                            key=value
+                            多个参数用&分隔
+                            不需要写？
+                    get 携带的参数必须是URL编码格式，如果不是将自动转成url编码
+                    post 和请求头中的 content-type 一致
+                        发送一条携带参数的post请求
+                            只写参数，没写请求头中的 content-type 
+                            所有后端都接收不到信息
+                        解决
+                            在发送请求前 设置请求头中 content-type
+                请求头
+                    使用 xhr.setRequestHeader(请求头的key，请求头的值)
+                    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+        */
+       //创建ajax对象
+       var xhr =new XMLHttpRequest();
+       //配置请求信息
+       xhr.open('post','./study/post.php');
+       //接收响应
+       xhr.onload=function(){
+           console.log(xhr.responseText);
+       }
+       //设置请求头
+       xhr.setRequestHeader('content-type','application/x-www-form-urlencode');
+       //发送请求
+       xhr.send('a=1&b=2');
     </script>
 </body>
 </html>
