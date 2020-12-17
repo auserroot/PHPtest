@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <ul>
+        
+    </ul>
+    <script>
+        /* 
+            我输入关键字:1
+            百度会帮我联系到的关键字有:[163,126,]
+            百度给我们提供了一个地址:
+                + https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1445,33102,33306,31253,32971,33284,33313,33312,33311,33310,32845,33309,33198,33308,33307,33237,33264&wd=1&req=2&csor=1&cb=jQuery1102035293875744392467_1608195085580&_=1608195085581
+                + 这个地址里面有一个参数wd就是输入的准备进行联想的关键字，比如 wd = 1;
+                + 这个地址里面有一个参数cb就是告诉后端我前端预先定义好的函数的函数名，比如 cb = fn
+                + 会返回fn(数据)
+            题目:
+                再文本框输入要联想的关键字，然后再文本框下面的ul里面展示联想的内容
+            */  
+    </script>
+
+    <script>
+        function fn(data){
+            console.log((data))
+        }
+    </script>
+    <script src="https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1445,33102,33306,31253,32971,33284,33313,33312,33311,33310,32845,33309,33198,33308,33307,33237,33264&wd=2&req=2&csor=1&cb=fn&_=1608195085581"></script>
+</body>
+</html>

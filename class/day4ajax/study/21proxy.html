@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            proxy --> 代理
+            代理跨域
+                + 因为“浏览器”不允许你请求一个“非同源的地址”
+                + 解决问题  
+                    ==> 再浏览器同源设置一个代理服务器
+                    ==> 把本该发给目标服务器的请求发送给代理服务器
+                    ==> 由代理服务器转发请求给目标服务器
+                    ==> 目标服务器把响应返回给代理服务器
+                    ==> 代理服务器再把响应给到浏览器
+                
+
+            怎么进行代理配置
+                + 只要是服务器就能代理
+                    ==> 但是apache代理
+                        --> http的不需要花钱(以前的传输协议，不加密传输)
+                        --> https是需要花钱的(现在多用的传输协议，加密传输)
+                    ==> nginx代理
+                        --> http和https都是免费的
+                + 不再使用apache服务器了
+                    ==> 使用nginx服务器
+
+            1 打开phpstudy窗口
+                ==> 点击切换版本
+                ==> 点击php5.4.xxx+nginx
+            2 打开phpstudy窗口
+                ==> 点击其他选项菜单
+                ==> 点击打开配置文件
+                ==> 点击nginx-conf（config）
+                    ==> 大概在56行左右有一个server
+                    ==> 顺着开始括号找到server的闭合大括号
+                    ==> 在这个闭合大扩号的上面一行书写代理配置
+                ==> 代理配置
+                    ==> 我写了空格的地方你们也要写
+                    ==> /cyr是你们自己定的，交什么都可以
+                        ==> 斜线是必须要有的
+                    ==> {}里面的那个地址，就是你要跨域i请求的地址（目标服务器的地址）
+                    ==> 最后的分号必须有
+                    location = /cyr {
+                        proxy_pass http://127.0.0.1/proxy.php;
+                    }
+                    ==> 修改完毕以后，一定要重启服务器
+                ==> 当你在nginx服务器上发送请求
+                    --> 只要请求你自己的代理标识符
+                    --> 那么就会由nginx服务器来帮你转发请求给proxy_pass地址
+            注意:
+                + 当切换到nginx服务器以后
+                + 不管是html文件还是php文件，都不能用中文，否则报错
+                    
+        */
+
+        var xhr = new XMLHttpRequest()    
+        xhr.open('get','/cyr');
+        xhr.onload = function(){
+            console.log(xhr.responseText)
+        }
+        xhr.send()
+    </script>
+</body>
+</html>

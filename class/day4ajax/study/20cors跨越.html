@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            cors跨域
+                + 跨域是浏览器不让你请求别人加的服务器
+                + 如果别人加的服务器告诉浏览器，我允许这个域名请求我
+                    --> 浏览器就管不着了，就可以正常请求了
+        */
+        var xhr = new XMLHttpRequest();
+        xhr.open('get','http://127.0.0.1/cors.php');
+        xhr.onload = function(){
+            console.log(xhr.responseText)
+        }
+        xhr.send()
+    </script>
+</body>
+</html>

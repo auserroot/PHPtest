@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 过程一
+        <script src="./jsonp/a.js"></script>
+        <script src="./jsonp/index.css"></script>
+        <script src="./jsonp/b.txt"></script>
+        <script src="./jsonp/c.php"></script>
+        <script src="./jsonp/d"></script> 
+    -->
+    <!-- 过程三 -->
+    <script>
+        function fn(res){
+            console.log('jsonp请求已经回来了')
+            console.log(res)
+        }
+    </script>
+    <!-- 过程二 -->
+    <script src="http://127.0.0.1/jsonp/jsonp.php"></script>
+    <script>
+       /* 
+            过程一:
+                script标签
+                    + 默认有一个type属性，值是text/javascript
+                    + 不管src请求什么文件，都是把文件里面的内容都当做字符串读取出来
+                    + 把读取出来的字符串当js代码来执行
+                    + 代码本身没有错误，错的是你放错了文件
+                src属性
+                    + script的src属性不受路蓝旗同源策略的限制
+                    + script的src属性，爱请求谁家服务器就请求谁家服务器
+                    + 我们就可以script标签的src属性去请求一个别人家的服务器
+                    + 只要给我返回一个正确的js语法的代码,那么就可以执行了
+            过程二
+                现在，这个script标签请求的是php文件
+                    + 返回的内容就是一个"alert(1)"
+                    + script会把这个字符串当做js代码来执行
+                不是把jsonp.php当做js代码执行了吗？那为什么还能执行echo
+                    + script请求的是jsonp.php文件没错
+                    + script请求时在apache服务器上发送的
+                    + apache服务器不管你怎么请求php文件
+                        ==> 只要他看到了php代码，就会把他当做php给你先解析了
+
+            过程三
+                jsonp.php里面的内容是fn(1)
+                现在这个script标签接收的内容就是"fn(1)"
+                    + 会把这个字符串当作js代码来执行
+                    + 就相当于执行了一句fn(1)
+                        ==> 我当前页面没有fn这个函数，这个代码回来的时候就会报错了
+                    + 报错是因为没有fn这个函数
+                    + 解决:只要再请求这个php文件之前
+                        ==> 自己提前定义一个fn函数
+
+            总结:
+                script请求的内容返回的就是一个"fn(后端想给前端提供的数据)"
+                    + script标签会把他当作js代码来执行
+                    + 也就是执行：fn(后端想给前端提供的数据)
+                    + 需要再这个script请求之前，提前一定义一个函数fn
+                    + 再函数fn里面，通过形参，就可以操作后端想给前端提供的数据
+
+       */ 
+    </script>
+</body>
+</html>

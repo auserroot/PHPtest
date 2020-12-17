@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <script>
+        /* 
+            封装ajax请求
+                + 把GET请求和POST请求封装成一个函数
+                + 我们需要发送请求的时候直接调用
+                + 因为GET和POST携带参数的方式不一样
+                    --> 封装成两个函数
+                    --> 一个叫做getSend()
+                    --> 一个叫做postSend()
+            1 写一遍完整流程
+            2 把步骤封装起来就可以了
+        */
+
+        function getSend(url,cb,param){
+            // var url = "./ajax.php"
+            // var cb = function(data){
+            //     // data 代表的是后端响应的数据
+            //     console.log(data)
+            // }
+            // var param = "a=11&b=22";
+            var xhr = new XMLHttpRequest();
+            xhr.open('get',url+"?"+param);
+            xhr.onload = function(){
+                cb(xhr.responseText)
+            }
+            xhr.send()
+        }
+
+        // 测试get请求
+        getSend('./ajax.json',function(data){
+            // data 代表的是后端响应的数据
+            document.querySelector('div').innerHTML = data;
+        },'a=11&b=22')
+
+        function postSend(url,cb,param){
+            // var url = "./ajax.php"
+            // var cb = function(data){
+            //     // data 代表的是后端响应的数据
+            //     console.log(data)
+            // }
+            // var param = "a=100&b=200";
+            var xhr = new XMLHttpRequest()
+            xhr.open('POST',url);
+            xhr.onload = function(){
+                cb(xhr.responseText)
+            }
+            xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+            xhr.send(param)
+        }
+
+        // 测试post请求
+        // postSend('./post.php',function(data){
+        //     document.querySelector('div').innerHTML = data;
+        // },"name=100&age=200")
+    </script>
+</body>
+</html>

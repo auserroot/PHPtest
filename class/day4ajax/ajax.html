@@ -22,19 +22,55 @@
         */
 
         //设置一个本地存储
-        localStorage.setItem('name','zhangsan');
-        localStorage.setItem('name1','zhangsan');
-        localStorage.age=10;
-        //删除
-        localStorage.removeItem('name');
-        //修改
-        localStorage.age=16;
-        localStorage.setItem('name1','xxx');
-        //获取
-        var loc = localStorage.getItem('age');
-        console.log(loc);
-        //清空
-        localStorage.clear();
+        // localStorage.setItem('name','zhangsan');
+        // localStorage.setItem('name1','zhangsan');
+        // localStorage.age=10;
+        // //删除
+        // localStorage.removeItem('name');
+        // //修改
+        // localStorage.age=16;
+        // localStorage.setItem('name1','xxx');
+        // //获取
+        // var loc = localStorage.getItem('age');
+        // console.log(loc);
+        // //清空
+        // localStorage.clear();
+
+
+        /*
+            了解ajax
+                是js中的一个方法
+                用于和php交互
+                    之前
+                        浏览器输入某些内容，显示一个页面
+                        浏览器地址栏输入一个php地址，php将输出内容输出给浏览器
+                    现在
+                        js请求一个php地址
+                        php将输出内容传给js
+                        如果想让其显示在页面，可用js去渲染
+                            document.write()
+                            innerText
+                            innerHtml
+                            appendChild等
+        
+        */
+    </script>
+
+    <!-- 发送一个ajax请求 -->
+    <form>
+        <input type="text" value="001">
+        <input type="text" value="001">
+        <input type="button" value="注册">
+    </form>
+    <h1></h1>
+    <script>
+        /*
+            前端
+                通过页面上的绑定事件获取用户填写的用户名和密码
+                当用户点击注册时，将用户名和密码传递给后端
+        */
+       var un = document.querySelectorAll('input')[0];//用户名输入框
+       var pw = document.querySelectorAll('input')[1];//用户名输入框
     </script>
 </body>
 </html>

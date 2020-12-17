@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>购物车</h1>
+    <script src="./cookie.js"></script>
+    <script>
+        // 购物车只有登录用户能够进入，直接输入地址没有登录会跳转回登录页面
+        var un = getCookie('un');
+        if(un){
+            document.querySelector('h1').innerHTML = un+"购物车"
+        }else{
+            location.href="./12登录.html"
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+
+        /* 
+            同源策略
+                + “浏览器”给js发送请求定的限制
+                    ==> 你可以发送请求
+                    ==> 你只能向自己家的“服务器”发送请求
+                    ==> 你不能向“别人家”的服务器发送请求
+                + 什么叫做别人家的服务器
+                    ==> 当传输协议或者域名或者端口号
+                    ==> 有任意一个不一样的时候
+                    ==> 浏览器就会认为你在请求别人家的服务器
+                    ==> 他就不让你请求，告诉你触发了“同源策略”    
+                + 管触发了同源策略的请求叫做“跨域请求”
+                    ==> 在真是开发过程中
+                    ==> 会经常用到跨域请求
+            例子:我要做一个外卖的网站
+                + 有人去帮我送外卖
+                + 需要一个功能（定位），我要实时知道小哥现在的位置
+                + 需要地图的功能，绘制路线，路况
+                    ==> 我就可以向百度家的地图服务器接口使用
+                    ==> 我就是在请求百度家的服务器，跨域请求
+
+        */
+
+
+        // 写法一：
+        // getSend('./get.php',function(data){
+        //     console.log(data)
+        // },'a=100&b=200&c=300')
+        
+        // 写法二:
+        // getSend('http://localhost/get.php',function(data){
+        //     console.log(data)
+        // },'a=100&b=200&c=300')
+
+
+        getSend('http://127.0.0.1/get.php',function(data){
+            console.log(data)
+        },'a=100&b=200&c=300')
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            发送一个带有参数的POST请求
+                + 因为POST请求的时候携带再请求主体里面
+                + 所以我们不需要再地址栏拼接了
+            
+            1 完整流程
+            2 携带参数
+                + 因为再请求主体里面
+                + xhr.send()这个方法的()里面就是书写请求主体的位置
+                + 我们需要把携带的参数写在send后面的括号里面
+                + 参数格式
+                    -> 一个参数就是 key=value的格式
+                    -> 多个参数是用(&)分隔
+                    -> 多个参数的时候 key1=value1&key2=value2
+                    -> 不需要写问号
+            道一道
+                + GET携带参数必须是url编码的格式，如果不是会自动转换成url编码
+                + POST谢大参数理论上不受限制，但是要和请求头里面的content-type一致
+                + 现在我就是发送了一个带有参数的POST请求
+                    -> 我只写了参数
+                    -> 没有写请求头里面的content-type
+                    -> 所有后端接收不到
+                + 解决
+                    -> 只要再发送请求之前设置一下请求头里面的content-type就可以了
+            
+            怎么书写请求头
+                + 使用的ajax对象里面的一个方法
+                + xhr.setRequestHeader(请求头的key,请求头的value)
+                + 一开始不要背，直接复制粘贴我的
+                + xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+        */
+
+        // 1 创建ajax对象
+        var xhr = new XMLHttpRequest()
+
+        // 2 配置请求信息
+        xhr.open('POST','./post.php');
+
+        // 3 接收响应
+        xhr.onload  =function(){
+            console.log(xhr.responseText)
+        }
+        // 4-0 发送请求之前，设置一下请求头
+        xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+        // 4-1 发送请求
+        xhr.send("name=zhangsan&age=18");
+    </script>
+</body>
+</html>

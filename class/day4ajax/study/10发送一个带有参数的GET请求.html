@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            发送一个带有参数的GET请求
+                + 为什么专门说带有参数的GET请求
+                    --> 因为GET和POST方式发送请求的时候携带参数的方式不一样
+                + GET和POST携带参数
+                    --> GET:携带参数是在地址栏后面拼接，不是请求体
+                    --> POST:携带参数是在请求体里面，不是在地址栏后面拼接
+
+            1 先是正常步骤书写
+            2 携带参数
+                + 因为是地址栏后面拼接参数
+                + open方法的第二个参数就是请求地址
+                + 参数就应该直接拼接再open的第二个参数后面
+                + 参数的格式
+                    -> 一个参数就是 key=value的格式
+                    -> 多个参数是用(&)分隔
+                    -> 多个参数的时候 key1=value1&key2=value2
+                + 多个参数直接写在地址后面的时候
+                    -> 分不清什么是后缀什么是参数了
+                    -> 我再地址栏和参数之间写一个问号(?)
+                + GET的参数我们有一个专门的好听的语义化的名字
+                    -> 查询字符串(query string)
+
+        */
+
+        // 创建ajax对象
+        var xhr = new XMLHttpRequest();
+
+        // 配置请求信息
+        xhr.open('GET','./get.php?a=100&b=200&c=300')
+
+        // 接收响应
+        xhr.onload = function(){
+            console.log(xhr.responseText)
+        }
+
+        // 发送请求
+        xhr.send()
+    </script>
+</body>
+</html>
