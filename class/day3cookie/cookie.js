@@ -3,11 +3,16 @@ function setCookie(key,value,putTime){
     // value 表示 cookie的值
     // putTime 表示多少天过期，不传默认回话时效
 
-    //获取当前时间
-    var time = new Date();
-    //设置（东8区）时间戳(putTime天后过期)
-    time.setTime(time.getTime()-8*60*60*1000+putTime*24*1000*60*60);
-    document.cookie=key+'='+value+';'+'expires='+time;
+    //判断是否传putTime值
+    if (putTime) {
+        //获取当前时间
+        var time = new Date();
+        //设置（东8区）时间戳(putTime天后过期)
+        time.setTime(time.getTime() - 8 * 60 * 60 * 1000 + putTime * 24 * 1000 * 60 * 60);
+        document.cookie = key + '=' + value + ';expires=' + time;
+    } else {
+        document.cookie = key + '=' + value;
+    }
 }
 
 function removeCookie(key){
