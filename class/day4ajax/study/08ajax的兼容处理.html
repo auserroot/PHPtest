@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            ajax的兼容处理
+                + 兼容处理，将来再我们开发的过程中
+                    ==> 可能要兼容IE 7 8 浏览器
+                    ==> 就要处理兼容问题
+                + 我们的ajax有两个地方不兼容
+                    1 创建ajax对象的时候不兼容
+                        + new XMLHttpRequest --> 标准浏览器使用
+                        + new ActiveXObject  --> IE低版本使用
+                    2 接收响应不兼容
+                        + 标准浏览器 --> onload事件
+                        + IE低版本 --> 没有onload事件
+                            --> IE低版本只有onreadystatechange事件
+                            --> IE低版本接受响应使用onreadystatechange这个事件
+                        + 再这个事件里面判断
+                            + 判断ajax请求结束了 --> ajax状态码为4就是结束
+                            + 判断本次http请求是成功了的 --> http的状态码是200-299之间
+                                --> xhr.status 就是本次请求的http状态码
+        */
+        
+
+
+        // 1 创建ajax对象
+        // new XMLHttpRequest --> 标准浏览器使用
+        // new ActiveXObject  --> IE低版本使用
+        var xhr = new XMLHttpRequest();
+
+        // 2 配置请求信息
+        xhr.open('GET','./ajax.php')
+
+        // 4 接受响应
+        // 下面这个代码是标准浏览器可以接收响应主体
+        // 再IE低版本浏览器里面接收不到响应主体
+        // xhr.onload = function(){
+        //     console.log(xhr.responseText)
+        // }
+
+        // 兼容IE的接收响应，使用这个事件
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState==4&&/^2\d{2}/.test(xhr.status)){
+                console.log('确实状态码应该是4了')
+                console.log(xhr.status)
+                console.log(xhr.readyState)
+                console.log(xhr.responseText)
+            }
+        }
+        // 3 发送请求
+        xhr.send()
+
+    </script>
+</body>
+</html>

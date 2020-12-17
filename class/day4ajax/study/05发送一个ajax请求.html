@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            发送一个ajax请求
+                + 使用js的方式发送请求
+                + 解释ajax
+                    ==> a： asynchronous(异步)
+                    ==> j:  javascript
+                    ==> a:  and
+                    ==> x:  xml
+                    ==> 异步的xml和javascript交互手段
+
+                + 当你再浏览器地址栏输入 05发送一个ajax请求.html 会显示这个页面
+                    + 这个页面的代码一执行
+                    + 就会执行script标签里面的代码
+                    + 如果我再这里写上一个js的ajax请求
+                    + 那么就是使用js请求一个php文件
+                + 发送ajax的步骤
+                    1 创建一个ajax对象
+                        + new XMLHttpRequest()
+                        + 实例化一个构造函数
+                        + 我们能得到一个对象
+                        + 这个对象就可以帮我们发送ajax请求
+                    2 配置本次请求的信息
+                        + 你要什么方式请求?GET还是POST
+                        + 你要请求哪一个地址?你请求的是什么php文件
+                        + 你是想发送一个同步还是异步的请求?
+                        + 使用ajax对象.open(请求方式,请求地址，是否异步)
+                            --> 请求方式,大小写无所谓
+                            --> 是否异步可以不写，默认是异步的
+                    3 把这个请求发送出去
+                        + 使用ajax对象.send()方法
+                        + 表示把我配置好的这个请求发送出去
+                        + ()里面写请求主体
+                    4 接收后端响应
+                        + 因为现在开始是js和php交互了
+                        + php的输出语法输出的内容都是给了js
+                        + 使用一个事件来接收
+                            + ajax对象.onload = function(){
+                                // 当这个事件触发表明响应回来了
+
+                            }
+
+
+        */
+    </script>
+    <script>
+        console.log('script start');
+        // 1 创建一个ajax对象
+        var xhr = new XMLHttpRequest();
+
+        // 2 配置本次请求的信息
+        xhr.open('get','./ajax.php');//以get请求方式，向ajax.php文件发起一个请求
+
+        // 3 发送请求
+        xhr.send()
+
+        // 4 接受响应
+        xhr.onload = function(){
+            // 这个函数会再当前这个ajax请求完成的时候触发
+            // 这个ajax请求一完成，那么就会触发这个函数了
+            // 我们再这里就能得到后端输出的数据了
+            console.log('请求已经完成了')
+            console.log(xhr)
+        }
+
+        console.log('script end');
+    </script>
+</body>
+</html>

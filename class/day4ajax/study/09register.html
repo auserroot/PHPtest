@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form>
+        <input type="text" value="zhangsan">
+        <input type="text" value="111111">
+        <input type="button" value="注册">
+    </form>
+    <h1></h1>
+    <script>
+        /* 
+            前端
+                ==> 通过页面上绑定事件的方式获取用户填写的用户名和密码
+                ==> 当用户点击注册的时候，把用户名和密码传递给后端 
+        */
+
+        var unInp = document.querySelectorAll('input')[0];//用户名输入框
+        var pwInp = document.querySelectorAll('input')[1];//密码输入框
+        var registerBtn = document.querySelectorAll('input')[2];//注册按钮
+        registerBtn.onclick = function(){
+            // 创建ajax对象
+            var xhr = new XMLHttpRequest();
+            // 配置请求信息
+            // 方法一：请求真是的php后端
+            xhr.open('GET','./ajax.php?username='+unInp.value+'&password='+pwInp.value);
+            // 方法二：请求mock的json数据
+            // xhr.open('GET','./ajax.json');
+            // 如果GET的url地址里面要拼接查询字符串，格式是
+            // 请求路径?key1=value2&key2=value2
+            // 接收响应
+            xhr.onload = function(){
+                // 前端
+                // 接收后端给回来的反馈信息
+                var json = JSON.parse(xhr.responseText);
+                // 根据反馈信息告诉用户注册成功还是失败
+                if(json.code==1){
+                    document.querySelector("h1").innerHTML = "注册成功"
+                }
+            }
+            // 发送请求
+            xhr.send()
+        }
+    </script>
+</body>
+</html>

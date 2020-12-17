@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            本地存储
+                ==> 本地存储也是浏览器内部的一个存储空间
+                ==> 只有前端可以操作，后端不能操作
+                ==> 存储空间比较大
+                ==> 根据存储的时效性分为:会话存储和本地存储
+                    + 会话存储:SessionStorage,在浏览器关闭的时候会消失
+                    + 本地存储:localStorage，除非手动删除，会长久存储
+                ==> 存储也是按照键值对的格式
+                ==> 键和值都必须是字符串格式
+                ==> 本地存储的操作都有预定义方法
+                ==> 按照域名存储
+        */
+        
+
+        // 设置一个本地存储
+        localStorage.setItem('name','zhangsan')
+        localStorage.setItem('name2','zhangsan2')
+        localStorage.setItem('name3','zhangsan3')
+        localStorage.setItem('name4','zhangsan4')
+        localStorage.setItem('name5','zhangsan5')
+        localStorage.age = 12;
+
+        // 删除本地存储
+        localStorage.removeItem('name')
+
+        // 修改本地存储
+        localStorage.age = 16;
+        localStorage.setItem('age',18)
+
+        // 获取本地存储
+        console.log(localStorage.getItem('age'))
+
+        // length:表示本地存储里面有几个键值对
+        
+        // 清空本地存储
+        localStorage.clear();
+        
+    </script>
+</body>
+</html>

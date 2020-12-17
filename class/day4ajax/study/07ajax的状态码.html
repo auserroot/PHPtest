@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            ajax的状态码
+                + http响应状态码 --> 表示本次请求是成功还是失败
+                + ajax状态码 --> 表示当前处于ajax的哪一个步骤
+                    --> 处在ajax的第一个环节可能就是0
+                    --> 进入ajax的第二个环节可能就是1
+                    --> .....
+                + 怎么获取ajax状态码
+                    --> ajax对象.readyState
+                + 有哪些状态码
+                    --> 0 ：表示你创建一个ajax对象成功了
+                    --> 1 ：表示配置请求信息成功了（也就是执行完了open）
+                    --> 2 ：表示响应体已经回到了浏览器，但是还不能使用（因为此时还是一个响应报文）
+                    --> 3 ：浏览器正再解析响应报文（把响应报文里面的响应主体分离出来）
+                    --> 4 ：浏览器分离响应主体成功，已经可以正常使用了（本次请求结束了）
+                + 一个ajax事件
+                    + onreadystatechange 事件
+                    + 当ajax状态码发生改变的时候，会触发
+        */
+
+        // 1 创建ajax对象
+        var xhr = new XMLHttpRequest();
+        console.log(xhr.readyState);
+
+        // ajax状态码改变的事件
+        xhr.onreadystatechange = function(){
+            console.log("========"+xhr.readyState+"=========")
+            console.log('ajax的状态码改变了，变成了'+xhr.readyState);
+            console.log(xhr.responseText)
+        }
+                    
+        // 2 配置请求信息
+        xhr.open('get','./ajax.php');
+
+        // 4 接受响应
+        xhr.onload = function(){
+            console.log('请求结束了，响应主体:'+xhr.responseText);
+        }
+        // 3 发送请求
+        xhr.send();
+    </script>
+</body>
+</html>
