@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            本地存储
+                是浏览器的一个内置存储空间
+                只有前端可以操作
+                存储空间较大
+                根据时效性分为 会话存储和本地储存
+                    会话存储 SessionStorage 在浏览器关闭时销毁
+                    本地存储 localStorage 长久存在（除非手动删除）
+                按照键值对格式存储
+                键值对必须是字符串格式
+                本地存储有预定义方法
+                也是按域名存储
+        */
+
+        //设置一个本地存储
+        localStorage.setItem('name','zhangsan');
+        localStorage.setItem('name1','zhangsan');
+        localStorage.age=10;
+        //删除
+        localStorage.removeItem('name');
+        //修改
+        localStorage.age=16;
+        localStorage.setItem('name1','xxx');
+        //获取
+        var loc = localStorage.getItem('age');
+        console.log(loc);
+        //清空
+        localStorage.clear();
+    </script>
+</body>
+</html>
