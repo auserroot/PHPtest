@@ -42,7 +42,9 @@
 		</div>
 	</form>	
 
+	<script src="../cookie.js"></script>
 	<script>
+		console.log(document.cookie)
 		//获取元素
 		var saveNP = document.querySelector("[type='checkbox']");
 		var reset = document.querySelector("[type='reset']");
@@ -53,7 +55,7 @@
 		}
 		//10天内免登陆功能
 		submitbtn.onclick = function(){
-			//获取cookie
+			// 获取cookie
 			document.cookie= "username="+username.value;
 			document.cookie= "password="+password.value;
 			//获取当前时间
@@ -64,11 +66,16 @@
 			var thisTime = time - 8*3600*1000;
         	//重新赋值time(时效10天)
         	getTime.setTime(thisTime + 10*24*60*60*1000);
-			if(saveNP.checked){
+			if (saveNP.checked) {
 				//设置时效
-				document.cookie= "username="+username.value+";expires='+getTime";
-				document.cookie= "password="+password.value+";expires='+getTime";
+				document.cookie = "username=" + username.value + ";expires=" + getTime;
+				document.cookie = "password=" + password.value + ";expires=" + getTime;
+				// if (document.cookie != 'undefined') {
+				// 	username.value = getCookie(username);
+				// 	password.value = getCookie(password);
+				// }
 			}
+			// console.log(document.cookie)
 		}
 	</script>
 </body>
