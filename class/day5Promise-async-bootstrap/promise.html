@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./study/ajax.js"></script>
+    <script>
+        /*
+            回调地狱
+                是回调函数嵌套过多时产生的问题
+                没有可维护性和可读性（后期维护难度大）
+            例
+                发送一个请求到a.php，获取两个数值
+                在第一次请求结束后，发送第二个请求到b.php
+                    返回从a.php中返回的数值之和，和另一个数值
+                第二次请求结束后，发送第三次请求到c.php
+                    返回从b.php中获取的值的乘积，和另一个数值
+        */
+       /*例*/
+       //发送一个请求
+    //    getSend('./study/a.php',function(res){
+    //        var result = JSON.parse(res);
+    //        console.log(result);
+
+    //        //第二次发送请求
+    //        getSend('./study/b.php',function(res){
+    //         var result = JSON.parse(res);
+    //         console.log(result);
+
+    //             //第三次发送请求
+    //             getSend('./study/b.php',function(res){
+    //                 var result = JSON.parse(res);
+    //                 console.log(result);
+    //              })
+    //        })
+    //    })
+
+
+    /*
+        解决方法
+            1 Promise 承诺
+                三个状态
+                    1 承诺继续
+                    2 成功
+                    3 失败
+                一旦状态确定，无法改变
+                    当处于第一个状态(继续) 其结果可能是 成功 也可能是 失败
+                    一旦状态到达 成功或失败 就无法改变（不能从成功变成失败 反之亦然）
+                在promise语法中
+                    继续 pending 正在进行
+                    成功 fulfilled 过去完成时
+                    失败 rejected 过去完成时
+            promise的作用
+                承诺帮助处理异步事件
+                在成功时回调成功函数
+                在失败时回调失败函数
+                    将事情交给promise
+                        pending 继续 正在处理异步事件
+                        fulfilled 成功 结果
+                        rejected 失败 结果
+            与ajax比较
+                pending 正在请求（网络传输过程中）
+                fulfilled 请求成功 （从服务器获得结果）
+                rejected 请求失败 （无法从服务器获取结果）
+            语法
+                在es6 中内置了一个构造函数
+                    let p1 = new Promise(function(){
+                        需要处理的异步事件
+                    })
+                promise中有两个方法
+                    then    p1处理异步事件请求成功时执行
+                    catch   p1处理异步事件请求失败时执行
+    */
+        //例
+        // resolve是成功的回调函数
+        // reject是失败的回调函数
+        var p1 = new Promise(function(resolve,reject){
+            // var resolve = function(data){
+            //     //data 是resolve传入的实参
+            //     console.log("成功的回调函数");
+            // }
+            // var reject = function(){
+            //     //data 是resolve传入的实参
+            //     console.log("失败的回调函数");
+            // }
+
+
+            //要处理的异步事件
+            var xhr = new XMLHttpRequest();
+            xhr.open('get','./study/b.php');
+            xhr.onreadystatechange = function(){
+                if(xhr.status===200&&xhr.readyState===4){
+                    //请求成功
+                    resolve(xhr.responseText);
+                }
+                if(xhr.status===404){
+                    //请求失败
+                    reject()
+                }
+            }
+            xhr.send();
+        })
+
+
+        //resolve、reject传值
+        //方法一
+        p1.then(function(data){
+            //data是resolve（）中的实参  即xhr.responseText
+            console.log(data);
+            console.log("成功的回调函数");
+        })
+        
+        p1.catch(function(){
+            console.log("失败回调函数");
+        })
+
+        //方法二
+        // p1.then(function(data){
+        //     //data是resolve（）中的实参  即xhr.responseText
+        //     console.log(data);
+        //     console.log("成功的回调函数");
+        // },function(){
+        //     console.log("失败回调函数");
+        // })
+    </script>
+</body>
+</html>
