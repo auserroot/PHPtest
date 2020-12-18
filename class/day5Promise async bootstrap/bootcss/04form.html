@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <style>
+        p{
+            height: 60px;            
+        }
+    </style>
+</head>
+<body>
+    <p></p>
+    <div class="container">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="un">用户名:</label>
+                <input type="text" id="un" class="form-control">
+            </div>
+    
+            <div class="form-group">
+                <label for="pw">密码:</label>
+                <input type="text" id="pw" class="form-control">
+            </div>
+    
+            <input type="button" value="点击登录" class="btn btn-danger form-control">
+            <input type="button" value="点击注册" class="btn btn-default form-control" >
+        </form>
+    </div>
+    <p></p>
+    <ul class="container">
+        <li class="hidden-xs hidden-sm hidden-md">只有大屏显示</li>
+        <li class="hidden-sm">小屏幕(sm)隐藏 </li>
+        <li class="hidden-md">中等屏幕(md)隐藏</li>
+        <li class="hidden-lg">大屏幕(lg)隐藏</li>
+    </ul>
+
+    <!-- 引入顺序不能调换，如果不需要bootstrap的js插件可以不引入下面两个文件 -->
+    <script src="./lib/jquery.min.js"></script>
+    <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

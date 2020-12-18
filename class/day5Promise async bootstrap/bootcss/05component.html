@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <style>
+        .box1{
+            height: 60px;
+            background-color: orangered;
+            color:white;
+            font-size:25px;
+            text-align: center;
+            line-height: 60px;
+        }
+        p{
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container box1">
+        <span  class="glyphicon glyphicon-envelope"></span> 字体图标
+    </div>
+    <p></p>
+    <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" 
+            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" 
+            style="width: 40%"
+        >
+        </div>
+    </div>
+    <p></p>
+    <div class="dropdown">
+        <!-- 下拉按钮 -->
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          1000phone
+          <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <!-- 弹出的菜单 -->
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Something else here</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+    </div>
+   
+
+    <!-- 引入顺序不能调换，如果不需要bootstrap的js插件可以不引入下面两个文件 -->
+    <script src="./lib/jquery.min.js"></script>
+    <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

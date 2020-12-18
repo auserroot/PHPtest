@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <style>
+        table img{
+            width: 70px;
+            height: 70px;
+        }
+        .box{
+            width: 600px;
+            margin:50px auto;
+        }
+        .box>tbody>tr.success>th{
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .box>tbody>tr>td{
+            text-align: center;
+            line-height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <table class="table box">
+        <tr class="success">
+            <th>商品名称</th>
+            <th>商品编号</th>
+            <th>图片</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td>口红</td>
+            <td>10001</td>
+            <td>
+                <img class="img-thumbnail" src="https://img.alicdn.com/imgextra/i4/1980545515/TB2r2RUo3ZC2uNjSZFnXXaxZpXa_!!1980545515-0-beehive-scenes.jpg_180x180xzq90.jpg_.webp" alt="">
+            </td>
+            <td>100</td>
+            <td>2</td>
+            <td>
+                <button class="btn btn-danger">删除</button>
+            </td>
+        </tr>
+        <tr>
+            <td>口红</td>
+            <td>10001</td>
+            <td>
+                <img class="img-thumbnail" src="https://img.alicdn.com/imgextra/i4/1980545515/TB2r2RUo3ZC2uNjSZFnXXaxZpXa_!!1980545515-0-beehive-scenes.jpg_180x180xzq90.jpg_.webp" alt="">
+            </td>
+            <td>100</td>
+            <td>2</td>
+            <td>
+                <button class="btn btn-danger">删除</button>
+            </td>
+        </tr>
+        <tr>
+            <td>口红</td>
+            <td>10001</td>
+            <td>
+                <img class="img-thumbnail" src="https://img.alicdn.com/imgextra/i4/1980545515/TB2r2RUo3ZC2uNjSZFnXXaxZpXa_!!1980545515-0-beehive-scenes.jpg_180x180xzq90.jpg_.webp" alt="">
+            </td>
+            <td>100</td>
+            <td>2</td>
+            <td>
+                <button class="btn btn-danger">删除</button>
+            </td>
+        </tr>
+        <tr>
+            <td>口红</td>
+            <td>10001</td>
+            <td>
+                <img class="img-thumbnail" src="https://img.alicdn.com/imgextra/i4/1980545515/TB2r2RUo3ZC2uNjSZFnXXaxZpXa_!!1980545515-0-beehive-scenes.jpg_180x180xzq90.jpg_.webp" alt="">
+            </td>
+            <td>100</td>
+            <td>2</td>
+            <td>
+                <button class="btn btn-danger">删除</button>
+            </td>
+        </tr>
+    </table>
+    <!-- 引入顺序不能调换，如果不需要bootstrap的js插件可以不引入下面两个文件 -->
+    <script src="./lib/jquery.min.js"></script>
+    <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

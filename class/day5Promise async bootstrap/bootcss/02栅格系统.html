@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <style>
+        .box1{
+            height: 60px;
+            background-color: orangered;
+            color:white;
+            font-size:25px;
+            text-align: center;
+            line-height: 60px;
+        }
+        p{
+            height: 50px;
+        }
+        
+        li{
+            list-style: none;
+            height: 60px;
+            line-height: 60px;
+            font-size:12px;
+            text-align: center;
+            color:white;
+            background:chartreuse;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        container （固定宽度） 版心
+        container-fluid （100% 宽度） 通栏
+    -->
+    <div class="container box1">
+        container （固定宽度） 版心
+    </div>
+    <p></p>
+    <div class="container-fluid box1">
+        container-fluid （100% 宽度） 通栏
+    </div>
+    <p></p>
+    <div class="container box1">
+        下面要进行分列显示,容器自带15px的padding,row这个类名可以去除15px的padding
+    </div>
+    <p></p>
+    <ul class="container-fluid row">
+        <li class="col-xs-6 col-lg-4">移动设备优先</li>
+        <li class="col-xs-6 col-lg-4">设置了小屏幕，就可以管住大屏幕，前提是大屏幕没有设置</li>
+        <li class="col-xs-6 col-lg-4">超小屏幕(xs)手机:小于768px  </li>
+        <li class="col-xs-6 col-lg-4">小屏幕(sm)平板:大于768px,小于992px </li>
+        <li class="col-xs-6 col-lg-4">中等屏幕(md)桌面显示器:大于992px,小于1200px</li>
+        <li class="col-xs-6 col-lg-4">大屏幕(lg)大桌面显示器:大于1200px</li>
+    </ul>
+    <!-- 引入顺序不能调换，如果不需要bootstrap的js插件可以不引入下面两个文件 -->
+    <script src="./lib/jquery.min.js"></script>
+    <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

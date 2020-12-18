@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            async/await 语法
+                + es7的语言
+                + 把异步代码写的“看起来像”一个同步代码
+                    --> 代码只是看起来像同步代码
+                    --> 本质还是异步代码
+                + 前提:Promise
+                + async --> 异步
+                + await --> 等待
+            语法规范
+                1 async关键字必须写在一个函数的前面
+                2 await关键字是一个写在异步函数里面的关键字
+                    --> 你想使用await关键字，那么函数前面必须有async关键字
+                3 await关键字后面必须是一个promise对象
+                + 有了await以后
+                    ==> 我们就可以吧本该写在then里面接收的结果
+                    ==> 在await前面定义一个变量来接收
+            兼容性问题
+                + 我们的promise和async/await语法都兼容性不好
+                + 一个是es6一个是es7
+                + 语法层面的兼容
+                + 语法层面的兼容我们不需要考虑
+                + 因为后面我们有一个工具叫做babel
+                + 能帮我们做的就是把es6 es7转换成es5语法
+                
+        */
+
+        // getSend函数执行的时候能返回一个promise对象
+        function getSend(url){
+            return new Promise(function(resolve,reject){
+                // 做一步的事情
+                var xhr = new XMLHttpRequest();
+                xhr.open('get',url);
+                xhr.onreadystatechange = function(){
+                    if(xhr.status==200&&xhr.readyState==4){
+                        resolve(xhr.responseText)
+                    }
+                    if(xhr.status==404){
+                        reject()
+                    }
+                }
+                xhr.send()
+            })
+        }
+
+        // 使用async/await语法完成刚才的三个需求
+        /* 
+        需求:
+            1 发送一个请求到a.php
+                ==> 等得到一个结果
+                ==> 由两个数字
+            2 在第一个请求结束以后，发送第二个请求到b.php
+                ==> 需要携带第一个请求返回的结果
+                ==> 等得到一个结果，结果就是两个数字和，和另外一个数字
+            3 在第二个请求结束以后，发送第三个请求到c.php
+                ==> 需要携带第二个请求返回的结果
+                ==> 等得到一个结果，结果就是两个数字乘积，和另外一个数字
+        */
+
+        async function fn(){
+            // 1 发送一个请求到a.php
+            var res = await getSend('./a.php');
+            res = JSON.parse(res)
+            console.log('这是第一次请求的结果')
+            console.log(res);
+            // 2 发送第二个请求到b.php
+            var res2 = await getSend(`./b.php?n1=${res.n1}&n2=${res.n2}`)
+            res2 = JSON.parse(res2);
+            console.log('这是第二次请求的结果')
+            console.log(res2);
+            // 3 发送第三个请求到c.php
+            var res3 = await getSend(`./c.php?n1=${res2.n1}&n2=${res2.n2}`)
+            res3 = JSON.parse(res3)
+            console.log('这是第三次请求的结果')
+            console.log(res3);
+        }
+        fn()
+    </script>
+</body>
+</html>

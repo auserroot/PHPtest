@@ -25,22 +25,19 @@
         */
 
         // 1 发送一个请求到a.php
-        getSend("./a.php")
-        .then(function(res){
-            console.log(res)
-            var result = JSON.parse(res);
+        getSend('./a.php').then(function(res){
+            console.log(res);
+            var result = JSON.parse(res)
             // 2 在第一个请求结束以后，发送第二个请求到b.php
             return getSend(`./b.php?n1=${result.n1}&n2=${result.n2}`)
-        })
-        .then(function(res){
-            console.log(res)
-            var result = JSON.parse(res);
+        }).then(function(res){
+            console.log(res);
+            var result = JSON.parse(res)
             // 3 在第二个请求结束以后，发送第三个请求到c.php
             return getSend(`./c.php?n1=${result.n1}&n2=${result.n2}`)
-        })
-        .then(function(res){
-            console.log(res)
-            var result = JSON.parse(res);
+        }).then(function(res){
+            console.log(res);
+            var result = JSON.parse(res)
         })
     </script>
 </body>
