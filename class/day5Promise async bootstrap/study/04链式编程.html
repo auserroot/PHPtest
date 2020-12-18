@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            Promise的链式调用
+                + then是成功的回调
+                + 只要then里面再次return一个promise对象
+                + 那么就可以在这个then后面继续then
+        */
+
+        // 先用定时器模拟一下
+        var p1 = new Promise(function(resolve,reject){
+            // 你要做的异步的事情
+            setTimeout(() => {
+                resolve();// 成功的回调
+            }, 1000);
+        })
+
+        // 1s以后执行这个then函数
+        p1.then(function(){
+            console.log('我是p1的then函数里面的代码');
+            // 准备第二个Promise对象
+            var p2 = new Promise(function(resolve,reject){
+                // 你要做的异步的事情
+                setTimeout(() => {
+                    resolve();// 成功的回调
+                }, 3000);
+            });
+            // p2.then(function(){
+            //     console.log('我是p2的then函数里面的代码');
+            // })
+
+            // 在p1里面return了一个新的promise对象
+            return p2;
+        }).then(function(){
+            console.log('我是p2的then函数里面的代码');
+        })
+
+
+        var arr = [1,2,3]
+        arr.concat([11,22,33]).concat([111,2222,3333])
+    </script>
+</body>
+</html>

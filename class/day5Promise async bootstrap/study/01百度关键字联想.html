@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 500px;
+            margin:100px auto; 
+        }
+        input{
+            border:2px solid skyblue;
+            height: 30px;
+            width:486px;
+            line-height: 40px;
+            padding-left:10px;
+            outline: none;
+        }
+        ul li{
+            list-style:none;
+            padding-left:12px;
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input type="text">
+        <ul>
+            
+        </ul>
+    </div>
+    <script>
+        /* 
+            需求分析:
+                1 可以在文本框里面输入要查询的关键字
+                2 在输入关键字的时候，会在下面自动提示关键字的联系
+            技术点:
+                1 输入内容不同，提示关键字,要找到一个接口，能根据输入内容返回联系的关键字
+                2 找到了一个百度服务器的接口
+                3 也就是从localhost这个域名请求baidu的域名，一定会有跨域问题
+                4 解决办法:jsonp,因为发现百度接口刚刚返回的是函数调用
+                5 接口地址:
+                https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1445,33102,33306,31253,32971,33284,33313,33312,33311,33310,32845,33309,33198,33308,33307,33237,33264&wd=2&req=2&csor=1&pwd=1&cb=jQuery110204751713758771612_1608254269697&_=1608254269699
+                6 参数分析:
+                    ==> GET
+                    ==> wd=关键字
+                    ==> cb=函数名
+
+        */
+
+        // 1 获取相关元素
+        var inp = document.querySelector('input');//关键字输入框
+        var ul = document.querySelector('ul');//显示联系的位置
+
+        
+        
+
+        // 3 可以在文本框里面输入要查询的关键字
+        inp.oninput = function(){  
+            // jsonp
+            // 3.1 提前准备一个函数 
+            window.words = function(data){
+                console.log(data.g);
+                ul.innerHTML = "";
+                if(data.g){
+                    // 遍历输入
+                    data.g.forEach(function(item){
+                        var li = document.createElement('li');
+                        li.innerHTML = item.q;
+                        ul.appendChild(li);
+                    })
+                }
+                // 数据回来了，那么对应的script就可以移除了
+                document.body.removeChild(script)
+            }         
+            // 没输入一个关键字，就要发一次请求
+            var srcValue = "https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1445,33102,33306,31253,32971,33284,33313,33312,33311,33310,32845,33309,33198,33308,33307,33237,33264&wd="+inp.value+"&req=2&csor=1&pwd=1&cb=words&_=1608254269699";
+            // 3.2 通过script标签的src请求数据
+            var script = document.createElement('script');
+            script.src = srcValue;
+            document.body.appendChild(script);
+        }
+    </script>
+
+</body>
+</html>

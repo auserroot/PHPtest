@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            Promise
+                + 解决回调地狱的方案之一
+                + 把回调地狱写的优雅的方案之一
+            Promise 单词
+                + 承诺
+                + 这个承诺几个状态(三个)
+                    1 承诺继续 --> 两个人在一起过日子
+                    2 成功 --> 最后两个人埋在一坟里面
+                    3 失败 --> 有一个人埋在别人的坟里
+                + 一旦状态确定，不可改变
+                    ==> 继续 --> 成功
+                    ==> 继续 --> 失败
+                    ==> 不可能由成功转变成失败
+                + 对应在Promise语法里面的时候
+                    1 继续 --> pending --> 正在进行时
+                    2 成功 --> fulfilled --> 过去完成时
+                    3 失败 --> rejected --> 过去完成时
+            Promise是做什么的
+                + 承诺会帮你做“异步的事情”
+                + 会在成功的时候给你成功的回调
+                + 会在失败的时候给你失败的回调
+                + 我们把异步的事情交给Promise来做
+                    ==> 我们等待结果就好
+                    ==> pending  继续，也就是正在帮你做这个异步的事情
+                    ==> fulfilled 成功，结果
+                    ==> rejected 失败，结果
+            Promise类比在ajax请求里面
+                ==> pending 就是正在请求(网络传输过程中)
+                ==> fulfilled 就是请求成功了(网络环境允许请求，可以链接到服务器拿到结果)
+                ==> rejected 就是请求失败(突然没网了，掉线了，不会结果回来了)
+
+            Promise的语法
+                + 在es6里面由一个内置的构造函数Promise
+                + 语法: let p1 = new Promise(function(){
+                    你要做的异步的事情
+                })
+                + promise对象里面有两个方法
+                + 一个叫做then --> 就是p1帮你做的异步的请求成功的时候执行的
+                + 一个叫做catch --> 就是p1帮你做的异步的请求失败的时候执行的
+
+        */
+
+
+        // 应用一下promise
+        var p1 = new Promise(function(resolve,reject){
+            // var resolve = function(data){
+            //     // 这个data就是resolve调用的时候传入的实参
+            //     console.log("我是成功的回调函数")
+            // }
+            // var reject = function(){
+            //     console.log("我是失败的回调函数")
+            // }
+            // 你要做的异步的事情
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET','./a2.php');
+            xhr.onreadystatechange = function(){
+                if(xhr.status === 200&&xhr.readyState===4){
+                    // 成功
+                    resolve(xhr.responseText)
+                }
+                if(xhr.status === 404){
+                    // 失败
+                    reject()
+                }
+            }
+            xhr.send()
+        })
+        
+
+        // 1 resolve和reject的第一种传入方式
+        // then方法
+        p1.then(function(data){
+            // data就收的就是resolve()里面的实参 ==> xhr.responseText
+            console.log(data);
+            console.log('我是成功的回调函数')
+        })
+
+        // catch方法
+        p1.catch(function(){
+            console.log("我是失败的回调函数")
+        })
+
+
+        // 2 resolve和reject的第二种传入方式
+        // p1.then(function(data){
+        //     console.log(data);
+        //     console.log('我是成功的回调函数')
+        // },function(){
+        //     console.log("我是失败的回调函数")
+        // })
+    </script>
+</body>
+</html>

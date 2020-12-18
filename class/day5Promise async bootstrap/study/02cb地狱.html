@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+        /* 
+            回调地狱
+                + 当回调函数嵌套过多的时候出现的一个问题
+                + 没有可维护性和可读性的代码
+                    ==> 代码没有问题，不是错的
+                    ==> 只是不好进行后期维护
+            需求:
+                1 发送一个请求到a.php
+                    ==> 等得到一个结果
+                    ==> 由两个数字
+                2 在第一个请求结束以后，发送第二个请求到b.php
+                    ==> 需要携带第一个请求返回的结果
+                    ==> 等得到一个结果，结果就是两个数字和，和另外一个数字
+                3 在第二个请求结束以后，发送第三个请求到c.php
+                    ==> 需要携带第二个请求返回的结果
+                    ==> 等得到一个结果，结果就是两个数字乘积，和另外一个数字
+        */
+        // 1 发送一个请求到a.php
+        getSend('./a.php',function(res){
+            // res就是xhr.responsteText
+            // console.log(res)
+            var result = JSON.parse(res);
+            console.log(result);
+
+            // 2 在第一个请求结束以后，发送第二个请求到b.php
+            getSend(`./b.php?n1=${result.n1}&n2=${result.n2}`,function(res){
+                // console.log(res)
+                var result = JSON.parse(res);
+                console.log(result);
+                 
+                // 3 在第二个请求结束以后，发送第三个请求到c.php
+                getSend(`./c.php?n1=${result.n1}&n2=${result.n2}`,function(res){
+                    var result = JSON.parse(res);
+                    console.log(result);
+                })
+            })
+
+        })
+        
+    </script>
+</body>
+</html>

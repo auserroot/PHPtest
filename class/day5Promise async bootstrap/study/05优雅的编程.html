@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./ajax-p.js"></script>
+    <script>
+        /* 
+            优雅的编程
+                + 使用Promise的方式二次放在ajax
+
+            需求:
+                1 发送一个请求到a.php
+                    ==> 等得到一个结果
+                    ==> 由两个数字
+                2 在第一个请求结束以后，发送第二个请求到b.php
+                    ==> 需要携带第一个请求返回的结果
+                    ==> 等得到一个结果，结果就是两个数字和，和另外一个数字
+                3 在第二个请求结束以后，发送第三个请求到c.php
+                    ==> 需要携带第二个请求返回的结果
+                    ==> 等得到一个结果，结果就是两个数字乘积，和另外一个数字
+        */
+
+        // 1 发送一个请求到a.php
+        getSend("./a.php")
+        .then(function(res){
+            console.log(res)
+            var result = JSON.parse(res);
+            // 2 在第一个请求结束以后，发送第二个请求到b.php
+            return getSend(`./b.php?n1=${result.n1}&n2=${result.n2}`)
+        })
+        .then(function(res){
+            console.log(res)
+            var result = JSON.parse(res);
+            // 3 在第二个请求结束以后，发送第三个请求到c.php
+            return getSend(`./c.php?n1=${result.n1}&n2=${result.n2}`)
+        })
+        .then(function(res){
+            console.log(res)
+            var result = JSON.parse(res);
+        })
+    </script>
+</body>
+</html>
