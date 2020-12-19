@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            es6的类语法
+                + es6有自己的书写类的语法叫做class -> 类似构造函数
+                
+        */
+
+        // 1.1 构造函数
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        // Person.prototype.sayHi = function(){
+        //     console.log('hello world');
+        // }        
+        // var p1 = new Person('lucy',12);
+        // console.log(p1)
+
+        // 1.2 万物都是对象,把Person看作一个对象，可以给他添加成员
+        //   这个在Person对象上定义的属性是给Person这个对象使用的，跟p1无关
+        // Person.aa = 100;
+        // Person.fn = function(){
+        //     console.log('hello fn')
+        // }
+        // 输出aa成员的值，调用fn方法
+        // console.log(Person.aa);
+        // Person.fn()
+
+        
+
+        // 2 es6:类的语法class
+        class Person{
+            constructor(name,age){
+                // 等价于构造函数体
+                this.name = name;
+                this.age = age;                
+            }
+
+            // 原型上的方法
+            sayHi(){
+                console.log('hello world');
+            }
+            // 用static修饰的fn方法类似前面的Person.fn = function(){}
+            static fn(){
+                console.log('hello fn');
+            }
+            // 用static修饰的aa属性类似前面的Person.aa = 100
+            static aa = 100
+        }
+        var p2 = new Person('lily',34)
+        console.log(p2)
+
+        // static fn这个方法是给Person这个对象使用的
+        Person.fn()
+        // static aa这个属性是给Person这个对象使用的
+        console.log(Person.aa)
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            原型继承
+                + 继承
+                    ==> 涉及两个构造函数
+                    ==> 准备好的父类叫Person
+                    ==> 再写一个Student当作子类
+                    ==> 完成继承以后，Student继承自Person
+                    ==> 那么s1就可以使用name属性和sayHi方法
+                + 原型继承 ==> 就是通过改变原型链的方式来达到继承
+                    ==> 子类.prototype = 父类的实例
+                + 原型继承的缺点
+                    1 我继承下来的属性没有继承在自己身上
+                        ==> 而是在__proto__里面呢
+                        ==> 当我要访问的时候就要去__proto__里面找
+                        
+                    2 我继承的目的是为了继承属性和方法
+                        ==> 我自己要使用name属性和age属性
+                        ==> 要在两个地方传递
+                        ==> age可以单独设置
+                        ==> name无法在不影响其他实例的情况下设置
+                        ==> 对于代码的书写和代码的维护阅读都不是很好                    
+                    
+        */
+        // 1 准备一个父类
+        function Person(name){
+            this.name = name;
+        }
+        // 原型上有一个方法
+        Person.prototype.sayHi = function(){
+            console.log('hello world')
+        }
+        
+        // 2 准备一个子类
+        function Student(age){
+            this.age = age;
+        }
+        // 让Student来完成继承:子类.prototype = 父类的实例
+        Student.prototype = new Person('Jack');
+        // 这一行代码完成以后，当你在去new Student(18)的时候
+        var s1 = new Student(18);
+        console.log(s1)
+        /* 
+            当你使用s1去访问name属性的时候
+                + 自己没有，去到__proto__上有
+            当你使用s1去访问sayHi方法的时候
+                + 自己没有，去到__proto__上没有
+                + 就去__proto__上找，就有了
+        */
+    </script>
+</body>
+</html>

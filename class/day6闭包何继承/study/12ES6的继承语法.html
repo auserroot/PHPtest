@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            es6的继承语法
+                1 准备一个父类
+                2 书写子类的时候
+                    + 写成: class 子类 extends 父类
+                        ==> class Son extends Father{}
+                        ==> 创建一个继承自Father的子类Son 
+                3 在子类的constructor里面书写
+                    + super()来完成继承
+                    + super()就相当于在借用父类构造函数
+                注意:
+                    + 当你书写super的时候
+                    + 必须书写super后写你自己的内容
+        */
+
+        class Father{
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+            }
+            sayHi(){
+                console.log('hello,my son!')
+            }
+        }
+
+        class Son extends Father{
+            constructor(gender,name,age){
+                super(name,age);
+                // super就相当于我们es5的借用构造函数继承
+                // 只不过不需要我们写call去改变this指向了
+                // 直接帮我们改变好this指向了，我们只需要传递参数就可以了
+                this.gender = gender;
+                
+            }
+            sayHello(){
+                console.log('hello,my father!')
+            }
+        }
+
+        var s1 = new Son('男','lilei',10)
+        console.log(s1)
+    </script>
+</body>
+</html>

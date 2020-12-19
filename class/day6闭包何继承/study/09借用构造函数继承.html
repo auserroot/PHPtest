@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            借用构造函数继承
+                + 继承 => 两个构造函数之间的关系
+                    ==> 为了让子类的实例能使用父类的属性和方法
+                + 继承方案
+                    ==> 在子类的构造函数体内，使用父类构造函数执行一下
+                    ==> 并且强行改变父类的函数的this指向子类的实例
+                + 前提
+                    call函数的应用
+                        + call是改变函数内部this指向的方法之一
+                        + 调用是跟在函数后面调用的
+                            ==> fn() -> fn.call()
+                            ==> obj.fn() -> obj.fn.call()
+                        + 目的是强行改变this指向
+                            ==> 不管你本身函数内部的this指向谁
+                            ==> 我让你指向谁你就指向谁
+                        + call(你要改变的函数的this指向，给函数传递参数,...)   
+                + 借用构造函数继承的缺点
+                    + 优点
+                        1 继承来的属性写在了自己的身上
+                            ==> 就不需要去__proto__里面找到
+                        2 自己需要用到的连哥哥属性的值，在一个构造函数的时候传递
+                            ==> 不需要像原型继承在两个地方传递
+                    + 缺点
+                        1 只能继承父类的属性
+                            ==> 不能继承父类原型（prototype）上的方法
+                            ==> 写在构造函数体里面的都可以继承下来
+
+                构造函数的书写
+                    + 属性写在构造函数体内
+                    + 方法写在构造函数的原型上
+                    + 方法是不能写在构造函数体内
+                        ==> 如果你写在构造函数体内
+                        ==> 每次new的时候会创建一个函数空间
+                        ==> 就会有若干个一模一样的函数空间出现
+                        ==> 平白浪费空间
+        */
+
+        // 1 准备父类
+        function Person(name,gender){
+            this.name = name;
+            this.gender = gender;            
+        }
+        Person.prototype.sayHi = function(){
+            console.log('hello world');
+        }
+
+        // 2 准备子类
+        function Student(age,name,gender){
+            // 构造函数内部的this就是实例化对象，用关键字new调用的才是构造函数
+            this.age = age;
+
+            // this.name = name;
+            // this.gender = gender;
+
+            // Person(name,gender);
+            // 此时的Person不是构造函数，没有和new连用，是普通函数，普通函数里面的this是window
+            // 我希望Person里面的this和Student里面的this是一致，都是Student的实例化对象
+
+            Person.call(this,name,gender);
+            // Person调用的时候里面的this和Student里面的this是一致，都是Student的实例化对象
+        }
+
+        var s1 = new Student(18,"xiaoxiao",'女');
+        console.log(s1)
+        // console.log(window)
+    </script>
+</body>
+</html>

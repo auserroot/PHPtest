@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            继承
+                + 出现再两个构造函数之间的关系
+                + 当A构造函数的属性和方法被B构造函数的实例使用了
+                + 那么我们就说B继承自A构造函数
+                    ==> A是B构造函数的父类
+                    ==> B是A构造函数的子类
+
+            构造函数
+                + 一个构造函数可以使用new关键字来创造出若干的实例
+                + 每个实例都可以使用这个构造函数的属性和方法
+
+        */
+
+        function Person(){
+            // this = new Object();
+            // 构造函数体内定义的属性
+            // 每一个实例都有
+            this.name = "Jack";
+            this.age = 18;
+            // return this;
+        }
+        Person.prototype = {
+            a:function(){},
+            b:function(){},
+            // .....
+        }
+        var p1 = new Person();
+        var p2 = new Person();
+        // ......
+
+        // p1,p2,....都能使用Person构造函数体内定义的属性
+        // p1,p2,....都能使用Person.prototype上的方法
+        
+        function Student(){};
+
+        var s1 = new Student();
+        // s1 只能使用Student构造函数体内定义的属性
+        // s1 只能使用Student.prototype的方法
+
+
+        // 当s1能使用Person构造函数的属性和原型上的方法的时候
+        // 我们就说Student继承自Person构造函数
+        // 我们管Student叫做Person的子类
+        // 我们管Person叫做Student的父类
+
+    </script>
+</body>
+</html>

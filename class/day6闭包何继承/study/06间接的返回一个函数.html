@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            间接的返回一个函数
+                + 直接返回的一个函数，return function b(){}
+                + 间接返回的一个函数，return一个对象或数组
+                    ==> 这个对象或数组里面有一个函数
+            使用:
+                + 当你只需要访问一个数据的时候，可以直接返回返回或者间接返回
+                + 当你要访问多个私有数据的时候
+                    ==> 我们就需要使用间接返回的方式
+                    ==> 返回一个对象内包含多个闭包函数
+        */
+
+        function fn(){
+            var num = 100;
+            var num2 = 200;
+            return {
+                // 对象的名称语义化比数组的索引要强些
+                getNum:function(){
+                    console.log(num)
+                },
+                getNum2:function(){
+                    console.log(num2)
+                }
+            }
+        }
+
+        var res = fn();
+        // res得到的是一个对象
+        // 这个对象里面有一个函数是fn的闭包函数
+        console.log(res)
+        res.getNum()
+        res.getNum2()
+    </script>
+</body>
+</html>

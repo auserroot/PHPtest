@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            组合继承
+                + 继承 => 两个构造函数之间的关系
+                    ==> 为了让子类的实例能使用父类的属性和方法
+                + 组合 => 原型继承+借用构造函数继承
+                    ==> 利用借用构造函数继承，把属性继承在自己身上
+                    ==> 利用原型继承把父类的prototype上的方法继承下来
+            缺点
+                1 子类的原型上面本来的方法没有了
+                    + 必须要继承以后再添加原型方法
+
+        
+        */
+
+        // 1 父类构造函数
+        function Person(age,name){
+            this.age = age;
+            this.name = name;
+        }
+        Person.prototype.sayHi = function(){
+            console.log('hello world');
+        }
+        // 2 子类构造函数
+        function Student(gender,age,name){
+            this.gender = gender;
+            // 利用借用构造函数继承，把属性继承在自己身上
+            Person.call(this,age,name)
+        }
+        
+        // 利用原型继承把父类的prototype上的方法继承下来
+        // 子类.prototype = 父类的实例
+        Student.prototype = new Person();
+        
+        Student.prototype.fn = function(){
+            console.log('hello fn')
+        }
+        // s1是Student的实例
+        var s1 = new Student('女',12,'Rose');
+        console.log(s1)
+    </script>
+</body>
+</html>
