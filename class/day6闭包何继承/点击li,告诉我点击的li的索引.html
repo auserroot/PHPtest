@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击li,告诉我点击的li的索引</title>
+    <style>
+        li{
+            float: left;
+            list-style-type: none;
+            width: 100px;
+            height: 30px;
+            margin: 0 20px;
+            background-color: blueviolet;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <script>
+    //闭包函数
+        //获取所有li
+        var li = document.querySelectorAll('li');
+            for(var i=0;i<li.length;i++){
+                li[i].id=i;//记录当前索引
+                //添加点击事件
+                li[i].onclick=function(){
+                    var num = 0;//用于接收索引
+                    return function(){
+                        num=this.id;//将当前li索引传给num
+                        alert('这个li的索引是'+num)
+                    }
+                }();
+            }
+    </script>
+</body>
+</html>
