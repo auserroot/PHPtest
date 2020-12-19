@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script src="./study/ajax.js"></script>
     <script>
@@ -19,112 +21,246 @@
                 第二次请求结束后，发送第三次请求到c.php
                     返回从b.php中获取的值的乘积，和另一个数值
         */
-       /*例*/
-       //发送一个请求
-    //    getSend('./study/a.php',function(res){
-    //        var result = JSON.parse(res);
-    //        console.log(result);
+        /*例*/
+        //发送一个请求
+        //    getSend('./study/a.php',function(res){
+        //        var result = JSON.parse(res);
+        //        console.log(result);
 
-    //        //第二次发送请求
-    //        getSend('./study/b.php',function(res){
-    //         var result = JSON.parse(res);
-    //         console.log(result);
+        //        //第二次发送请求
+        //        getSend('./study/b.php',function(res){
+        //         var result = JSON.parse(res);
+        //         console.log(result);
 
-    //             //第三次发送请求
-    //             getSend('./study/b.php',function(res){
-    //                 var result = JSON.parse(res);
-    //                 console.log(result);
-    //              })
-    //        })
-    //    })
+        //             //第三次发送请求
+        //             getSend('./study/b.php',function(res){
+        //                 var result = JSON.parse(res);
+        //                 console.log(result);
+        //              })
+        //        })
+        //    })
 
 
-    /*
-        解决方法
-            1 Promise 承诺
-                三个状态
-                    1 承诺继续
-                    2 成功
-                    3 失败
-                一旦状态确定，无法改变
-                    当处于第一个状态(继续) 其结果可能是 成功 也可能是 失败
-                    一旦状态到达 成功或失败 就无法改变（不能从成功变成失败 反之亦然）
-                在promise语法中
-                    继续 pending 正在进行
-                    成功 fulfilled 过去完成时
-                    失败 rejected 过去完成时
-            promise的作用
-                承诺帮助处理异步事件
-                在成功时回调成功函数
-                在失败时回调失败函数
-                    将事情交给promise
-                        pending 继续 正在处理异步事件
-                        fulfilled 成功 结果
-                        rejected 失败 结果
-            与ajax比较
-                pending 正在请求（网络传输过程中）
-                fulfilled 请求成功 （从服务器获得结果）
-                rejected 请求失败 （无法从服务器获取结果）
-            语法
-                在es6 中内置了一个构造函数
-                    let p1 = new Promise(function(){
-                        需要处理的异步事件
-                    })
-                promise中有两个方法
-                    then    p1处理异步事件请求成功时执行
-                    catch   p1处理异步事件请求失败时执行
-    */
+        /*
+            解决方法
+                1 Promise 承诺
+                    三个状态
+                        1 承诺继续
+                        2 成功
+                        3 失败
+                    一旦状态确定，无法改变
+                        当处于第一个状态(继续) 其结果可能是 成功 也可能是 失败
+                        一旦状态到达 成功或失败 就无法改变（不能从成功变成失败 反之亦然）
+                    在promise语法中
+                        继续 pending 正在进行
+                        成功 fulfilled 过去完成时
+                        失败 rejected 过去完成时
+                promise的作用
+                    承诺帮助处理异步事件
+                    在成功时回调成功函数
+                    在失败时回调失败函数
+                        将事情交给promise
+                            pending 继续 正在处理异步事件
+                            fulfilled 成功 结果
+                            rejected 失败 结果
+                与ajax比较
+                    pending 正在请求（网络传输过程中）
+                    fulfilled 请求成功 （从服务器获得结果）
+                    rejected 请求失败 （无法从服务器获取结果）
+                语法
+                    在es6 中内置了一个构造函数
+                        let p1 = new Promise(function(){
+                            需要处理的异步事件
+                        })
+                    promise中有两个方法
+                        then    p1处理异步事件请求成功时执行
+                        catch   p1处理异步事件请求失败时执行
+
+            2 async/await 下面详解（208行）
+        */
         //例
         // resolve是成功的回调函数
         // reject是失败的回调函数
-        var p1 = new Promise(function(resolve,reject){
-            // var resolve = function(data){
-            //     //data 是resolve传入的实参
-            //     console.log("成功的回调函数");
-            // }
-            // var reject = function(){
-            //     //data 是resolve传入的实参
-            //     console.log("失败的回调函数");
-            // }
+        // var p1 = new Promise(function(resolve,reject){
+        //     // var resolve = function(data){
+        //     //     //data 是resolve传入的实参
+        //     //     console.log("成功的回调函数");
+        //     // }
+        //     // var reject = function(){
+        //     //     //data 是resolve传入的实参
+        //     //     console.log("失败的回调函数");
+        //     // }
 
 
-            //要处理的异步事件
-            var xhr = new XMLHttpRequest();
-            xhr.open('get','./study/b.php');
-            xhr.onreadystatechange = function(){
-                if(xhr.status===200&&xhr.readyState===4){
-                    //请求成功
-                    resolve(xhr.responseText);
-                }
-                if(xhr.status===404){
-                    //请求失败
-                    reject()
-                }
-            }
-            xhr.send();
-        })
+        //     //要处理的异步事件
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open('get','./study/b.php');
+        //     xhr.onreadystatechange = function(){
+        //         if(xhr.status===200&&xhr.readyState===4){
+        //             //请求成功
+        //             resolve(xhr.responseText);
+        //         }
+        //         if(xhr.status===404){
+        //             //请求失败
+        //             reject()
+        //         }
+        //     }
+        //     xhr.send();
+        // })
 
 
-        //resolve、reject传值
-        //方法一
-        p1.then(function(data){
-            //data是resolve（）中的实参  即xhr.responseText
-            console.log(data);
-            console.log("成功的回调函数");
-        })
-        
-        p1.catch(function(){
-            console.log("失败回调函数");
-        })
-
-        //方法二
+        // //resolve、reject传值
+        // //方法一
         // p1.then(function(data){
         //     //data是resolve（）中的实参  即xhr.responseText
         //     console.log(data);
         //     console.log("成功的回调函数");
-        // },function(){
+        // })
+
+        // p1.catch(function(){
         //     console.log("失败回调函数");
         // })
+
+        // //方法二
+        // // p1.then(function(data){
+        // //     //data是resolve（）中的实参  即xhr.responseText
+        // //     console.log(data);
+        // //     console.log("成功的回调函数");
+        // // },function(){
+        // //     console.log("失败回调函数");
+        // // })
+
+        /*
+            promise 的链式调用
+                then是成功的回调函数，每次在 then中返回一个promise对象
+                就可以在后面继续接then
+        */
+        // //定时器模拟示例
+        // var p1 = new Promise(function(resolve,reject){
+        //     //事件 
+        //     setTimeout(() => {
+        //         resolve();//成功回调
+        //     }, 1000);
+        // })
+
+        // //1s后执行then
+        // p1.then(function(){
+        //     var p2 = new Promise(function(resolve,reject){
+        //          //事件 
+        //          setTimeout(() => {
+        //             resolve();//成功回调
+        //         }, 3000);
+        //     });
+        //     return p2;
+        // }).then(function(){
+        //     console.log('p2 then中的函数');
+        // })
+
+
+        /*
+            优雅的编程
+                使用promise的方式将结果重新返回到ajax中
+            
+            例：
+                发送一个请求到a.php，获取两个数值
+                    在第一次请求结束后，发送第二个请求到b.php
+                        返回从a.php中返回的数值之和，和另一个数值
+                    第二次请求结束后，发送第三次请求到c.php
+                        返回从b.php中获取的值的乘积，和另一个数值
+        */
+       
+        //// 封装 Promise版本 请求函数
+        // function getSend(url) {
+        //         var p1 = new Promise(function (resolve, reject) {
+        //             // 做一步的事情
+        //             var xhr = new XMLHttpRequest();
+        //             xhr.open('get', url);
+        //             xhr.onreadystatechange = function () {
+        //                 if (xhr.status == 200 && xhr.readyState == 4) {
+        //                     resolve(xhr.responseText)
+        //                 }
+        //                 if (xhr.status == 404) {
+        //                     reject()
+        //                 }
+        //             }
+        //             xhr.send()
+        //         })
+        //         return p1;
+        //     }
+        // //发送一个请求到a.php
+        // getSend('./study/a.php').then(function (res) {
+        //         console.log(res);
+        //         var result = JSON.parse(res);
+        //         //在第一次请求结束后，发送第二个请求到b.php
+        //         return getSend(`./study/b.php?n1=${result.n1}&n2=${result.n2}`);
+        //     }).then(function (res) {
+        //         console.log(res);
+        //         var result = JSON.parse(res);
+        //         //第二次请求结束后，发送第三次请求到c.php
+        //         return getSend(`./study/c.php?n1=${result.n1}&n2=${result.n2}`);
+        //     }).then(function (res) {
+        //         console.log(res);
+        //         var result = JSON.parse(res);
+        //     })
+
+
+        /*
+            async/await 语法
+                es7的语法
+                    将异步代码写的看起来像同步代码（本质还是异步代码）
+                前提：要有promise对象
+                    async 异步
+                    await 等待
+                规范
+                    async关键字必须写在一个函数前
+                    await关键字是写在异步函数内的
+                        要使用await关键字，函数前必须有async
+                        且await后必须是一个promise对象
+                    可以在await前定义变量来接收then中的返回结果
+                兼容性
+                    promise和async/await兼容性都不好（语法层面的兼容）
+                    可以使用babel工具解决（该工具能将 高版本es转换成es5语法）
+        */
+       //封装函数getSend执行时能返回一个promise对象
+       function getSend(url){
+           return new Promise(function(resolve,reject){
+               //event
+               var xhr = new XMLHttpRequest();
+               xhr.open('get',url);
+               xhr.onreadystatechange = function(){
+                   if(xhr.status===200&&xhr.readyState===4){
+                        resolve(xhr.responseText);
+                   }
+                   if(xhr.status===404){
+                       reject();
+                   }
+               }
+               xhr.send();
+           })
+       }
+
+       //使用async/await 实现上例需求
+       async function fn(){
+           //发送一个请求到a.php
+           var res = await getSend('./study/a.php');
+           res=JSON.parse(res);
+           console.log('************请求1 *************');
+           console.log(res);
+
+        //发送第二个请求到b.php
+        var res2 = await getSend(`./study/b.php?n1=${res.n1}&n2=${res.n2}`);
+           res2=JSON.parse(res2);
+           console.log('************请求2 *************');
+           console.log(res2);
+
+        //发送第三个请求到b.php
+        var res3 = await getSend(`./study/c.php?n1=${res.n1}&n2=${res.n2}`);
+           res3=JSON.parse(res3);
+           console.log('************请求3 *************');
+           console.log(res3);
+       }
+       fn()
     </script>
 </body>
+
 </html>
