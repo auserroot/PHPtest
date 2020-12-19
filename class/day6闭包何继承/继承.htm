@@ -31,26 +31,26 @@
                         而原型继承中的某些属性需要自己传参时无法在不影响其他实例的情况下设置
                         因此对于代码的书写和维护都不是很友好
         */
-       //定义一个父类
-        function Person(name){
-            this.name = name;
-        }
-        //原型上的方法
-        Person.prototype.sayHi = function() {
-            console.log('hi')
-          }
+    //    //定义一个父类
+    //     function Person(name){
+    //         this.name = name;
+    //     }
+    //     //原型上的方法
+    //     Person.prototype.sayHi = function() {
+    //         console.log('hi')
+    //       }
 
-          //子类
-          function student(age){
-              this.age=age;
-          }
+    //       //子类
+    //       function student(age){
+    //           this.age=age;
+    //       }
 
-          //让student继承person(子类.prototype = 父类的实例)
-          student.prototype = new Person('jack');
+    //       //让student继承person(子类.prototype = 父类的实例)
+    //       student.prototype = new Person('jack');
 
-          //调用继承
-          var s = new student(18);
-          console.log(s); 
+    //       //调用继承
+    //       var s = new student(18);
+    //       console.log(s); 
           /*
             使用s访问name时
                 子类本身没有该属性，__proto__上有
@@ -61,8 +61,46 @@
           //借用构造函数继承
           /*
                 借用构造函数继承
-                    
+                    继承
+                        为了让子类实例能调用父类的属性和方法
+                    方案
+                        在子类构造函数中调用父类构造函数
+                        并将父类构造函数this指向子类实例
+                    前提
+                        call函数的应用
+                            call是改变函数内部this指向的方法之一
+                            语法
+                                函数名.call(要改变的this指向,参数1，参数2，....)
+                    优点
+                        继承的属性继承在本身（无需到__proto__中获取）
+                        传多个值时直接在构造函数传入
+                    缺点
+                        只能继承父级的属性
+                            无法继承父级原型上的方法
+                            （能继承写在构造函数体中的所有属性）
+                构造函数的书写
+                    属性写在函数体中
+                    方法写在构造函数原型上
+                        方法写在函数体中会造成资源浪费（不建议将方法写在函数体zhing) 
           */
+
+          //父类
+          function person(name,age){
+              this.name=name;
+              this.age=age;
+          }
+          person.prototype.sayhi = function(){
+              console.log('hi');
+          }
+          //子类
+          function student(age,name,gender){
+              this.gender=gender;
+              //调用父级构造函数，并将其this指向子级实例化对象
+              person.call(this,name,age);
+          }
+
+          var s = new student(18,'xx','男');
+          console.log(s)
     </script>
 </body>
 </html>
