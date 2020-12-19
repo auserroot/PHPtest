@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        继承
+            出现在两个构造函数之间的关系
+            当构造函数A的属性和方法被构造函数B的实例化对象使用
+                那么可以认为B继承自A构造函数
+                    A是B的父类
+                    B是A的子类
+            构造函数
+                使用new关键字创造实例化对象
+                每个实例都能使用这个构造函数的属性和方法
+    -->
+    <script>
+        // 原型继承
+        /*
+            原型继承
+                就是通过改变原型链的方式来达到继承
+                    子类.prototype = 父类的实例化对象
+                缺点：
+                    1 子类继承下来的属性没有继承在自身
+                        而是继承到__proto__中了
+                        当要访问时需要到__proto__中寻找
+                    2 继承的目的是为了继承父级的属性和方法
+                        而原型继承中的某些属性需要自己传参时无法在不影响其他实例的情况下设置
+                        因此对于代码的书写和维护都不是很友好
+        */
+       //定义一个父类
+        function Person(name){
+            this.name = name;
+        }
+        //原型上的方法
+        Person.prototype.sayHi = function() {
+            console.log('hi')
+          }
+
+          //子类
+          function student(age){
+              this.age=age;
+          }
+
+          //让student继承person(子类.prototype = 父类的实例)
+          student.prototype = new Person('jack');
+
+          //调用继承
+          var s = new student(18);
+          console.log(s); 
+          /*
+            使用s访问name时
+                子类本身没有该属性，__proto__上有
+                    访问sayHi方法时在__proto__中没有，在__proto__.__proto__中才有
+          */
+
+
+          //借用构造函数继承
+          /*
+                借用构造函数继承
+                    
+          */
+    </script>
+</body>
+</html>
