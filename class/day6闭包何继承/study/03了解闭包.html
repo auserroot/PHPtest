@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            了解闭包
+                + 闭包的生成有三个必要条件（缺一不可）
+                    1 在函数A内部直接或者间接返回一个函数B
+                    2 B函数内部使用着A函数的私有变量（私有数据）
+                    3 A函数外部有一个变量接受这个函数B
+                + 形成了一个不会销毁的函数空间
+
+            闭包空间
+                + 我们管这个不会销毁的A函数的执行空间叫做闭包空间
+                + 把函数A里面返回的函数B叫做函数A的闭包函数
+                + 官方给的定义有一句话:闭包 ==> 函数内部的函数
+        */
+
+        function a(){
+            // 这个num就是函数a的私有变量
+            var num = 100;
+
+            return function b(){
+                console.log(num)
+            }
+        }
+
+        // res接受的是a函数执行以后的返回值
+        // res接受的就是函数a内部返回的一个复杂数据类型（函数b）
+        // 导致函数a的执行空间不会销毁
+        var res = a()
+
+        // 从现在开始，res随时可以是一个函数a里面返回的函数b
+        // res随时可以调用
+        res()
+
+        // 当res调用的时候，打印num
+        // 打印出来的num就是a函数的私有变量num的值
+
+    </script>
+</body>
+</html>

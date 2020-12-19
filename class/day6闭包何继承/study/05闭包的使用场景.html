@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul li{
+            list-style: none;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: pink;
+            margin:0 10px;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>小张</li>
+        <li>小华</li>
+        <li>小黄</li>
+        <li>小黑</li>
+        <li>小李</li>
+    </ul>
+    <script>
+        /* 
+            需求分析:
+                1 点击li，给li里面的人投票
+                2 每个li的初始票数为0
+                3 点击投票以后，票数+1，弹出该li的票数
+        */
+        
+        var liArr = document.getElementsByTagName('li');
+        // var num = 0;//如果做成全局变量就是记录的总票数，我们要记录每个li单独的票数
+        // 方法一：闭包
+        for(var i=0;i<liArr.length;i++){
+            liArr[i].onclick = (function(){
+                // 闭包可以缓存中间变量，延长了中间变量的生命周期
+                var num = 0;
+                return function(){
+                    num++;
+                    alert(num)
+                }
+            })()
+        }
+
+        // 方法二：自定义属性
+        // for(var i=0;i<liArr.length;i++){
+        //     liArr[i].num = 0;
+        //     liArr[i].onclick = function(){
+        //         // 在事件函数里面，this就是事件源
+        //         this.num++;
+        //         alert(this.num)
+        //     }
+        // }
+
+        // var fn = function(){
+        //     console.log(123);
+        //     return 222;
+        // }
+
+        // var res = (function (){
+        //     var num = 100
+        //     return function(){
+        //         alert(num)
+        //     };
+        // })();
+
+        // console.log(res)
+        // res()
+
+        // document.onclick = (function (){
+        //     var num = 100
+        //     return function(){
+        //         num++;
+        //         alert(num)
+        //     };
+        // })()
+    </script>
+</body>
+</html>

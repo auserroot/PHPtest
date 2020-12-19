@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>购物车</title>
+	<link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.css">
+	<style type="text/css">
+		img{
+			width: 50px;
+			height: 50px;
+		}
+	</style>
+</head>
+<body>
+<div class="col-md-6 col-md-offset-3">
+	<table class="product-list table">
+		<thead>
+			<th>商品编号</th>
+			<th>商品图片</th>
+			<th>商品名称</th>
+			<th>价格</th>
+			<th>操作</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td>2312313</td>
+				<td>
+					<img src="./img/xifashui.jpg"/>
+				</td>				
+				<td>洗发水</td>
+				<td>12</td>
+				<td>
+					<span class="addCart btn-info btn">加入购物车</span>
+				</td>
+			</tr>
+			<tr>
+				<td>6765713</td>
+				<td><img src="./img/maojin.jpg"/></td>
+				<td>毛巾</td>
+				<td>2</td>
+				<td>
+					<span class="addCart btn-info btn">加入购物车</span>
+				</td>
+			</tr>
+			<tr>
+				<td>2879879</td>
+				<td>
+					<img src="./img/xishouye.jpg"/>
+				</td>
+				<td>洗手液</td>
+				<td>112</td>
+				<td>
+					<span class="addCart btn-info btn">加入购物车</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="car">
+		
+	</div>
+</div>
+
+<script>
+    //获取元素
+    var car = document.querySelector('#car');
+    var th = document.querySelector('thead');
+    var btn = document.querySelectorAll('.btn');
+    var tbod = document.querySelector('tbody');
+    console.log(btn);
+    //加入购物车功能实现
+    //先清空购物车
+    // car.innerHTML = '';
+    var tab = document.createElement('table');
+    tab.className = 'product-list table';
+    var tbd = document.createElement('tbody');
+    var tabTh = th.cloneNode(true);
+    tab.appendChild(tabTh);
+    var Tth = document.createElement('th');
+    Tth.innerHTML='数量';
+    var Thh = document.createElement('th');
+    Thh.innerHTML='操作';
+    //点击对应商品按钮，添加到购物车
+    for(var i=0;i<btn.length;i++){
+		btn[i].num=0;
+        btn[i].onclick = function(){
+			this.num++;
+            car.appendChild(tab);
+            tab.appendChild(tbd);
+            var tabTh=document.querySelectorAll('thead');
+            console.log(tabTh)
+            console.log(tabTh[1].children)
+            tabTh[1].children[0].removeChild(tabTh[1].children[0].children[4]);
+            tabTh[1].children[0].appendChild(Tth);
+            tabTh[1].children[0].appendChild(Thh);
+
+			// var tr = tbod.children[i].cloneNode(true);
+			var tr = this.parentNode.parentNode.cloneNode(true);
+			console.log(tr)
+            tr.removeChild(tr.children[4]);
+            var Tnum = document.createElement('td');
+            Tnum.innerHTML = this.num;
+			var Tdo = document.createElement('td');
+			Tdo.className='addCart btn-info btn'
+            Tdo.innerHTML='删除';
+            tr.appendChild(Tnum);
+            tr.appendChild(Tdo);
+            tbd.appendChild(tr);
+    	}
+    }
+
+</script>
+</body>
+</html>
