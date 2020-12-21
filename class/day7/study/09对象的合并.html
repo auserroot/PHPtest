@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Object.assign: 把其他对象的属性合并到目标对象上
+        // 语法:Object.assign(目标对象, 要合并的对象1,要合并的对象2,....)
+        // 返回值:目标对象
+
+        var obj1 = {
+            name:"zhangsan",
+            age:12
+        }
+        var obj2 = {
+            name:'lisi',
+            gender:'男'
+        }
+        var obj = Object.assign({name:'lucy'},obj1,obj2);// 等价于var obj = {name:'lucy',...obj1,...obj2}
+        console.log(obj)
+        
+    </script>
+</body>
+</html>

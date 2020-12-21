@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 视图 -->
+    <input type="text">
+    <span></span>
+    <script>
+        // js里面的变量
+        // var a = 100;
+        // 如果和a的值显示在input里面
+        // document.querySelector('input').value = a;
+
+        // 更新a的值，input会自动更新吗？不会
+        // a = 200;
+        // input里面的输入内容变化，a会更新吗? 不会
+
+        // 双向数据绑定:
+        // 更新a的值，input会自动更新
+        // input里面的输入内容变化，a会更新
+
+        // 需求:实现双向数据绑定
+        var input = document.querySelector('input');
+        var obj = {};
+        Object.defineProperty(obj,'text',{
+            get:function(){
+
+            },
+            set:function(val){
+                // 更新obj.text的值，span会自动更新
+                document.querySelector('span').innerHTML = val;
+            }
+        })
+        // input里面的输入内容变化，obj.text会更新
+        input.oninput = function(){
+            var value = this.value;
+            obj.text = value;
+        }
+    </script>
+</body>
+</html>

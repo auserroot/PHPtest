@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Human(){
+            this.name = "zhangsan";
+            this.age = 12;
+            this.sayName = function(){
+                console.log('sayName')
+            }
+        }
+        // 原型继承: 子类的原型 = 父类的实例
+        // 子类的实例.__proto__ = 父类的实例
+        // Object.create也能实现继承
+        var s1 = Object.create(new Human(),{
+            a:{     
+                value:100,       // value表示属性值
+                writable:true,   // writable表示是否可以修改
+                enumerable:true  // enumerable表示是否可遍历
+            },
+            b:{
+                value:200,
+                writable:false,
+                enumerable:false
+            }
+        })
+
+        
+        s1.a = "aaaa";
+        s1.b = "bbbb";
+        console.log(s1);
+
+        for(var key in s1){
+            console.log(key)
+        }
+    </script>
+</body>
+</html>

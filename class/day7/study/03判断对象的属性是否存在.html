@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // in运算符  
+        // 语法： 属性名 in 对象  
+        // 返回值是布尔值，既可以判断对象本身的属性也能判断原型上的属性和方法
+        var obj = {a:1};
+        // 属性有两种情况
+        // 一种是对象本身上的属性和方法
+        console.log("a" in obj);//true
+        // 一种是继承来的属性和方法
+        console.log('hasOwnProperty' in obj)//true
+
+
+        // hasOwnProperty 只能识别对象本身的属性
+        console.log(obj.hasOwnProperty('a'));//true
+        console.log(obj.hasOwnProperty('hasOwnProperty'));;//false
+    </script>
+</body>
+</html>

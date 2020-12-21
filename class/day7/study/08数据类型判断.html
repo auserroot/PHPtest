@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 数据类型判断方法一：typeof
+        var a = [1,2,3]
+        var b = /\d+/;
+        console.log(typeof a)
+        console.log(typeof b)
+
+        // 数据类型判断方法二：Object.prototype.toString 
+        console.log(Object.prototype.toString());//随调用这个方法就判断谁的数据类型
+        console.log(Object.prototype.toString.call(a));//判断a的数据类型
+        console.log(Object.prototype.toString.call(b));//判断b的数据类型
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Human{
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+                this.sayHi = function(){
+                    console.log("hello world")
+                }                
+            }
+            sayHello(){
+                console.log('我是原型上的sayHello方法')
+            }
+            
+        }
+
+        var h1 = new Human("lucy",12);
+
+        // 删除实例本身上的属性和方法
+        delete h1.name;
+        delete h1.sayHi;
+
+        // 无法删除原型上的属性和方法
+        delete h1.sayHello;
+
+        console.log(h1);
+
+
+        var a = "hello";
+        aa = "hi";
+        delete window.a;//不能成功
+        delete window.aa;//可以删除
+        console.log(window)
+    </script>
+</body>
+</html>

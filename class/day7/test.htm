@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 删除实例本身上的属性和方法 -->
+    <script>
+        class p{
+            constructor(name,age){
+                this.name=name;
+                this.age=age;
+                this.sayhi = function(){
+                    console.log('hi')
+                }
+            }
+            sayhello(){
+                console.log('hello')
+            }
+        }
+
+        console.log(p)
+        var p1 = new p('jack',20);
+
+        // // 删除实例自身属性和方法
+        // delete p1.name;
+        // delete p1.sayhi;
+        console.log(p1)
+
+        // //无法删除原型上的属性和方法
+        // delete p1.sayhello;
+        // console.log(p1)
+
+
+        // // 不能删除var定义的全局变量
+        // var a=1;
+        // aa=2;
+        // delete window.a;//无法删除
+        // delete window.aa;//可以删除
+        // console.log(window)
+
+        //判断对象属性是否存在
+        //in 运算符
+            // 语法： 属性名 in 对象
+                // 返回布尔值（可以判断自身和原型上的属性和方法）
+        console.log('name' in p);//自身属性 true
+        console.log('hasOwnProperty' in p);//原型上的方法 true
+
+        // hasOwnProperty 只能识别对象本身属性
+        console.log(p.hasOwnProperty('name'));//true
+        console.log(p.hasOwnProperty('hasOwnPorperty'));//false
+
+
+        //定义对象属性补充
+            // Object.defineProperty
+                // 语法 Object.defineProperty('要定义属性的对象','要定义或修改的属性名','属性描述符{}')
+
+            // Object.defineProperty(p,'gender',{
+            //     //要定义或修改的属性描述符
+            //     get:function(){
+            //         //当访问属性gender时调用get函数
+            //         console.log('你在访问p对象的gender属性值')
+            //         //该函数的返回值会被用做gender属性值
+            //         return '男';
+            //     },
+            //     set:function(value){
+            //         //当属性gender被修改时，调用该函数
+            //         console.log('已修改gender属性值')
+            //         //该方法接收的value就是给属性重新赋值
+            //         gender = value;
+            //     }
+            // });
+            // console.log(p)
+            // console.log(p.gender)
+            // p.gender='女';//此时调用set函数，但属性值并不改变
+            // console.log(p.gender)
+
+    </script>
+</body>
+</html>

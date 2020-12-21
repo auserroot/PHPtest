@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {}
+
+        // 方法一:定义对象的属性
+        obj.a = 100;
+
+        // 方法二:Object.defineProperty
+        // 语法:Object.defineProperty('要定义属性的对象','要定义或修改的属性的名称',{要定义或修改的属性描述符})
+        var bbb;
+        Object.defineProperty(obj,'b',{
+            // 要定义或修改的属性描述符
+            get:function(){
+                // 当访问b属性时，会调用此函数
+                console.log('你在获取obj的b属性值')
+                // 该函数的返回值会被用作属性b的值
+                return bbb;
+            },
+            set:function(value){
+                // 当属性b的值被修改时，会调用此函数
+                console.log('你在修改obj的b属性值')
+                // 该方法接受一个参数,就是被赋予的新值
+                bbb = value;
+            }
+            
+        });
+        console.log(obj.b)
+        obj.b = 200;
+        console.log(obj.b)
+
+        // vue:双向数据绑定，利用Object.defineProperty来实现的
+
+        
+    </script>
+</body>
+</html>
