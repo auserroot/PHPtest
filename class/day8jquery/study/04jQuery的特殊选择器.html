@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li class="a">1</li>
+        <li class="a">2</li>
+        <li class="b">3</li>
+        <li class="c">4</li>
+        <li id="aaa">5</li>
+        <li id="bbb">6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>        
+    </ul>
+    <ul>
+        <li class="a">1</li>
+        <li class="a">2</li>
+        <li class="b">3</li>
+        <li class="c">4</li>
+        <li id="aaa">5</li>
+        <li id="bbb">6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>        
+    </ul>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jQuery的特殊选择器
+                + jQuery里面帮我们提供了一些特殊的选择器
+                    ==> first-child
+                    ==> last-child
+                    ==> nth-child
+                    ==> 因为这些内容都太长了，所有jQuery准备了一些段的供我们使用
+                + 特殊选择器
+                    1 :first => 获取第一个
+                    2 :last => 获取最后一个
+                    3 :eq(数字) => 获取索引为n的那一个
+                    4 :odd => 获取索引为奇数的那些
+                    5 :even => 获取索引为偶数的那些
+        */
+
+        console.log($('li:first-child'))
+        console.log($('li:first'));//获取所有li里面的第一个
+
+        console.log($('li:last-child'))
+        console.log($('li:last'))//获取所有li里面的最后一个
+
+        console.log($('li:nth-child(1)'))
+        console.log($('li:eq(0)'))//获取所有li里面的索引为0个那一个
+
+        console.log($('li:nth-child(odd)'))
+        console.log($('li:odd'));//获取索引为奇数的那些
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;padding: 0;
+        }
+        .box{
+            width: 300px;
+            border:1px solid #ccc;
+            margin:50px auto;
+        }
+        ul li,ol li{
+            list-style: none;
+        }
+        ul li{
+            float: left;
+            width: 100px;
+            background-color: chartreuse;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+        ol li{
+            background-color: pink;
+            font-size:80px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+
+        }
+        li.active{
+            background-color: red;
+            color:white;
+        }
+        ol li{
+            display: none;
+        }
+        ol li.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li class="active">苹果</li>
+            <li>西瓜</li>
+            <li>菠萝</li>
+        </ul>
+        <ol>
+            <li class="active">苹 果</li>
+            <li>西 瓜</li>
+            <li>菠 萝</li>
+        </ol>
+    </div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        
+        // // 原生js
+        // // 需求:点击菜单显示相应的内容，同时被点击的菜单高亮
+        // // 1 获取元素
+        // var menuArr = document.getElementsByTagName('ul')[0].children;//所有的菜单li集合
+        // var contentArr = document.getElementsByTagName('ol')[0].children;//所有的内容li集合
+        // // 2 给菜单li集合里面的每个li绑定事件
+        // for(var i=0;i<menuArr.length;i++){
+        //     menuArr[i].index = i;
+        //     menuArr[i].onclick = function(){
+        //         console.log(this.index)
+        //         // 所有菜单都不高亮
+        //         // 内容li都隐藏
+        //         for(var j=0;j<menuArr.length;j++){
+        //             menuArr[j].className = ""
+        //             contentArr[j].className = ""
+        //         }
+        //         // 被点击的菜单高亮
+        //         // 菜单对应的li显示
+        //         this.className = "active"
+        //         contentArr[this.index].className = "active"
+        //     }
+        // }
+
+        // jQuery
+        $('ul>li').click(function(){
+            // dom元素不等于jquery元素集合
+            // console.log(this)
+            // dom元素只有变成jquery元素集合才能使用jquery的方法
+            // jquery元素集合只有变成dom元素才能使用dom的方法
+            // dom元素变成jQuery元素集合
+            // console.log($(this))
+            // jQuery元素集合变成dom
+            // 方法一: jQuery元素集合[索引]
+            // console.log($(this)[0])
+            // 方法一: jQuery元素集合.get(索引)
+            // console.log($(this).get(0))
+
+
+            $(this)  // 把dom变成jquery对象集合
+                .addClass('active')  // 给当前li添加类名active
+                .siblings()  // 选择当前li的所有兄弟元素
+                .removeClass('active') //移除active
+                .parent()  //找到父元素ul
+                .next()   // 下一个兄弟ol
+                .children()  // ol下面所有的li
+                .removeClass('active') // 移除active
+                .eq($(this).index()) //找到索引和我点击的li对应的那一个
+                .addClass('active') //添加类名active            
+        })
+
+
+        // var arr = [1,2,3];
+        // arr.push(4)
+        // console.log(arr)
+
+        // var menuArr = document.getElementsByTagName('ul')[0].children;
+        // var a = [...menuArr]
+        // console.log(a)
+    </script>
+</body>
+</html>

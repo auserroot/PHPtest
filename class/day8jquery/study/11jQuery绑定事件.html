@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        li{
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin:40px;
+            background:pink;
+            list-style: none;
+            text-align: center;
+            line-height: 100px;
+            font-size:50px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jQuery绑定事件
+                + 给元素绑定一个事件
+                + on()方法是专门用来绑定事件的
+                    ==> jQuery里面通用的事件绑定方式
+                    ==> 通过传递不同的参数可以达到不同的效果
+                + one()方法是专门用来绑定一个只能执行一次的方法
+                    ==> 传递的参数的个数和效果同on方法
+                    ==> 绑定的事件执行执行一次
+                + off()方法是专门用来解绑一个元素的事件处理函数的
+                    ==> 有两种使用方法
+                    ==> off('事件类型'):给该类事件的所有事件处理函数解绑
+                    ==> off('事件类型','事件处理函数'):给该类事件的指定事件处理函数解绑
+                + trigger()方法是专门用来触发事件的方法
+                    ==> 不通过点击，通过代码把事件触发了
+                    ==> trigger('事件类型'):把该元素的事件给触发了
+
+                + 常用事件绑定
+                    ==> jQuery把一些常用事件直接做成了函数
+                        -> click()
+                        -> mouseover()
+                    ==> 直接使用就可以了
+                    ==> 使用click举个例子
+                        -> click(事件处理函数)
+                        -> click(参数,事件处理函数)
+                            -> 参数:触发市价你的时候传递到事件里面的数据
+                + hover
+                    ==> jQuery里面为一个一个很特殊的事件函数
+                    ==> 表示一个鼠标悬停动作
+                    ==> 自己唯一的使用方法
+                    ==> hover(鼠标移入的时候触发,鼠标移出的时候触发)
+        */
+
+        // on方法的各种参数描述
+        
+        // 1 on('事件类型',事件处理函数) => 给元素集合里面的每个元素绑定事件
+        // $('li').on('click',function(){
+        //     // 事件处理函数里面的this就是事件源,是dom元素
+        //     console.log(this)
+        // })
+
+        // 2 on('事件类型','事件委托',事件处理函数)
+        // $('ul').on('click','li',function(){
+        //     // this就是ul里面的被点击的li
+        //     console.log(this)
+        // })
+
+        // 3 on('事件类型',复杂数据类型,事件处理函数)
+        // 给一个元素绑定一个事件，复杂数据类型是触发事件你的时候传递的参数，在事件对象的data属性里面
+        // $('li').on('click',{a:1,b:2},function(e){
+        //     // 这个e是经过jquery处理以后的事件对象
+        //     console.log(e.data)
+        // })
+
+        // 4 on('事件类型','事件委托',复杂数据类型,事件处理函数)
+        // $('ul').on('click','li',{cc:'hello'},function(e){
+        //     console.log(this)
+        //     console.log(e.data)
+        // })
+
+        // 5 on(对象) => 给一个元素绑定多个事件的方法
+        // $('li').on({
+        //     'click':function(){
+        //         console.log('click')
+        //     },
+        //     'mouseleave':function(){
+        //         console.log('mouseleave')
+        //     }
+        // })
+
+        // trigger() => 触发指定事件
+        // $('li').trigger('click')
+
+
+        function HandlerA(){
+            console.log('click A')
+        }
+        function HandlerB(){
+            console.log('click B')
+        }
+        function HandlerC(){
+            console.log('mouseleave')
+        }
+        $('li').on('click',HandlerA)
+        $('li').on('click',HandlerB)
+        $('li').on('mouseleave',HandlerC)
+        
+        // off解绑事件
+        // $('li').off() 
+        // $('li').off('click')
+        // $('li').off('click',HandlerA)
+
+
+        // hover
+        $('li').hover(function(){
+            console.log('鼠标移入')
+        },function(){
+            console.log('鼠标移出');
+        })
+    </script>
+</body>
+</html>

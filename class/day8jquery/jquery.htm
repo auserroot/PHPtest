@@ -1,0 +1,108 @@
+<!-- 了解jQuery
+        jQuery是一个前端类库（方法库、工具库）
+        其中封装了大量jsDOM操作方法
+            用于获取DOMD元素
+            操作元素类名
+            控制元素属性、样式、动画等
+
+    使用
+        下载引入即可使用其封装的方法
+
+    jQuery的中文网站
+                https://jquery.cuishifeng.cn/
+-->
+
+<!-- jquery选择器
+            引入jquery文件后
+                就可以使用jquery向全局提供的俩个变量名
+                    jQuery
+                    $
+                    这两个变量名没有区别
+                选择器
+                    $()
+                    jQuery()
+                        括号中填的是想要获取的元素（可以是css、id等）
+                        获取的元素是一组元素，并非单个
+-->
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li class="a">3</li>
+    <li>4</li>
+    <li>5</li>
+    <li class="aaa">6</li>
+</ul>
+<ul>
+    <li>1</li>
+    <li id="aaa">2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<script src="./jquery.min.js"></script>
+<script>
+    // console.log($('ul'))//获取所有ul标签
+    // console.log($('ul li'))//获取ul中所有li
+    // console.log($('ul>li'))//获取ul的所有子元素li
+    // console.log($('ul>li:nth-child(1)'))//获取页面中的ul标签里面的子元素li的第一个
+    // console.log($('ul>li:last-child'))//获取页面中的ul标签里面的子元素li的最后一个
+    // console.log($('ul>li.a'))// 获取页面中的ul标签的子元素li里面类名是a的
+    // console.log($('#aaa'));//通过id获取元素
+    // console.log($('li:nth-child(odd)'));//li里面的奇数个
+    // console.log($('li:nth-child(even)'));//li里面的偶数个
+    
+    /*jquery的特殊选择器
+                first-child
+                last-child
+                nth-child
+            特殊选择器
+                :first  获取第一个子元素
+                :last   获取最后一个子元素
+                :eq(数字) 获取索引为n的那个
+                :odd获取索引为奇数的那些
+                :even 获取索引为偶数的那些
+    */
+
+        // console.log($('li:first-child'))
+        // console.log($('li:first'));//获取所有li里面的第一个
+
+        // console.log($('li:last-child'))
+        // console.log($('li:last'))//获取所有li里面的最后一个
+        // console.log($('li:nth-child(1)'))
+        // console.log($('li:eq(0)'))//获取所有li里面的索引为0个那一个
+        // console.log($('li:nth-child(odd)'))
+        // console.log($('li:odd'));//获取索引为奇数的那些
+
+
+        /*jquery的筛选器*/
+        // console.log($('li').first())//筛选出li集合中的第一个元素
+        // console.log($('li').last())//筛选出li集合中最后一个元素
+        // console.log($('li').eq(2))//筛选li集合中索引为2的元素
+        // console.log($('.a').next())//筛选出元素的下一个兄弟节点
+        // console.log($('.a').nextAll())//筛选出元素后面的所有兄弟节点
+        // console.log($('.a').nextUntil('#aaa'))//筛选出从.a到.aaa的所有元素（不包括.a和#aaa）
+        // console.log($('.a').prev())//筛选出元素的上一个兄弟节点
+        // console.log($('.a').prevAll())//筛选出元素前面的所有兄弟节点
+        // console.log($('.aaa').prevUntil('.a'))//筛选出从.aaa到.a的所有元素（不包括.a和#aaa）
+        // console.log($('ul').children())//获取子元素
+        // console.log($('.a').siblings())//获取所有同级元素
+        // console.log($('ul').find('li'))//获取ul下所有li
+        // console.log($('li.aaa').index())//获取.aaa的第一个索引
+
+        /*jquery操作文本
+                html() 能解析html标签
+                    不传参时，获取元素html内容（获取元素集合中第一个html内容）
+                    传参，给所有元素设置html内容
+
+                text() 不能解析html标签
+                    不传参时，获取元素html内容（获取元素集合中第一个html内容）
+                    传参，给所有元素设置html内容
+
+                val() 用于表单元素
+                    不传参时，获取元素html内容（获取元素集合中第一个html内容）
+                    传参，给所有元素设置html内容
+
+
+        */
+</script>

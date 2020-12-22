@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .one{
+            width: 100px;
+            height: 100px;
+            background:red;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            margin:20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="one"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jQuery操作元素样式
+                + css()
+                    ==> 一个读写的方法
+                    ==> 不同的操作需要传递不同的参数
+                1 css('样式名称')
+                    + css('width')
+                    + 获取元素的样式，不管是行内样式还是非行内样式都可以
+                        => 获取的是集合里面的第一个元素的样式值
+                    + 返回值:字符串
+                2 css('样式名称','样式的值')
+                    + css('width',100)
+                    + 设置元素的样式，集合里有多少个元素就给都多少个元素设置样式
+                    + 如果不写单位，默认是px
+                    + 返回值:元素集合
+                3 css(对象)
+                    + css({
+                        width:50,
+                        height:50,
+                        backgroundColor:'red',
+                        opacity:0.5
+                    })
+                    + 批量设置css样式
+                    + 设置元素的样式，集合里有多少个元素就给都多少个元素设置样式
+                    + 如果不写单位，默认是px
+                    + 返回值:元素集合
+
+        */
+
+        // 1 css('样式名称') --- 获取元素的样式
+        console.log($('div').css('width'))
+
+        // 2 css('样式名称','样式的值') --- 设置元素的样式
+        $('div').css('width','50px')
+        $('div').css('height',50)
+        $('div').css('backgroundColor','red');
+        $('div').css('opacity',0.5);
+
+        // 3 css(对象) --- 批量设置css样式
+        $('div').css({
+            width:150,
+            height:150,
+            backgroundColor:'purple',
+            opacity:0.1
+        })
+
+    </script>
+</body>
+</html>

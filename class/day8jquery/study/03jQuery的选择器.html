@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>   
+    <style>
+        /* + 表示紧邻兄弟选择器 */
+        li.b+li{
+            color:red;
+        }
+        /* ~ 表示通用兄弟选择器 */
+        li.b~li{
+            color:red;
+        }
+    </style> 
+</head>
+<body>
+    <ul>
+        <li class="a">1</li>
+        <li class="a">2</li>
+        <li class="b">3</li>
+        <li class="c">4</li>
+        <li id="aaa">5</li>
+        <li id="bbb">6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jQuery的选择器
+                + 选择器就是用来帮我们获取DOM元素的方法
+            当jQuery文件被引入以后
+                + 我们全局就多了两个变量
+                + jQuery向全局暴露了两个名字
+                    ==> $
+                    ==> jQuery
+                + 他们两个名字没有任何区别
+                    ==> 你喜欢用哪个就使用哪个
+            选择器
+                + $()
+                + jQuery()
+                + 就是jQuery的选择器
+                    ==> 也就是jQuery获取元素的方法
+                + ()里面写什么
+                    ==> 你css怎么获取元素，这里就可以怎么写
+                    ==> 不管你写什么，获取的都是一组元素
+                    ==> 只有id的时候，是这一组里面只能有一个
+
+        */
+
+        console.log($==jQuery)
+        
+        // jQuery的选择器
+        console.log($('ul'));//获取页面中的所有的ul标签
+        console.log($('ul li'));//获取页面中的ul标签里面的所有的li
+        console.log($('ul>li'));//获取页面中的ul标签里面的子元素li
+        console.log($('ul>li:nth-child(1)'))//获取页面中的ul标签里面的子元素li的第一个
+        console.log($('ul>li:last-child'))//获取页面中的ul标签里面的子元素li的最后一个
+        console.log($('ul>li.a'))// 获取页面中的ul标签的子元素li里面类名是a的
+        console.log($('#aaa'));//通过id获取元素
+        console.log($('li:nth-child(odd)'));//li里面的奇数个
+        console.log($('li:nth-child(even)'));//li里面的偶数个
+        // odd 三个字母组成的表示奇数
+        // even  四个字母组成的表示偶数
+    </script>
+</body>
+</html>

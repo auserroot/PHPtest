@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div index='12' id="box" data-cc-aa-dd="12"></div>
+    <script>
+        /* 
+            在所有标签上，id是原生系统属性
+            在大部分标签上，src说不好是原生系统属性还是自定义属性
+            在大部分标签上，hello一定是一个自定义属性
+
+            在H5的标准下，给了一个定义，当你需要写自定义属性的时候，
+                + 最好写成 data-xxx = "值"
+                + 当看到data-xxx的时候，就会知道他就是一个自定义属性
+            现在这个标签上
+                + id是原生系统属性
+                + data-id是一个自定义属性
+        */
+
+        var box = document.getElementById('box');        
+        
+        // 1 属性的获取和设置 -- 会显示在标签上
+        box.setAttribute('index',34)
+        console.log(box.getAttribute('index'))
+        // 这种方法获取的属性值都是字符串格式
+
+        // 2 属性的获取和设置在dom对象上 -- 除非是系统属性，不会显示在标签上
+        box.id = 34;
+        console.log(box.id)       
+
+
+        // 3 h5标准的自定义属性的获取和设置
+        console.log(box.dataset.ccAaDd)
+        box.dataset.info = true;
+        console.log(box.dataset.info)
+    </script>
+</body>
+</html>

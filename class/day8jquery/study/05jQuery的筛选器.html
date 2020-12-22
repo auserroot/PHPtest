@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li class="a">1</li>
+        <li class="a">2</li>
+        <li class="b">3</li>
+        <li class="c">4</li>
+        <li id="aaa">5</li>
+        <li id="bbb">6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>        
+    </ul>  
+    <ul>
+        <li class="a">1</li>
+        <li class="a">2</li>
+        <li class="b">3</li>
+        <li class="c">4</li>
+        <li class="aaa">5</li>
+        <li class="aaa">6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>        
+    </ul>  
+</body>
+<script src="./jquery1.12.4.min.js"></script>
+<script>
+        /* 
+            jQuery的筛选器
+                + 用在jQuery选择的元素集合后面
+                + 都是方法，为了对已经选择出来的元素进行二次筛选
+
+            筛选器:
+                1 first() => 筛选出来一个元素集合里面的第一个
+                2 last() => 筛选出来一个元素集合里面的最后一个
+                3 eq(index) => 筛选出来一个元素集合里面的索引为index的那一个
+                4 next() => 筛选出元素的下一个兄弟元素
+                5 nextAll() 
+                    => 筛选出元素的后面的所有兄弟元素
+                    => nextAll(选择器) 
+                        => 拿到下面所有兄弟元素中符合选择器的元素集合
+                6 nextUntil(选择器)
+                    => 筛选出元素的后面的所有兄弟元素直到选择器为止,不包含选择器元素
+                7 prev() => 筛选出元素的上一个兄弟元素
+                8 prevAll() 
+                    => 筛选出元素的前面的所有兄弟元素
+                    => prevAll(选择器) 
+                        => 拿到上面所有兄弟元素中符合选择器的元素集合
+                9 prevUntil(选择器)
+                    => 筛选出元素的前面的所有兄弟元素直到选择器为止,不包含选择器元素
+                10 parent()
+                    => 筛选出元素的父元素
+                11 parents()
+                    => 筛选出元素的所有祖先元素
+                    => parents(选择器)
+                        => 筛选出元素的所有祖先元素中选择器要求的
+                12 parentsUntil(选择器)
+                    => 筛选出元素的所有祖先元素,直到选择器为止
+                13 children()
+                    => 筛选出元素的所有子级元素
+                    => children(选择器)
+                    => 筛选出元素的所有子级元素中符合选择器的
+                14 siblings()    
+                    => 筛选出元素的所有兄弟元素
+                    => 自己不算
+                    => siblings(选择器)  
+                    => 筛选出元素的所有兄弟元素符合选择器要求的元素
+                15 find(选择器)
+                    => 在元素的后代里面查找符合选择器的元素
+                16 index()
+                    => 获取到元素的索引位置
+                    => 不是元素集合里面的第几个
+                    => 找到他是该父元素下的第几个元素
+                    => 返回值是一个数字
+        */
+
+        // 1 first() 筛选出来一个元素集合里面的第一个
+        console.log($('li').first())
+        // 2 last() 筛选出来一个元素集合里面的最后一个
+        console.log($('li').last())
+        // 3 eq(index) => 筛选出来一个元素集合里面的索引为index的那一个
+        console.log($('li').eq(2))
+        // 4 next() => 筛选出元素的下一个兄弟元素
+        console.log($('.b').next())
+        // 5 nextAll() => 筛选出元素的后面的所有兄弟元素
+        console.log($('.b').nextAll())
+        console.log($('.b').nextAll('#aaa'))
+        // 6 nextUntil(选择器)
+        console.log($('.b').nextUntil('#aaa'))
+        console.log("=========prev========")
+        // 7 prev() => 筛选出元素的上一个兄弟元素
+        console.log($('.b').prev())
+        // 8 prevAll() => 筛选出元素的前面的所有兄弟元素
+        console.log($('.b').prevAll())
+        console.log($('.b').prevAll('.c')) 
+        // 9 prevUntil(选择器) => 筛选出元素的前面的所有兄弟元素直到选择器为止,不包含选择器元素
+        console.log($('.c').prevUntil('.a')) 
+        
+        // 10 parent() => 筛选出元素的父元素
+        console.log($('.b').parent())
+        // 11 parents()=> 筛选出元素的所有祖先元素
+        console.log($('.b').parents())
+        // parents(选择器)=> 筛选出元素的所有祖先元素中选择器要求的
+        console.log($('.b').parents('body'))
+        // 12 parentsUntil(选择器) => 筛选出元素的所有祖先元素,直到选择器为止
+        console.log($('.b').parentsUntil('body'))
+        console.log("=========children========")
+        // 13 children()
+        console.log($('html').children())
+        console.log($('html').children('body'))
+        // 14 siblings()  
+        console.log($('.b').siblings());
+        console.log($('.b').siblings('.a'));
+        // 15 find(选择器)
+        console.log($('html').find('li'))
+        // 16 index() 获取到元素的索引位置
+        console.log($('li.aaa').index());//如果要求所有的有多个元素，只求第一个的索引
+</script>
+</html>

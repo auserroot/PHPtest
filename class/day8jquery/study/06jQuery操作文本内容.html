@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <span>1</span>
+        </li>
+        <li>
+            <span>2</span>
+        </li>
+        <li>
+            <span>3</span>
+        </li>
+        <li>
+            <span>4</span>
+        </li>
+        <li>
+            <span>5</span>
+        </li>
+    </ul>
+
+    <input type="text" value="hello1">
+    <input type="text" value="hello2">
+    <input type="text" value="hello3">
+    <input type="text" value="hello4">
+
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jQuery操作文本内容
+                + html()
+                    ==> 一个读写的方法
+                    ==> 不传递参数的时候，就是获取元素内部的html内容
+                        ==> 获取的是元素集合里面的第一个元素的html内容
+                    ==> 传递一个参数的时候，就是设置元素的html内容 
+                        ==> 集合里面有多少个元素，就给多少个元素设置html内容
+
+                + text()
+                    ==> 一个读写的方法
+                    ==> 不传递参数的时候，就是获取元素内部的文本内容
+                        ==> 不认识html标签,就是获取元素集合里面的所有本文内容
+                    ==> 传递一个参数的时候，就是设置元素的文本内容 
+                        ==> 集合里面有多少个元素，就给多少个元素设置文本内容
+
+                + val()
+                    ==> 一个读写的方法,专门用于表单元素
+                    ==> 不传递参数的时候，就是获取表单元素的值
+                        ==> 获取的是表单元素集合里面的第一个元素的value值
+                    ==> 传递一个参数的时候，就是设置表单元素的值
+                        ==> 集合里面有多少个元素，就给多少个元素设置value值
+        */
+
+        // 1 html()
+        // 不传递参数的时候，就是获取元素内部的html内容
+        console.log($('li').html())
+        // 传递一个参数的时候，就是设置元素的html内容 
+        $('li').html('<div>hello</div>')
+
+        // 2 text()
+        // 不传递参数的时候，就是获取元素内部的文本内容
+        console.log($('li').text())
+        // 传递一个参数的时候，就是设置元素的文本内容
+        $('li').text('<span>world</span>')
+
+        // 3 val()
+        // 不传递参数的时候，就是获取表单元素的值
+        console.log($('input').val())
+        // 传递一个参数的时候，就是设置表单元素的值
+        $('input').val('world')
+        
+    </script>
+</body>
+</html>

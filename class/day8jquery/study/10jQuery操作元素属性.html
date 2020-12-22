@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div index="1" class="box1" data-info="zhangsan"></div>
+    <div index="2" class="box2"></div>
+    <div index="3" class="box3"></div>
+    <div index="4" class="box4"></div>
+
+    <input type="checkbox"> 男
+    <input type="checkbox"> 女
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jQuery操作元素属性
+                + attr()和removeAttr()
+                    ==> attr:attribute  
+                    ==> attr()
+                        -> 一个读写的方法
+                        -> attr(要读取的属性名),传递一个参数的时候是读取
+                            -> 读取集合里面的第一个元素的属性值
+                        -> attr(属性名,属性值),传递二个参数的时候是设置
+                            -> 集合里面有多少元素就设置多少个
+                    ==> removeAttr()
+                        -> 专门用来移除属性的
+                            -> 集合里面有多少元素就移除多少个
+                    ==> attr这套方法的注意
+                        -> 所有的属性都会显示在标签上（原生属性和自定义属性）
+                        -> 不管你设置的是什么数据类型，都会变成字符串
+                        -> removeAttr删除attr设置的属性，有多少删除多少
+
+                + prop()和removeProp()
+                    ==> prop: property
+                    ==> prop()
+                        -> 一个读写的方法
+                        -> prop(要读取的属性名),传递一个参数的时候是读取
+                            -> 读取集合里面的第一个元素的属性值
+                        -> prop(属性名,属性值),传递二个参数的时候是设置
+                            -> 集合里面有多少元素就设置多少个
+                    ==> removeProp()
+                        -> 专门用来移除属性的
+                    ==> prop这套方法的注意
+                        -> 非原生属性，不会显示在标签上的，但是你可以获取使用
+                        -> 你存储的是什么数据类型，获取的时候就是什么数据类型
+                        -> removeProp删除prop设置的属性，有多少删除多少
+
+                + data()和removeData()
+                    ==> data()
+                        -> 一个读写的方法 
+                        -> data(要读取的属性名),传递一个参数的时候是读取
+                            -> 读取集合里面的第一个元素的属性值
+                        -> data(属性名,属性值),传递二个参数的时候是设置
+                            -> 集合里面有多少元素就设置多少个
+                    ==> removeData()
+                        -> 专门用来移除属性的
+                    ==> data这套方法的注意
+                        -> 和元素的原生属性没有关系，可以设置id，但是和元素的id没有关系
+                        -> 你存储的是什么数据类型，获取的时候就是什么数据类型
+                        -> 就是在元素行给你开辟一个地方，存储一个数据
+                        -> data()方法也能读取写在标签上的h5标准的自定义属性
+                        -> removeData删除data设置的属性
+
+
+                总结
+                    + attr
+                        ==> 给元素标签设置属性，可以在标签上显示
+                        ==> 不管设置的是什么数据类型，都会变成字符串
+                    + prop
+                        ==> 给元素标签设置属性，不在标签上显示
+                        ==> 设置的是什么数据类型，就是什么数据类型
+                    + data
+                        ==> 在元素行给你开辟一个地方，存储一些数据
+                        ==> 和元素的原生属性没有关系
+                        ==> 也能读取写在标签上的h5标准的自定义属性
+        */
+        // 1 attr()和removeAttr()
+
+        // attr(属性名,属性值)
+        $('div').attr('index',1)
+        $('div').attr('class','one')
+
+        // attr(要读取的属性名)
+        console.log($('div').attr('index'))
+        console.log($('div').attr('class'))
+
+        // removeAttr(要移除的属性名)
+        // $('div').removeAttr('index')
+        // $('div').removeAttr('class')
+
+        // 2 prop()和removeProp()
+        $('input').prop('checked',true)
+        console.log($('input').prop('checked'));
+
+        $('div').prop('world',45)
+        console.log($('div').prop('world'));
+
+        $('div').removeProp('world')
+        console.log($('div').prop('world'));
+
+        // 3 data()和removeData()
+        $('div').data('id','hello')
+        console.log($('div').data('id'))
+        $('div').removeData('id')
+        console.log($('div').data('id'))
+        // data()方法也能读取写在标签上的h5标准的自定义属性
+        console.log($('div').data('info'))
+        
+    </script>
+</body>
+</html>

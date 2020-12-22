@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="add">添加类名</button>
+    <button class="del">删除类名</button>
+    <button class="toggle">切换类名</button>
+    <button class="has">判断有无类名</button>
+
+
+    <div class="a b c d e f g"></div>
+    <div></div>
+    <div></div>
+    <div class="container"></div>
+    <div></div>
+
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jQuery操作元素类名
+                + addClass()
+                    ==> 添加类名
+                    ==> 执行这个方法可以给元素集合里面的每个元素添加类名
+                    ==> 如果有就不添加，没有才会添加
+                + removeClass()
+                    ==> 移除类名
+                    ==> 执行这个方法可以给元素集合里面的每个元素移除类名
+                    ==> 如果有就移除
+                + toggleClass()
+                    ==> 切换类名
+                    ==> 执行这个方法可以给元素集合里面的每个元素切换类名
+                    ==> 如果有就移除,没有就添加
+                + hasClass()
+                    ==> 判断有没有指定类名
+                    ==> 执行这个方法可以判断元素集合里面有没有指定的类名
+                    ==> 返回值:只要集合里面可有一个元素有则返回true，无则返回false
+        */
+
+        // 添加类名
+        $('.add').click(function(){
+            // 给div元素添加类名
+            $('div').addClass('box')
+        })
+
+        // 移除类名
+        $('.del').click(function(){
+            // 给div元素移除类名
+            $('div').removeClass('box')
+        })
+
+        // 切换类名
+        $('.toggle').click(function(){
+            // 给div元素切换类名
+            $('div').toggleClass('box')
+        })
+
+        // 判断有没有指定类名
+        $('.has').click(function(){
+            // 判断所有div里面是否有container类名
+            alert($('div').hasClass('container'))
+            // 判断所有div里面是否有box类名
+            alert($('div').hasClass('box'))
+        })
+    </script>
+</body>
+</html>
