@@ -46,6 +46,22 @@
     }
 
   </style>
+    <script src="./jquery1.12.4.js"></script>
+    <script>
+      window.onload = function () {
+        //改变css
+        // $('li').mouseover(function () {
+        //   $('span').css('left', $(this).index() * 100)
+        // })
+        //动画
+        $('li').mouseover(function () {
+          // $('span').animate(
+          //   { 'left': $(this).index() * 100 });
+          $('span').stop().animate(
+            { 'left': $(this).index() * 100 });
+        });
+      }
+    </script>
 </head>
 <body>
 
@@ -63,7 +79,6 @@
     <span></span>
   </ul>
 
-  <script src="./jquery1.12.4.js"></script>
   <script>
     /*
       滑动选项卡
@@ -76,23 +91,23 @@
           => 你在第 n 个 li 的时候, span 的 left 值为 n * 100
     */
 
-    $('ul > li').mouseover(function () {
-      // 拿到你移入的时哪一个 li
-      // console.log(this) // 你移入的那一个 li
-      // 拿到移入的这个 li 的索引值 index()
-      // console.log($(this).index())
+    // $('ul > li').mouseover(function () {
+    //   // 拿到你移入的时哪一个 li
+    //   // console.log(this) // 你移入的那一个 li
+    //   // 拿到移入的这个 li 的索引值 index()
+    //   // console.log($(this).index())
 
-      // 让 span 的 left 值跟着改变就可以了
-      //   运动就使用 animate() 函数
-      // $('span').animate({
-      //   left: $(this).index() * 100
-      // })
+    //   // 让 span 的 left 值跟着改变就可以了
+    //   //   运动就使用 animate() 函数
+    //   // $('span').animate({
+    //   //   left: $(this).index() * 100
+    //   // })
 
-      // 每次移入的时候, 都让之前的动画停止, 直接做最新的这个动画
-      $('span').stop().animate({
-        left: $(this).index() * 100
-      })
-    })
+    //   // 每次移入的时候, 都让之前的动画停止, 直接做最新的这个动画
+    //   $('span').stop().animate({
+    //     left: $(this).index() * 100
+    //   })
+    // })
   </script>
 </body>
 </html>
