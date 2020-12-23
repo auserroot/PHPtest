@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background:tomato;
+            padding:20px;
+            border:30px solid #ccc;
+            margin:70px;  
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jquery获取元素尺寸
+                + 尺寸:元素的占地面积
+                    ==> width和height
+                    ==> padding
+                    ==> border
+                    ==> margin
+                + 三套方法,四种使用方法
+                + 这些方法都是不考虑盒模型的状态(不管是什么盒模型，都是固定区域)
+                    1 width()和height()
+                        ==> 元素内容区域的尺寸
+                    2 innerWidht()和innerHeight()
+                        ==> 元素内容区域+padding的尺寸
+                    3 outerWidth()和outerHeight()
+                        ==> 元素内容区域+padding+border的尺寸
+                    4 outerWidth(true)和outerHeight(true)
+                        ==> 元素内容区域+padding+border+margin的尺寸
+        */
+
+        // 1 width()和height()
+        console.log($('div').width())
+        console.log($('div').height())
+
+        // 2 innerWidht()和innerHeight()
+        console.log($('div').innerWidth())
+        console.log($('div').innerHeight())
+
+        // 3 outerWidth()和outerHeight()
+        console.log($('div').outerWidth())
+        console.log($('div').outerHeight())
+
+        // 4 outerWidth(true)和outerHeight(true)
+        console.log($('div').outerWidth(true))
+        console.log($('div').outerHeight(true))
+    </script>
+</body>
+</html>

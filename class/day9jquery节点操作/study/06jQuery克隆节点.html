@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            height: 200px;
+            background:pink;
+            margin-top:10px;
+        }
+        p{
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>1</p>
+    </div>
+    
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jquery克隆节点
+                + 复制一份一模一样的元素
+                1 clone()
+                    ==> 专门用来克隆节点的
+                    ==> 页面元素.clone()
+                    ==> 返回值:就是克隆出来的元素集合
+                    ==> 集合里面有一个元素就是克隆好的节点
+                    ==> 接收两个参数
+                        ==> clone(布尔值，布尔值)
+                        ==> 第一个参数:默认值是false，表示是否克隆元素的事件
+                        ==> 第二个参数:默认是跟随第一个，表示是否克隆子节点你的事件
+                        注意:当第一个参数为false的时候，第二个参数是没有意义的
+
+            回忆原生js
+                + cloneNode()
+                    ==> true：表示克隆子节点
+                    ==> false: 表示不克隆子节点
+                + clone()
+                    ==> 你传递或者不传递参数都克隆子节点
+
+        */
+        
+        // 给页面中的两个元素都添加事件
+        $('div').click(()=>{console.log('我是div')})
+        $('p').click(()=>{console.log('我是p');return false;})
+        // return false表示阻止冒泡
+
+        // 把div元素克隆一份
+        var $cloneDiv = $('div').clone(true,true);
+
+        // 把克隆出来的div放在原来div的后面
+        $('div').after($cloneDiv)
+
+        
+    </script>
+</body>
+</html>

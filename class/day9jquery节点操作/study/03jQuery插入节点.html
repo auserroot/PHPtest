@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            height: 200px;
+            background:pink;
+            margin-top:10px;
+        }
+        p{
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>我是本身写扎起div里面的p标签</p>
+    </div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jQuery插入节点
+                + 内部插入(父子关系)
+                    1 append()
+                        ==> 页面元素.append(要插入的元素)
+                        ==> 把要插入的元素放在页面元素的子元素位置，放在末尾
+                    2 appendTo()
+                        ==> 要插入的元素.appendTo(页面元素)
+                        ==> 把要插入的元素放在页面元素的子元素位置，放在末尾
+                    3 prepend()
+                        ==> 页面元素.prepend(要插入的元素)
+                        ==> 把要插入的元素放在页面元素的子元素位置，放在最前面
+                    4 prependTo()
+                        ==> 要插入的元素.prependTo(页面元素)
+                        ==> 把要插入的元素放在页面元素的子元素位置，放在最前面
+
+                + 外部插入(兄弟关系)
+                    5 after()
+                        ==> 页面元素.after(要插入的元素)
+                        ==> 要插入的元素放在页面元素的下一个兄弟元素位置
+                    6 insertAfter()
+                        ==> 要插入的元素.insertAfter(页面元素)
+                        ==> 要插入的元素放在页面元素的下一个兄弟元素位置
+                    7 before()
+                        ==> 页面元素.before(要插入的元素)
+                        ==> 要插入的元素放在页面元素的上一个兄弟元素位置
+                    8 insertBefore()
+                        ==> 要插入的元素.insertBefore(页面元素)
+                        ==> 要插入的元素放在页面元素的上一个兄弟元素位置
+
+        */
+
+        // 在页面元素里面插入子元素，在末尾
+        $('div').append($('<p>hello world end!</p>'))
+        // $('div').append('<p>hello world end!</p>')
+        $('<p>hello world end2!</p>').appendTo($('div'));
+        // $('<p>hello world end2!</p>').appendTo('div');
+
+
+        // 在页面元素里面插入子元素，在最前面
+        $('div').prepend($('<p>hello world start!</p>'))
+        $('<p>hello world start2!</p>').prependTo($('div'))
+
+        // 要插入的元素放在页面元素的下一个兄弟元素位置
+        $('div').after($('<div>next</div>'))
+        $('<div>next2</div>').insertAfter($('div:eq(0)'))
+
+        // 要插入的元素放在页面元素的上一个兄弟元素位置
+        $('div:eq(0)').before($('<div>prev</div>'))
+        $('<div>prev2</div>').insertBefore($('div').eq(0))
+    </script>
+</body>
+</html>

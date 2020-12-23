@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            height: 200px;
+            background:pink;
+            margin-top:10px;
+        }
+        p{
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>我是本身写扎起div里面的p标签</p>
+    </div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jquery删除节点
+                1 empty() 空
+                    ==> 页面元素.empty()
+                    ==> 把页面逆元素变成一个空标签
+                    ==> 所有的子元素都干掉
+                2 remove() 移除
+                    ==> 页面元素.remove()
+                    ==> 把自己从页面里面移除
+                + 没有删除某一个子节点的方法
+                    ==> 想删除一个子节点怎么办?
+                    ==> 因为jQuery的选择器的功能强大
+                    ==> 直接找到要删除的节点,remove()
+        */
+
+        // 1 empty()
+        // 把div变成空标签
+        // $('div').empty()
+
+        // 2 remove()
+        // 把div标签移除
+        // $('div').remove()
+
+        // 想删除div里面的p标签
+        $('div').children('p').remove()
+
+    </script>
+</body>
+</html>
