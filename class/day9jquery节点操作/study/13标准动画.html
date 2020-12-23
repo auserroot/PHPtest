@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background:red;
+            margin:20px;
+        }
+    </style>
+</head>
+<body>
+    <button class="show">显示</button>
+    <button class="hide">隐藏</button>
+    <button class="toggle">切换</button>
+    <div></div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jquery的标准动画
+                1 show() 显示
+                    => 语法:show(时间,动画曲线,动画结束的函数)
+                2 hide() 隐藏
+                    => 语法:hide(时间,动画曲线,动画结束的函数)
+                3 toggle() 切换隐藏和显示
+                    => 语法:toggle(时间,动画曲线,动画结束的函数)
+                + 上面三个方法参数都是可选的，如果不加参数，就没有动画效果
+        */
+        // 点击显示按钮
+        $('.show').click(function(){
+            $('div').show(2000,'linear',function(){
+                console.log('显示结束')
+            })
+        })
+        // 点击隐藏按钮
+        $('.hide').click(function(){
+            $('div').hide('fast','linear',function(){
+                console.log('隐藏结束')
+            })
+        })
+        // 点击切换按钮
+        $('.toggle').click(function(){
+            $('div').toggle(1000,'linear',function(){
+                console.log('切换结束')
+            })
+        })
+
+    </script>
+</body>
+</html>

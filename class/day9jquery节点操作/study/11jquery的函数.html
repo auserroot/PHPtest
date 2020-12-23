@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        // $(document).ready(function(){
+        //     // html加载完毕
+        //     $('div').click(function(){
+        //         alert(1)
+        //     })
+        // }) 
+
+        $(function(){
+            // html加载完毕
+            $('div').click(function(){
+                alert(1)
+            })
+        })
+    </script>
+</head>
+<body>
+    <div>
+
+    </div>    
+    <script>
+        /* 
+            jquery的方法
+                + ready() 事件
+                    ==> 类似window.onload事件
+                    ==> window.onload => 会在页面所有的资源加载完成后执行
+                    ==> ready() => 会在页面html结构加载完成后执行
+                + 也叫做jquery的入口函数
+                + 有一个简写形式
+                    => $(function(){})
+                + each() 方法
+                    ==> 类似forEach(),遍历数组的
+                    ==> jquery的元素集合，是一个jquery数组，不是一个数组，不能使用forEach
+                    ==> forEach语法: arr.forEach(function(item,index){})
+                    ==> 语法: jquery的元素集合.each(function(index,item){})
+                    ==> 比较少用到，因为jquery隐式迭代
+                        ==> 自动遍历
+        */
+    </script>
+</body>
+</html>

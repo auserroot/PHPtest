@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            background:red;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top:300px;
+            left:300px;
+        }
+    </style>
+</head>
+<body>
+    <button>开始动画</button>
+    <div></div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            综合动画
+                1 animate()
+                    ==> 大部分css样式都可以动画
+                    ==> transform不行，颜色不行
+                    ==> 语法:animate({},时间,运动曲线,运动结束的函数)
+                    ==> {}里面就写要运动css属性
+                    ==> 运动结束后是否占位置，取决于元素是否脱落标准流
+        */
+
+        $('button').click(function(){
+            $('div').animate({
+                width:300,
+                height:300,
+                left:30,
+                top:50,
+                borderRadius:'50%',
+                opacity:0.5
+            },2000,'linear',function(){
+                console.log('动画完成')
+            })
+        })
+    </script>
+</body>
+</html>

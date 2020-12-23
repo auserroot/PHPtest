@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul li{
+            list-style: none;
+        }
+        ul{
+            width: 1000px;
+            height: 60px;
+            border-bottom:3px solid skyblue;
+            margin:50px auto;
+            display:flex;
+            position: relative
+        }
+        li{
+            flex:1;
+            height: 100%;
+            text-align: center;
+            line-height: 60px;
+            cursor: pointer;
+        }
+        span{
+            width: 100px;
+            height: 3px;
+            background:red;
+            position: absolute;
+            left:0;
+            bottom:-3px;
+        }
+    </style>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            需求分析:
+                1 鼠标移入哪个li
+                    => 每隔li的宽度是100
+                2 span就缓动到哪个li的下面
+                    => 如果鼠标在索引为0的li上面
+                    => span的left:0
+                    => 如果鼠标在索引为1的li上面
+                    => span的left:100
+                    => span的left = 所在li的索引*每个li的宽度
+        */
+        $(function(){
+            $('ul>li').mouseover(function(){
+                // 拿到你移入的是哪一个li
+                // console.log(this)
+                // 拿到你移入的是那一个li的索引
+                // console.log($(this).index())
+                // 让span的left改变就可以了
+                // $('span').animate({
+                //     'left':$(this).index()*$(this).width()
+                // })
+
+                // 每次移入的时候，都让之前的动画停止，直接做最新的动画
+                $('span').stop().animate({
+                    left:$(this).index()*$(this).width()
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <ul>
+        <li>选项1</li>
+        <li>选项2</li>
+        <li>选项3</li>
+        <li>选项4</li>
+        <li>选项5</li>
+        <li>选项6</li>
+        <li>选项7</li>
+        <li>选项8</li>
+        <li>选项9</li>
+        <li>选项10</li>
+        <span></span>
+    </ul>
+</body>
+</html>

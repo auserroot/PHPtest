@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 10000px;
+            width: 5000px;
+        }
+    </style>
+</head>
+<body>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jquery获取滚动的尺寸
+                + scrollTop()
+                    ==> 原生js: 
+                    ==> document.documentElement.scrollTop||document.body.scrollTop
+                    ==> 读写的方法
+                    ==> 不传递参数表示获取卷去的高度
+                    ==> 传递一个参数就是设置卷去的高度
+                + scrollLeft()
+                    ==> 原生js: 
+                    ==> document.documentElement.scrollLeft||document.body.scrollLeft
+                    ==> 读写的方法
+                    ==> 不传递参数表示获取卷去的宽度
+                    ==> 传递一个参数就是设置卷去的宽度
+        */
+
+        $(window).scroll(function(){
+            console.log($(this).scrollTop(),$(this).scrollLeft())
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background:red;
+            margin:20px;
+        }
+    </style>
+</head>
+<body>
+    <button class="show">显示</button>
+    <button class="hide">隐藏</button>
+    <button class="to">透明度变成0.5</button>
+    <button class="toggle">切换</button>
+    <div></div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            渐显渐隐动画
+                1 fadeIn() -> 渐渐的显示（透明度变化）
+                    ==> 语法:fadeIn(时间,动画曲线,动画结束的函数)
+                2 fadeOut() -> 渐渐的隐藏（透明度变化）
+                    ==> 语法:fadeOut(时间,动画曲线,动画结束的函数)
+                3 fadeToggle() -> 切换显示和隐藏（透明度变化）
+                    ==> 语法:fadeToggle(时间,动画曲线,动画结束的函数)
+                + 上面的三个方法，参数都是可选的，不写参数就是默认动画
+
+                4 fadeTo() -> 去到一个指定的透明度
+                    ==> 语法:fadeTo(时间,指定的透明度,动画曲线,动画结束的函数)
+                    ==> 时间,指定的透明度是必须的
+        */
+
+        // 点击显示按钮
+        $('.show').click(function(){
+            $('div').fadeIn(1000,'linear',function(){
+                console.log('show finish')
+            })
+        })
+        // 点击隐藏按钮
+        $('.hide').click(function(){
+            $('div').fadeOut('slow','linear',function(){
+                console.log('hide finish')
+            })
+        })
+        // 点击切换按钮
+        $('.toggle').click(function(){
+            $('div').fadeToggle(2000,'linear',function(){
+                console.log('toggle finish')
+            })
+        })
+        // 点击to按钮，去到指定透明度
+        $('.to').click(function(){
+            $('div').fadeTo(1000,0.5)
+        })
+
+    </script>
+</body>
+</html>

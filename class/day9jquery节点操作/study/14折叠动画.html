@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background:red;
+            margin:20px;
+        }
+    </style>
+</head>
+<body>
+    <button class="show">显示</button>
+    <button class="hide">隐藏</button>
+    <button class="toggle">切换</button>
+    <div></div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            折叠动画
+                1 slideDown -> 下滑显示
+                    ==> 语法:slideDown(时间,动画曲线,动画结束的函数)
+                2 slideUp -> 上滑隐藏
+                    ==> 语法:slideUp(时间,动画曲线,动画结束的函数)
+                3 slideToggle -> 切换显示（下滑）和隐藏（上滑）
+                    ==> 语法:slideToggle(时间,动画曲线,动画结束的函数)
+                + 上面三个方法参数都是可选的，如果不加参数，就是默认的动画效果
+                    ==> 时间:normal
+                    ==> 动画曲线:swing
+        */
+
+        // 点击显示按钮
+        $('.show').click(function(){
+            $('div').slideDown(1000,'linear',function(){
+                console.log('显示结束')
+            })
+        })
+
+        // 点击隐藏按钮
+        $('.hide').click(function(){
+            $('div').slideUp('fast','linear',function(){
+                console.log('隐藏结束')
+            })
+        })
+
+        // 点击切换按钮
+        $('.toggle').click(function(){
+            $('div').slideToggle(2000,'linear',function(){
+                console.log('切换结束')
+            })
+        })
+    </script>
+</body>
+</html>

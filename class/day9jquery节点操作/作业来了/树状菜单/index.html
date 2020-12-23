@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul, ol, li {
+      list-style: none;
+    }
+
+    ul {
+      width: 300px;
+      border: 3px solid pink;
+      margin: 30px auto;
+      padding-left: 20px;
+    }
+
+    ul > li {
+      cursor: pointer;
+    }
+
+    /* 二级菜单 */
+    li > ol {
+      padding-left: 20px;
+      display: none;
+    }
+
+    /* 包含一级菜单和二级菜单的所有 li */
+    li::before {
+      content: '+ ';
+    }
+
+    /* 有 active 类名的 li 的 before 伪元素样式 */
+    li.active::before {
+      content: '- ';
+    }
+
+  </style>
+</head>
+<body>
+
+  <ul>
+    <li>一级菜单
+      <ol>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+      </ol>
+    </li>
+    <li>一级菜单
+      <ol>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+      </ol>
+    </li>
+    <li>一级菜单
+      <ol>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+        <li>二级菜单</li>
+      </ol>
+    </li>
+  </ul>
+
+  <script src="./lib/jquery1.12.4.js"></script>
+ 
+  <script>
+      /*
+        需求分析:
+        一.布局
+        1 有三个一级菜单,每个一级菜单有一个子元素的二级菜单
+        2 每个菜单(li)的前面有一个+号
+        3 当一级菜单展开的时候,该一级菜单前面的+变成-号
+        二.特效
+        1 点击一级菜单
+        2 该一级菜单下面的子元素二级菜单下拉显示
+        3 其他一级菜单下面的子元素二级菜单都上拉隐藏
+      
+      */
+      $('ul>li').click(function(){
+        //this是被点击的li的dom节点,要转化成jquery元素
+        $(this)
+        .addClass('active')
+        .children('ol')
+        .slideDown()
+        .parent()
+        .siblings()
+        .removeClass('active')
+        .children('ol')
+        .slideUp()
+      })
+  </script>
+</body>
+</html>

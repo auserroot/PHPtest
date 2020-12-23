@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 10000px;
+        }
+        div{
+            position: fixed;
+            bottom:20px;
+            right:20px;
+            width: 100px;
+            height: 100px;
+            line-height: 50px;
+            text-align: center;
+            font-size:35px;
+            background:chartreuse;
+            color:cornsilk;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>回到顶部</div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            需求分析
+                1 页面滚动到300px的时候，显示回到顶部按钮
+                2 点击回到顶部按钮，页面滚动回顶部
+        */
+        // 1 页面滚动到300px的时候，显示回到顶部按钮
+        $(window).scroll(function(){
+            if($(this).scrollTop()>300){
+                // 显示回到顶部按钮
+                $('div').css('display','block')
+            }
+            if($(this).scrollTop()<=300){
+                // 隐藏回到顶部按钮
+                $('div').css('display','none')
+            }
+        })
+        // 2 点击回到顶部按钮，页面滚动回顶部
+        $('div').click(function(){
+            $(window).scrollTop(0)           
+        })
+    </script>
+</body>
+</html>

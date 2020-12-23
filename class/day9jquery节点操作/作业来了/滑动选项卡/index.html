@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul, li {
+      list-style: none;
+    }
+
+    ul {
+      width: 1000px;
+      height: 60px;
+      border-bottom: 3px solid skyblue;
+      margin: 50px auto;
+      /* 这里的弹性布局时为了让 li 横向排列 */
+      display: flex;
+      position: relative;
+    }
+
+    li {
+      /* 每一个 li 占父元素的一份 */
+      flex: 1;
+      height: 100%;
+      /* 再 li 里面写 弹性布局是为了让文字绝对居中 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    span {
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100px;
+      height: 3px;
+      background-color: red;
+    }
+
+  </style>
+</head>
+<body>
+
+  <ul>
+    <li>选项1</li>
+    <li>选项2</li>
+    <li>选项3</li>
+    <li>选项4</li>
+    <li>选项5</li>
+    <li>选项6</li>
+    <li>选项7</li>
+    <li>选项8</li>
+    <li>选项9</li>
+    <li>选项10</li>
+    <span></span>
+  </ul>
+
+  <script src="./jquery1.12.4.js"></script>
+  <script>
+    /*
+      滑动选项卡
+        + 每一个 li 添加一个鼠标移入事件
+          => 每一次让 span 移动一个固定的位置
+          => 修改 span 的 left 值
+          => 当你再 第 0 个 li 的时候, span 的 left 值为 0
+          => 当你再 第 1 个 li 的时候, span 的 left 值为 100
+          => 当你再 第 2 个 li 的时候, span 的 left 值为 200
+          => 你在第 n 个 li 的时候, span 的 left 值为 n * 100
+    */
+
+    $('ul > li').mouseover(function () {
+      // 拿到你移入的时哪一个 li
+      // console.log(this) // 你移入的那一个 li
+      // 拿到移入的这个 li 的索引值 index()
+      // console.log($(this).index())
+
+      // 让 span 的 left 值跟着改变就可以了
+      //   运动就使用 animate() 函数
+      // $('span').animate({
+      //   left: $(this).index() * 100
+      // })
+
+      // 每次移入的时候, 都让之前的动画停止, 直接做最新的这个动画
+      $('span').stop().animate({
+        left: $(this).index() * 100
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>轮播图</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding:0;
+		}
+		ul li{
+			list-style: none;
+		}
+		#main{
+			width:760px;
+			height: 300px;
+			position: relative;
+			margin:50px auto;
+		}
+		#main .pic{
+			width: 760px;
+			height: 300px;
+			overflow: hidden;
+		}
+		#main .pic ul li{
+			width: 760px;
+			height: 300px;
+			position: relative;
+		}
+		#main .pic ul li .img1{
+			position: absolute;
+			top:0;
+			left:-760px;
+			display: block;
+		}
+		#main .pic ul li .img2{
+			position: absolute;
+			top:0;
+			left:-20px;
+			display: none;
+		}
+		#main .nav{
+			position: absolute;
+			right:20px;
+			bottom:20px;
+		}
+		#main .nav ul li{
+			float: left;
+			width:10px;
+			height: 10px;
+			border:1px solid #fff;
+			margin-left:5px;
+		}
+		#main .nav ul li.select{
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div class="pic">
+			<ul>
+				<li style="background:url(./img/bg1.jpg)">
+					<img src="./img/text1.png" class="img1">
+					<img src="./img/con1.png" class="img2">
+				</li>
+				<li style="background:url(./img/bg2.jpg)">
+					<img src="./img/text2.png" class="img1">
+					<img src="./img/con2.png" class="img2">
+				</li>
+				<li style="background:url(./img/bg3.jpg)">
+					<img src="./img/text3.png" class="img1">
+					<img src="./img/con3.png" class="img2">
+				</li>
+				<li style="background:url(./img/bg4.jpg)">
+					<img src="./img/text4.png" class="img1">
+					<img src="./img/con4.png" class="img2">
+				</li>
+				<li style="background:url(./img/bg5.jpg)">
+					<img src="./img/text5.png" class="img1">
+					<img src="./img/con5.png" class="img2">
+				</li>
+			</ul>
+		</div>
+		<div class="nav">
+			<ul>
+				<li class="select"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+
+	</div>
+<script type="text/javascript" src="./lib/jquery1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//有几个li标签
+		var $len = $('.pic ul li').size();
+		//记录当前li的索引
+		var index = 0;
+		var $pic = $('.pic ul li');//所有的li
+		myShow();
+		function myShow(){
+			$pic.eq(index).find('.img1').animate({left:0},1000,function(){
+				$pic.eq(index).find('.img2').css({display:'block'});
+				$pic.eq(index).find('.img2').animate({left:0},1000);
+			})
+		}  
+		setInterval(function(){
+			index++;
+			if(index>=$len){
+				index=0;
+			}
+			
+			$pic.eq(index).fadeIn(300).siblings().fadeOut(300);//当前index对应的li背景渐显,其他兄弟背景渐隐
+			$('.nav ul li').eq(index).addClass('select').siblings().removeClass('select');
+			myShow();//当时当前index对应的里面的图片
+			//还原其他的
+			$pic.eq(index).siblings().find('.img1').css({left:'-760px'})
+			$pic.eq(index).siblings().find('.img2').css({left:'-20px','display':'none'})
+		},2000)
+	})
+</script>
+</body>
+</html>

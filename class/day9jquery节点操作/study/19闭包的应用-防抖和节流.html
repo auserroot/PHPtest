@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 10000px;
+        }
+    </style>
+</head>
+<body>
+    <button id='btn'>不要一直点击我</button>
+    <script>
+        /* 
+            闭包
+                ==> 概念
+                    + 一个函数A里面返回一个函数B
+                    + 在函数A外部有一个变量接收函数B
+                    + 函数B可以使用函数A里面的私有变量
+                    ==> 函数A的执行空间就是闭包空间
+                    ==> 函数B叫做函数A的闭包函数
+                    ==> 作用:延长函数A里面的私有变量的生命周期
+                ==> 应用
+                    + 防抖和节流
+                    + 都是防止函数多次调用
+                    + 假设一个用户一直触发某个函数，且触发频繁，每次触发函数的间隔都小于wait
+                        ==> 防抖的情况下只会调用一次，能够有效的避免资源浪费，节省存储空间
+                        ==> 节流的情况下每隔一定时间调用函数，相对保守，不易造成资源请求的丢失
+
+        */
+
+        // 节流实例（点击按钮）
+        var clickHandler = ()=>{
+            // 函数A
+            var preTime = new Date().getTime();//记录起始时间
+            return ()=>{
+                // 函数B
+                var nowTime = new Date().getTime();
+                if(nowTime-preTime>1000){
+                    console.log('执行点击事件');
+                    preTime = new Date().getTime();
+                }
+            }
+        }
+        btn.addEventListener('click',clickHandler())
+
+        // 防抖实例（滚动监听）
+        var scrollHandler = ()=>{
+            // 函数A
+            var timer = null;
+            return ()=>{
+                // 函数B
+                clearTimeout(timer);
+                timer = setTimeout(()=>{
+                    console.log('执行滚动事件')
+                },1000)
+            }
+        }  
+        window.addEventListener('scroll',scrollHandler())          
+    </script>
+</body>
+</html>
