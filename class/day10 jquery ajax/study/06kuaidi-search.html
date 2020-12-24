@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0 ;
+        }
+        .box{
+            width: 500px;
+            margin:30px auto;
+            border:2px solid olive;
+            padding:10px;
+            line-height: 40px;
+        }
+        button{
+            width: 100px;
+            background-color: orangered;
+            color:white;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <select>
+            <option value="yuantong">圆通快递</option>
+            <option value="huitong">百世快递</option>
+            <option value="yunda">韵达快递</option>
+            <option value="shentong">申通快递</option>
+            <option value="zhongtong">中通快递</option>
+            <option value="tiantian">天天快递</option>
+        </select>
+        <label for="no">单号</label><input type="text" id='no'>
+        <button>查询</button>
+        <ul>
+
+        </ul>
+    </div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            需求分析
+                1 可以在文本框里面输入快递单号，在select里面选择快递公司
+                2 点击button，发送ajax查询快递数据节点
+                3 获取到数据，渲染到ul里面
+        */
+
+        $('button').click(function(){
+            var company = $('select').val();//获取公司名称
+            var no = $('#no').val();//获取快递单号
+            
+            getData(no,company);// 75419226498693
+            
+        })
+
+        async function getData(no,company){
+            // 发送ajax,获取快递数据
+            var data = await $.ajax({
+                url:'/kuaidi',
+                data:{
+                    key:"",
+                    number:no,
+                    company:company
+                }
+            })
+            // 根据数据渲染ul
+            data = data.newslist[0].list;//数组
+            $.each(data,function(index,item){
+                // console.log(index,item)
+                $('ul').append($(`<li><span class='left'>${item.content}</span><span class='right'>${item.time}</span> </li>`))
+            })
+        }
+    </script>
+</body>
+</html>

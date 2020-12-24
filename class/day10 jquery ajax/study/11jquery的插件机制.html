@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>    
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jquery的插件机制
+                ==> 全局的jquery方法
+                    + $.get()
+                    + $.post()
+                    + $.ajax()
+                    + $.each()
+                ==> jquery实例对象上的方法
+                    + $('div').css()
+                    + $('div').show()
+                    + $('div').hide()
+                    + $('div').animate()
+        */
+
+        // 扩展在全局的jquery上的方法
+        $.extend({
+            fn1:function(){
+                console.log(this);//$
+                console.log('fn1')
+            },
+            fn2:function(){
+                console.log(this);//$
+                console.log('fn2')
+            }
+        })
+        $.fn1()
+        $.fn2()
+        // 扩展在jquery实例对象上的方法，$.fn.extend是固定写法
+        $.fn.extend({
+            check:function(){
+                console.log(this);//jquery的实例化对象
+                console.log('check')
+            }
+        })
+        $('ul').check()
+        $('li').check()
+
+
+    </script>
+</body>
+</html>

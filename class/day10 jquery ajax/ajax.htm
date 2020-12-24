@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /*
+            jquery 发送ajax请求
+                jquer中的ajax请求方法
+                    $.get() 用于发送get请求
+                    $.post() 用于发送post请求
+                    $.ajax() 可以发送任意请求（get、post、put、delete...)
+                        还能发送jsonp请求
+                        
+            jquery发送get请求
+                语法：
+                    $.get(请求地址,需要携带到后端的参数，成功的回调函数，期望后端返回的数据类型)
+                        请求地址： 要请求的后端接口地址（必填
+                        需要携带到后端的参数
+                            可以是一个固定格式的字符串'key1=value1&key2=value2...'(参数用&链接)
+                            也可以是一个对象：
+                                    {
+                                        a:100，
+                                        b：200
+                                    }
+                        成功的回调函数  请求成功后执行
+                        期望后端返回的数据类型  
+                                    不需要jquery解析响应体（默认不解析）
+                                    传递一个json的时候，会自动解析（调用JSON.parse解析）
+            jquery发送一个post请求
+                语法：
+                    $.post(请求地址,需要携带到后端的参数，成功的回调函数，期望后端返回的数据类型)
+                        参数与get请求相同
+            jquery的$.ajax()方法
+                用来发送ajax综合请求（get、post、put、delete...）
+                语法：
+                    $.ajax(对象)
+                        对象是对本次请求的所有配置
+                        $.ajax({
+                            url:'请求地址',
+                            type:'请求方式',//get/post/delete/put...
+                            method:'请求方式（同type）',
+                            data:'携带到后端的数据',
+                            dataType:'期望后端返回的数据类型',//默认不解析，常用json和jsonp
+                            async:true,//是否异步 默认true
+                            success:function(data){},//成功的回调函数
+                            error:function(){},//失败的回调函数
+                            timeout:数字,//单位 ms ，超时 如果超时则请求失败
+                            cache:true,//是否缓存，默认true
+                            context:上下文,//可以改变this指向
+                            ...
+                        })
+            $.ajax() 失败的回调
+                不仅是失败时触发
+                jquery认为请求失败时也会触发
+                        当dataType写成json时，jquery会自动调用JSON.parse()
+                        当后端返回值不是一个json字符串时，执行JSON.parse()就会报错，此时也会执行失败回调
+            
+            $.ajax() 缓存问题
+                当两次请求同一个地址时，就会缓存
+                如果将cache写成false 表示不要缓存
+                    此时jquery会在每次请求后追加一个参数（时间戳）
+                        例：
+                            第一次请求:./server/json.php?_=3974032744
+                            第二次请求:./server/json.php?_=3240328408
+            
+            $.ajax里面的回调this指向问题
+                    ==> ajax的回调里面默认this指向被jquery加工过的ajax对象
+                    ==> context的值你写的是谁，回调函数里面的this就是谁
+        */
+    </script>
+</body>
+</html>

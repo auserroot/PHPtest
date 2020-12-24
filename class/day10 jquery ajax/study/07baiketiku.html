@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .box{
+            width: 500px;
+            margin:50px auto;
+            border:2px dotted #ccc;
+            padding:10px;
+        }
+        li{
+            list-style: none;
+            line-height: 40px;
+            padding-left:15px;
+            font-size:20px;
+        }
+        .right{
+            color:green;
+        }
+        .wrong{
+            color:red;
+        }
+        .button{
+            text-align: center;
+        }
+        button{
+            margin-left:5px;
+            width: 100px;
+            height: 40px;
+            border:none;
+            outline: none;
+            background-color: red;
+            color:white;
+            font-weight: 900;
+        }
+        h3,h4{
+            padding-left:30px;
+            font-weight: 100px;
+            font-size: 16px;
+            line-height: 25px;
+        }
+        input{
+            margin-right:10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="question">
+            
+        </div>
+        <div class="button">
+            <button class="submit">提交</button>
+            <button class="next">下一题</button>
+        </div>
+        <div style="display: none;" class="answer">
+            
+        </div>
+    </div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            需求分析
+                1 页面打开的时候，发送ajax请求
+                2 获取随机题目，渲染都页面上
+                3 当用户提交答案的时候，显示正确答案和解析
+                4 点击下一题的时候，随机显示一个题目
+        */
+
+        // 技术点
+        // 如何获取被选中的单选按钮的value
+        // $('.submit').click(function(){
+        //     console.log($('input[name="question"]:checked').val())
+        // })
+
+        var answer = "";
+        // 开始完成需求
+        async function getData(){
+            // 发送ajax请求，获取数据
+            var data = await $.ajax({
+                url:'/baike',
+                method:'get',
+                data:{
+                    key:""
+                }
+            })
+            // 把数据渲染到页面上
+            data = data.newslist[0];
+            // 先把问题渲染到question这个div里面
+            $('.question').html(`<h1>${data.title}</h1>
+            <ul>
+                <li>
+                    <input type="radio" name="question" value="A">
+                    A <span>${data.answerA}</span>
+                </li>
+                <li>
+                    <input type="radio" name="question" value="B">
+                    B <span>${data.answerB}</span>
+                </li>
+                <li>
+                    <input type="radio" name="question" value="C">
+                    C <span>${data.answerC}</span>
+                </li>
+                <li>
+                    <input type="radio" name="question" value="D">
+                    D <span>${data.answerD}</span>
+                </li>
+            </ul>`)
+
+            // 把答案渲染到answer这个div里面
+            $('.answer').html(`<h3>正确答案是:<span>${data.answer}</span></h3>
+            <h4>解析</h4>
+            <div>
+                ${data.analytic}
+            </div>`);
+
+            // 更新正确答案
+            answer = data.answer;
+        }
+
+        // 1 页面打开的时候，发送ajax请求，渲染第一个题目
+        getData()
+
+        // 2 当用户提交答案的时候，显示正确答案和解析
+        $('button').click(function(){
+            var yourAnswer = $('input[name="question"]:checked').val();
+            if(yourAnswer!=answer){
+                // 回答错误
+                $('.answer h3 span').removeClass('right').addClass('wrong')
+            }else{
+                // 回答正确
+                $('.answer h3 span').removeClass('wrong').addClass('right')
+            }
+            $('.answer').show()
+        })
+
+        // 3 点击下一题的时候，随机显示一个题目
+        $('.next').click(function(){
+            $('.answer').hide()
+            getData();
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jquery的全局钩子函数
+                + 钩子:挂在你的身上，你的所有动作都和他有关系
+                + 这些全局函数都是挂在ajax身上的，这个ajax的每一个动作都和全局函数有关系
+                + 全局钩子函数
+                    1 ajaxStart()
+                        ==> 会在同一个作用域下多个ajax的时候，第一个ajax开始之前触发
+                        ==> 如果有多个ajax他只能触发一次
+                    2 ajaxSend()
+                        ==> 每一个ajax在发送出去之前，都会触发一次
+                        ==> xhr.send()之前触发
+                    3 ajaxSuccess()
+                        ==> 每一个ajax成功的时候触发
+                        ==> 只要有一个ajax成功了就会触发
+                    4 ajaxError()
+                        ==> 每一个ajax失败的时候触发
+                        ==> 只要有一个ajax失败了就会触发
+                    5 ajaxComplete()
+                        ==> 每一个ajax完成的时候触发
+                        ==> 只要有一个ajax完成了，不管成功还是失败都会触发
+                    6 ajaxStop()
+                        ==> 会在同一个作用域下多个ajax的时候,最后一个ajax完成以后触发
+                        ==> 如果有多个ajax他只能触发一次
+                    + 作用:通常用来做loading效果
+        */
+        // 提前准备钩子函数
+        $(window).ajaxStart(function(){
+            console.log('第一个请求要开始了');//1
+        })
+        $(window).ajaxSend(function(){
+            console.log('有一个请求要发送出去了');//2 2 2 
+        })
+        $(window).ajaxSuccess(function(){
+            console.log('有一个请求成功了');//3 3 3 
+        })
+        $(window).ajaxError(function(){
+            console.log('有一个请求失败了')
+        })
+        $(window).ajaxComplete(function(){
+            // 不管成功还是失败都是完成
+            console.log('有一个请求完成了');//4 4 4 
+        })
+        $(window).ajaxStop(function(){
+            console.log('最后一个请求完成了');//5 
+        })
+
+
+        // 发送一个请求
+        $.ajax({
+            url:"./json.php",
+            data:{a:100,b:200},
+            dataType:'json',
+            success:function(res){
+                console.log(res)
+            }
+        })
+        // 在发送一个请求
+        $.ajax({
+            url:"./jsonp.php",
+            data:{a:300,b:400},
+            dataType:'jsonp',
+            success:function(res){
+                console.log(res)
+            }
+        })
+
+        // 在发送一个请求
+        $.ajax({
+            url:"./data.json",
+            dataType:'json',
+            success:function(res){
+                console.log(res)
+            }
+        })
+    </script>
+</body>
+</html>

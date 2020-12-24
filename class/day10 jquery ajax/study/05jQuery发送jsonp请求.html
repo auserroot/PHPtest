@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jquery发送一个jsonp请求
+                + 使用$.ajax()这个方法
+                    ==> dataType必须写"jsonp"
+                + 发送jsonp请求
+                    ==> jquery帮我们准备好了一个函数名，并且以参数的形式带到了后端
+                    ==> jquery帮我们带过去的callback参数就是他准备好的函数名
+                        ==> ?callback = 准备好的函数名
+                    ==> 后端应该返回一个函数调用:  jquery准备好的函数名(数据)
+
+                + 参数
+                    ==> jsonp:'',//你带到后端表示你函数名的的那个key，就相当于callback
+                    ==> jsonpCallback:'',//替换jquery提前准备好的函数名，就相当于callback=fn里面的fn
+                    ==> cache:false,//当dataType写成jsonp的时候，cache默认就是false
+        */
+
+        // jquery发送一个jsonp请求
+        // 1 请求jsonp.php
+        $.ajax({
+            url:'./jsonp.php',
+            dataType:'jsonp',
+            success:function(data){
+                // data就是后端传递出来的数据
+                console.log(data)
+            },
+            jsonpCallback:'fn'
+        })
+
+        // 2 请求百度关键字联系api
+        // 回调函数写法1
+        // $.ajax({
+        //     url:"https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1445,33359,33306,31253,32971,33284,33351,33313,33312,33311,33310,33309,33308,33307,33237,33264,33383&req=2&csor=1",
+        //     data:{
+        //         wd:'163'
+        //     },
+        //     dataType:'jsonp',
+        //     jsonp:'cb',
+        //     success:function(data){
+        //         console.log(data)
+        //     }
+
+        // })
+
+        // 回调函数写法2
+        $.ajax({
+            url:"https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1445,33359,33306,31253,32971,33284,33351,33313,33312,33311,33310,33309,33308,33307,33237,33264,33383&req=2&csor=1",
+            data:{
+                wd:'taobao'
+            },
+            dataType:'jsonp',
+            jsonp:'cb'
+        }).then(res=>{
+            console.log(res)
+        })
+    </script>
+</body>
+</html>

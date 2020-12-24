@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            width: 300px;
+            border:3px solid pink;
+            margin:30px auto;
+            padding-left:20px;
+        }
+        li{
+            list-style: none;
+        }
+        /* 一级菜单 */
+        ul>li{
+            cursor: pointer;
+        }
+        /* 二级菜单 */
+        li>ol{
+            padding-left:20px;
+            display: none;
+        }
+        /* 使用位元素写+号 */
+        /* 包含一级菜单和二级菜单的所有li */
+        li::before{
+            content:"+"
+        }
+        /* 有active类名的li的before位元素就是“-”号 */
+        li.active::before{
+            content:'-'
+        }
+    </style>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            /* 
+                树状菜单
+                    + 一级菜单有n个
+                        ==> 每个一级菜单下面都有二级菜单
+                        ==> 所有的二级菜单都是收起来的
+                    + 每个一级菜单点击的时候
+                        ==> 自己下面的二级菜单打开:slideDown()
+                        ==> 其他兄弟下面的二级菜单收起来:slideUp()
+            */
+
+            // 每个一级菜单都有点击事件
+            $('ul>li').click(function(){
+                // 点击的时候
+                // 自己有active类名,自己的子元素ol slideDown()
+                // 兄弟元素去除active类名，兄弟元素的子元素ol slideUp()
+                $(this)
+                .addClass('active')
+                .children('ol')
+                .slideDown()
+                .parent()
+                .siblings()
+                .removeClass('active')
+                .children('ol')
+                .slideUp()
+
+            })
+        })
+    </script>
+</head>
+<body>
+    <ul>
+        <li>一级菜单
+          <ol>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+          </ol>
+        </li>
+        <li>一级菜单
+          <ol>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+          </ol>
+        </li>
+        <li>一级菜单
+          <ol>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+          </ol>
+        </li>
+      </ul>
+</body>
+</html>

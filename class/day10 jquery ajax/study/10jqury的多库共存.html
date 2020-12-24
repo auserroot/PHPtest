@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px;
+            height:100px;
+            background:red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jquery的多库共存
+                + 我们一直在使用jquery，都没有什么问题
+                + 但是如果有一天，我们需要引入一个别的插件或者库的时候
+                + 人家也向外暴露的是$或者jQuery
+                + 那么，我们的jQuery这个变量就不能使用
+                + 这个时候，jquery为我们提供了一个多库并存的方法
+        */
+        // 这个方法可以交还jQuery的命名控制权
+        // $.noConflict();
+        // 上面代码执行完毕以后，$这个变量就不能用了,但是jQuery这个变量还是可以使用的
+        // console.log($);//undefined
+        // console.log(jQuery);//可以使用
+
+        // 完全交出控制权
+        // jQuery.noConflict(true);
+        // 上面代码执行完毕以后,$和jQuery都不能用了
+        // console.log($);//undefined
+        // console.log(jQuery);//undefined
+
+        // 更换控制权
+        var aa = jQuery.noConflict(true);
+        // 可以用一个变量来接收返回值，这个变量就是新的控制权
+        // 接下来就可以吧aa当初jquery向外暴露的接口使用了
+        aa('div').click(function(){
+            alert(1)
+        })
+    </script>
+</body>
+</html>

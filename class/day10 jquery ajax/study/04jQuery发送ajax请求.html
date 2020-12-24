@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        /* 
+            jQuery发送一个ajax请求
+                + 封装了几个方法专门发送ajax请求的
+                1 $.get() -> 专门发get请求
+                2 $.post() -> 专门发post请求
+                3 $.ajax() -> 发送什么请求都可以(get,post,put,delete,...)
+                    --> 还可以发送jsonp请求
+            
+            jQuery发送一个get请求
+                + 语法:$.get(请求地址,需要携带到后端的参数，成功的回调函数，期望后端返回的数据类型)
+                    ==> 请求地址：你要请求的后端接口的地址(必填)
+                    ==> 需要携带到后端的参数
+                        ==> 可以是一个固定格式的字符串:'key1=value1&key2=value2'
+                        ==> 也可以是一个对象:{a:100,b:200}
+                    ==> 成功的回调函数：当请求成功以后会执行的函数
+                    ==> 期望后端返回的数据类型：就是你需不需要jquery帮你解析响应体
+                        ==> 默认不解析
+                        ==> 传递一个'json'的时候，会自动帮你调用JSON.parse解析
+            jQuery发送一个post请求
+                + 语法:$.post(请求地址,需要携带到后端的参数，成功的回调函数，期望后端返回的数据类型)
+                    ==> 四个参数和get是一样的
+
+            jQuery的$.ajax方法
+                + 用来发送综合ajax请求的(get,post,put,delete,...)
+                + 语法:$.ajax(对象)
+                    ==> 对象是对本请求的所有配置
+                    ==> $.ajax({
+                        url:'',//请求地址（必填）
+                        type:'',//请求方式:get/post/put/delete/...
+                        method:'',//请求方式,同type
+                        data:'',//携带到后端的参数
+                        dataType:'',//期望后端返回的数据类型，默认不解析，常用的用:json和jsonp
+                        async:true,//是否异步
+                        success:function(data){} ,//成功的回调
+                        error:function(){} ,//失败的回调
+                        timeout:数字,//单位是ms,超时时间(如果超过这个时间还没有响应，那么就算失败)
+                        cache:true,//是否缓存，默认是true
+                        context:上下文,//可以改变回调函数里面的this指向
+                        ......
+                    })
+                $.ajax里面的失败的回调
+                    ==> 不光是失败的时候会触发
+                    ==> jquery认为失败就是失败
+                        ==> 当dataType写成json的时候，jquery会帮我们执行JSON.parse()
+                        ==> 当后端返回的不是一个json字符串的时候
+                        ==> 执行JSON.parse()就会报错
+                        ==> 也会执行失败的回调，请求虽然成功，但是解析失败了，也是失败
+                        ==> JSON.parse('hello world') -> 就会报错
+
+                $.ajax里面是否缓存的问题
+                    ==> 这个请求要不要缓存
+                    ==> 当两次请求地址一样的时候，就会缓存
+                    ==> 如果你写成false，表示不要缓存
+                    ==> jquery就会自动再你的请求后面加一个参数_=时间戳
+                        -> 第一次请求:./server/json.php?_=3974032744
+                        -> 第二次请求:./server/json.php?_=3240328408
+
+                $.ajax里面的回调this指向问题
+                    ==> ajax的回调里面默认this指向被jquery加工过的ajax对象
+                    ==> context的值你写的是谁，回调函数里面的this就是谁
+        */
+
+        // 1 jQuery发送一个get请求
+        // $.get('./json.php',{a:100,b:299},function(data){
+        //     // 这个形参data就是后端返回给前端的数据
+        //     console.log(data)
+        // },'json')
+
+        // 2 jQuery发送一个post请求
+        // 2.1 回调函数
+        // $.post('./json.php',{a:200,b:400},function(data){
+        //     // 这个形参data就是后端返回给前端的数据
+        //     console.log(data)
+        // },'json')
+
+        // 2.2 使用promise语法
+        // $.post('./json.php',{a:200,b:400}).then(res=>{
+        //     console.log(res)
+        // })
+
+        // 2.3 使用async/await语法
+        // async function getData(){
+        //     var data = await $.post('./json.php',{a:200,b:400});
+        //     console.log(data)
+        // }
+
+        // getData()
+
+
+        // 3 jQuery的$.ajax方法
+        $.ajax({
+            url:'./json.php',
+            method:'get',
+            dataType:'json',
+            success:function(data){
+                // 这个形参data就是后端返回给前端的数据
+                console.log(data)
+                console.log(this)
+            },
+            timeout:1000,
+            error:function(){
+                console.log('失败了')
+            },
+            cache:false,
+            context:{a:1,b:2}         
+        })
+    </script>
+</body>
+</html>
