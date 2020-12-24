@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="./jquery1.12.4.min.js"></script>
+    <script src="./study/jquery1.12.4.min.js"></script>
     <script>
         /*
             jquery 发送ajax请求
@@ -72,6 +72,51 @@
                     ==> ajax的回调里面默认this指向被jquery加工过的ajax对象
                     ==> context的值你写的是谁，回调函数里面的this就是谁
         */
-    </script>
+
+                //jquery 发送get请求
+                // $.get('./study/json.php',{a:100,b:299},function(data){
+                //     //data是后端返回给前端的数据
+                //     console.log(data);
+                // },'json')
+
+                //发送post请求
+                //回调函数
+                // $.post('./study/json.php',{a:100,b:299},function(data){
+                //     //data是后端返回给前端的数据
+                //     console.log(data);
+                // },'json')
+
+                // Promise语法(.then接回调函数)
+                // $.post('./study/json.php',{a:100,b:299}).then(res=>{
+                //     //data是后端返回给前端的数据
+                //     console.log(res);
+                // },'json')
+
+                //async/await
+                // async function getDate(){
+                //     var data = await $.post('./study/json.php',{a:100,b:299})
+                //     //data是后端返回给前端的数据
+                //     console.log(data);
+                // }
+                // getDate()
+
+
+                //$.ajax
+                $.ajax({
+                    url:'./study/json.php',
+                    type:'get',
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data);
+                        console.log(this);
+                    },
+                    timeout:1000,
+                    error:function(){
+                        console.log('失败')
+                    },
+                    cache:false,
+                    context:{a:22,b:222}
+                });
+</script>
 </body>
 </html>
