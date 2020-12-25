@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 2 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="box" style="width: 500px;height:500px;"></div>
+
+    <!-- 1 引入 ECharts -->
+    <script src="./echarts.js"></script>
+
+    <script>
+        // 引入ECharts以后，就多了一个echarts对象,里面有很多的方法
+
+        // 3 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('box'));
+
+        // 4 指定图表的配置项和数据
+        var option = {
+            // title表示图标的标题
+            title: {
+                // 其中text就是标题文字
+                text: '天气预报'
+            },
+            // legend表示图例
+            legend: {
+                // data里面的内容要和series里面的name一致
+                data:['salary','销量']                
+            },
+            // x轴
+            xAxis: {
+                // x轴的刻度
+                data: ["12-25","12-26","12-27","裤子","高跟鞋","袜子"]
+            },
+            // y轴
+            yAxis: {
+
+            },
+            // 系列设置
+            series: [
+                // 就是一个系列的数据，这个系列的名字就做“销量”,这个系列的展示形式是“柱形图”
+                {
+                    name: 'salary',
+                    type: 'line',
+                    // data数据要和xAxis的data对应
+                    data: [5, 20, 36, 10, 10, 20]
+                },
+                {
+                    name: '销量',
+                    type: 'line',
+                    data: [15, 34, 56, 12, 110, 120]
+                }
+            ]
+        };
+
+        // 5 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option)
+    </script>
+</body>
+</html>

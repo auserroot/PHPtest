@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width:1200px;
+            margin:0 auto;
+        }
+        .container>.items{
+            padding-top:40px;
+            position: relative;
+        }
+        .container>.items>.item{            
+            width:232px;
+            position: absolute;
+            box-shadow: 0 1px 3px rgba(0,0,0,.3);
+        }
+        .container>.items>.item>img{
+            width:100%;
+            display: block;
+        }
+        .container>.items>.item>p{
+            padding:10px;
+            background:#fff;
+        }
+        .container>.btn{
+            width: 280px;
+            height: 40px;
+            line-height: 40px;
+            margin:30px auto;
+            background:#ccc;
+            border-radius: 5px;
+            text-align: center;
+            font-size:15px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="items">      
+            
+        </div>
+        <div class="btn">
+            点击加载更多
+        </div>
+    </div>
+    <script src="./jquery1.12.4.min.js"></script>
+    <!-- 封装函数版本 -->
+    <!-- <script src="./waterfall.js"></script> -->
+    <!-- jquery插件版本 -->
+    <script src="./waterfall-fn.js"></script>
+    <script>
+        /* 
+            需求分析:
+                1 根据接口数据，在items渲染多个item,每个item里面包含图片和文本
+                2 把items里面的item变成瀑布流布局
+                    ==> 给每个item定位到他所处的位置
+                    ==> 给items一个固定高度
+        */
+
+        
+        // 1 打开页面的时候主动获取数据，并把item渲染items里面
+        getDataAndRender()
+        // getDataAndRender:请求并渲染数据
+        async function getDataAndRender(){
+            // 获取数据
+            var data = await $.ajax({
+                url:'./data.json',
+                type:'get',
+                dataType:'json'
+            })
+            // 把item渲染items里面
+            $.each(data,function(index,item){
+                $(`<div class="item">
+                        <img src="${item.path}" alt="" style="height:${item.height}px">
+                        <p>${item.text}</p>
+                </div>`).appendTo($('.items'))
+            })
+            // 把items里面的item变成瀑布流布局
+            // 方法1: 封装函数版本
+            // waterfall()
+            // 方法2: 插件版本-扩展在全局的juqery对象上
+            // $.waterfall()
+            // 方法3: 插件版本-扩展在juqery实例对象上
+            $('.items').waterfall()
+        }
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            display:block;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>商品id</th>
+                <th>商品名称</th>
+                <th>商品图片</th>
+                <th>商品价格</th>
+                <th>商品数量</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    
+    <!-- 展示已经购买的商品的信息 -->
+    <!-- 可以修改商品数量/删除购物车里面的商品 -->
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        // 1 展示已经购买的商品的信息
+        showData()
+        async function showData(){
+            var data = await $.ajax({
+                url:'http://localhost/06cart/interface/showlist.php',
+                dataType:'json'
+            })
+            if(data.code===1){
+                data = data.data;
+                $('tbody').empty()
+                $.each(data,function(index,item){
+                    $(`<tr>
+                        <td>${item.product_id}</td>
+                        <td>${item.product_name}</td>
+                        <td>
+                            <img src="${item.product_img}">
+                        </td>
+                        <td>${item.product_price}</td>
+                        <td>
+                            <span class="add">+</span>
+                            <input type="text" value="${item.product_num}">
+                            <span class="cut">-</span>
+                        </td>
+                        <td class="del">
+                            删除
+                        </td>
+                    </tr>`).appendTo($('tbody'))
+                })
+            }
+           
+        }
+        
+
+        // 2 修改商品数量
+        $('tbody').on('click','span',async function(){
+            var data = await $.ajax({
+                url:"http://localhost/06cart/interface/update.php",
+                type:'get',
+                data:{
+                    id:$(this).parents('tr').children().eq(0).html(),
+                    type:this.className
+                },
+                dataType:"json"
+            })
+            if(data.code==1){
+                if(this.className=="add"){
+                    var num = $(this).siblings('input').val();
+                    $(this).siblings('input').val(+num+1)
+                    
+                }else{
+                    var num = $(this).siblings('input').val();
+                    $(this).siblings('input').val(num-1)
+                }
+            }
+        })
+
+        // 3 删除商品
+        $('tbody').on('click','.del',async function(){
+            var data = await $.ajax({
+                url:"http://localhost/06cart/interface/del.php",
+                data:{
+                    id:$(this).parent().children().eq(0).html()
+                },
+                dataType:"json"
+            })
+            if(data.code==1){
+                showData()
+            }
+        })
+    </script>
+</body>
+</html>

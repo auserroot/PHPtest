@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            display:block;
+            width:100%;
+        }
+        .container{
+            width: 1600px;
+            margin:0 auto;
+        }
+        div.form{
+            width: 1600px;
+            margin:0 auto;
+        }
+        div.left{
+            width: 650px;
+            float: left;
+            height: 200px;
+        }
+        div.right{
+            float:right;
+            width: 950px;
+            height:200px;
+        }
+        .form{
+            padding:20px;
+        }
+        .right div{
+            float: left; 
+            margin-right:20px;
+        }
+        a{
+            text-decoration: none;
+            width: 20px;
+            height: 20px;
+            display: block;       
+            text-align: center;
+            line-height: 18px;
+            font-size:20px;
+            border:1px solid #ccc;
+            box-sizing: border-box;
+            color:rgb(8, 8, 8);
+        }
+        a.disabled{
+            background:#f1f1f1;
+            cursor: not-allowed;
+        }
+        a.add{
+            border-bottom:none;
+        }
+        input{
+            width: 50px;
+            height: 40px;
+            border:none;
+            outline: none;
+            border:1px solid #ccc;
+            border-right:none;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 40px;
+            float: left;
+
+        }
+        
+        button{
+            width: 100px;
+            height: 40px;
+            background-color:#e2231a;
+            font-size:20px;
+            color:white;
+            text-align: center;
+            line-height: 40px;
+            border:none;
+            outline: none;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./img/detail-cart.png" alt="">
+        <img src="./img/detail-2.png" alt="">
+    </div>
+    <div class="form">
+        <div class="left"></div>
+        <div class="right">
+            <input type="text" value="1">
+            <div>
+                <a href="javascript:;" class="add">+</a>
+                <a href="javascript:;" class="disabled cut">-</a>
+            </div>
+            <button>点击购买</button>
+        </div>
+    </div>
+    <h1 style="display:none;">12324324</h1>
+    <script src="./jquery1.12.4.min.js"></script>
+    <script>
+        // 点击购买按钮
+        // 获取用户输入的商品数量
+        // 获取本页面的商品id
+        // 获取本页面的商品价格
+        // 获取本页面的商品名称
+        // 获取本页面的商品图片
+        $('button').click(async function(){
+            var data = await $.ajax({
+                url:"http://localhost/06cart/interface/add.php",
+                type:'get',
+                data:{
+                    id:$('h1').html(),
+                    name:'沐浴露',
+                    price:451,
+                    num:$('input').val(),
+                    img:"./img/chabei.jpg"
+                },
+                dataType:'json'
+            })
+            if(data.code===1){
+                alert('商品添加成功')
+            }
+        })
+    </script>
+</body>
+</html>
