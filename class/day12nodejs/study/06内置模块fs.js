@@ -42,7 +42,7 @@ const fs = require('fs');//导入这个fs模块
 // })
 
 
-// 2 fs.readFileSync()
+// // 2 fs.readFileSync()
 // var data = fs.readFileSync('./06.txt','utf8');
 // console.log(data)
 
@@ -53,9 +53,9 @@ const fs = require('fs');//导入这个fs模块
 // })
 
 
-// 4 fs.writeFileSync()
-fs.writeFileSync('./06.txt','11111');
-console.log('写入完成')
+// // 4 fs.writeFileSync()
+// fs.writeFileSync('./06.txt','11111');
+// console.log('写入完成')
 
 // 作业1:我要向一个文件里面追加一些内容
 // 作业2:我要复制一个文件
