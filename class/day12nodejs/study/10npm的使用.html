@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            npm的使用
+                + 专门用来在你的项目里面下载第三方依赖包的工具
+
+                1 指令:npm install 包名 (简写 npm i 包名)
+                    + 下载包使用的
+                    + 你需要在哪一个文件夹里面使用，就在哪一个文件夹里面开启命令行
+                    + 执行完毕以后，会自动下载，会在你的当前目录多一个文件夹；node_modules
+                    + 这个文件夹里面就是你下载的第三方包
+                        ==> npm install jquery
+                        ==> 使用npm这个工具(install)下载jquery这个包
+                2 指令: npm install 包名@版本号 (简写 npm i 包名@版本号)
+                    + 下载指定版本的包使用的,npm默认下载最新版本的
+                    + 同名的包在node_modules里面只能保留一个
+                3 npm init (简写 npm init -y )
+                    + 初始化当前项目
+                    + 就是给你生成一个文件，用来描述你当前的项目
+                    + 记录当前使用npm下载了那些依赖包
+                    + 执行完毕以后，会让你填写一些内容
+                        ==> package name必须使用英文
+                    + 填写完毕以后再当前目录下回生成一个package.json文件
+                        ==> 这个文件是用来记录你的项目信息的
+                        ==> 只要你使用npm下载第三方依赖，他会自动记录下来
+
+                4 指令:npm uninstall 包名(简写 npm un 包名)
+                    + 把不需要的第三方依赖删除掉
+                    + 有两种方法
+                        1 直接手动删除 -> 不会更新package.json
+                        2 使用指令删除 -> 会更新package.json
+                5 指令: npm install (简写 npm i)
+                    + 默认读取当前文件夹下的package.json
+                    + 会把里面记录的所有第三方包一次下载下来
+                    + 如果没有package.json文件，就什么都下载不下来了
+                    + 我们在传输项目的时候，不需要传递node_modules这个文件夹
+                        ==> 因为我们传输项目的时候里面有package.json文件
+                        ==> 只要把package.json文件保留就可以了，到你的电脑上再次下载就行了
+                        ==> 我下载下来长什么样，你下载也一样
+                        ==> node_modules里面很多细碎的文件，传输容易丢失
+
+
+        */
+    </script>
+</body>
+</html>
