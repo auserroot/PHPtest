@@ -1,0 +1,1 @@
+"use strict";console.log("a.js"),img.onclick=function(){img.src="../images/2.jpg"};

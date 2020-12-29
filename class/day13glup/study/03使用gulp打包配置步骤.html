@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            使用gulp打包配置步骤
+                + gulp:自动化打包工具
+                    == 手动告诉他如何完成事情
+                + 在gulp里面需要手动书写一个配置文件
+                    == 配置文件：告诉gulp如何完成事情
+                    == 每个人写项目文件夹都不同
+                        -- pages/views -- 放html文件
+                        -- css  -- 放css文件
+                        -- js -- 放js文件
+                        -- images/image/img -- 放图片文件
+                        -- font/fonts -- 放字体图标文件
+                        -- video/videos -- 放视频文件
+                    == 文件夹不同，后期写的gulp配置文件就需要根据具体的路径来更改配置
+
+                + gulp使用之前准备
+                    1 准备一个项目文件夹:cyrshop
+                        - cyrshop
+                            - src/    我所有的原始代码
+                                - pages/ -- 放html文件
+                                - css/  -- 放css文件
+                                - js/ -- 放js文件
+                                - images/ -- 放图片文件
+                                - lib/ -- 放的第三方js插件:jquery,swiper
+                            + package.json  记录项目信息写描述文件
+                            + gulpfile.js   项目的gulp打包配置文件
+                    2 使用npm init初始化一个项目
+                        + 为了要初始化：后期会使用大量的第三方依赖
+                        + 使用package.json可以记录使用的包的信息
+                        + 顺便也记录一下项目信息
+                    3 自己手动在项目根目录里创建gulpfile.js文件
+                        + 名字必须是gulpfile.js
+                        + 和package.json同级
+                        + 这就是整个项目的gulp打包配置文件
+                书写gulpfile.js里面的配置文件了
+                    1 借助一些gulp的API（方法）来搬我们进行打包
+                        + 先要在项目里面安装一个gulp，作为本地开发依赖
+                        + 把这个第三方模块导入进来
+                    2 准备一个一个的打包规则了
+                        + 因为打包js和css和html的规则肯定不一样
+                        + 所有我们要一个一个的书写规则
+                    3 执行各种压缩代码的方式
+                        + 都是使用各种第三方依赖模块
+                        + gulp-cssmin 第三方模块是专门用来压缩css文件的
+                            == 你需要下载，导入，使用
+                        + gulp-autoprefixer 第三方模块是专门用给css自动添加前缀的
+                            == 你需要下载，导入，使用
+                        + gulp-uglify 第三方模块是专门用来压缩js文件的
+                            == 你需要下载，导入，使用
+                            == 注意: 这个第三方包不认识es6语法，不能转换压缩es6语法
+                        + gulp-babel 第三方模块是专门用来转es6语法的
+                            == 这个第三方依赖依赖了另外两个第三方包
+                                -- @babel/core和@babel/preset-env
+                            == 下载的时候要下载三个包
+                        + gulp-htmlmin 第三方模块是专门用来压缩html文件的
+                            == 你需要下载，导入，使用
+                        + del 第三方模块是专门用来删除目录的
+                            == 你需要下载，导入，使用
+                        + gulp-webserver 第三方模块是专门用来开启服务器的
+                            == 你需要下载，导入，使用
+                        
+                本地安装
+                    + 开发时依赖：打包的时候这些模块不需要打包到我们的项目中
+                        + 下载的时候
+                        + 指令: npm install 包名 --save-dev
+                            -- 简写: npm i 包名 -S-D
+                        + 这类包在package.json里面放在：devDependencies
+                            
+                    + 上线时和开发时都依赖:打包的时候这些模块需要打包到我们的项目中
+                        + 下载的时候
+                        + 指令: npm install 包名 --save
+                            -- 简写: npm i 包名 -S
+                        + 这类包在package.json里面放在：dependencies
+
+            注意:
+                如果在打包的时候报错:can not find module "@babel/core"
+                解决办法:重新下载一次这个包
+        */
+    </script>
+</body>
+</html>

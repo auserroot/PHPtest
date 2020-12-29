@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            了解nrm
+                + npm:包管理器
+                    == 管理第三方依赖
+                    == npm默认的下载地址在国外
+                    == 距离我们远，下载时间长，容易出问题
+                + nrm:npm的镜像源地址管理工具
+                    == 镜像源地址:npm的下载地址
+                    == 管理工具:就是管理这些镜像源地址
+                + nrm的安装
+                    == 安装在电脑里面的一个工具
+                    == 当命令行使用
+                    == 全局安装
+                    == 直接使用npm安装
+                        == 指令:npm inastall nrm --global  
+                            -- 简写: npm i nrm -g
+                            -- 使用npm下载一个第三方的全局模块nrm
+                + 检测
+                    == 指令:nrm --version   或者  nrm -v
+                + nrm的使用
+                    1 nrm test
+                        == 检测所有可用的镜像地址的网络延迟
+                        == 需要比较长时间，因为要检测每一个镜像源地址
+                        == 要等最慢的哪一个网络延迟返回才能测试完成，才一起返回给你看
+                        ==  npm ---- 915ms
+                            yarn --- 890ms
+                            cnpm --- 630ms
+                          * taobao - 336ms
+                            nj ----- Fetch Error
+                            npmMirror  971ms
+                            edunpm - Fetch Error
+                        == * 表示你正在使用的
+                    2 nrm use 镜像地址名称
+                        == 切换下载地址
+                        == nrm use taobao
+                            -- 切换taobao镜像，以后npm下载的时候就都从taobao镜像下载了
+
+        
+        
+        + 本地安装和全局安装的区别
+            1 本地安装
+                == 下载的包在当前项目的根目录的node_modules文件夹里面
+                == 如何使用: 在项目中使用require('模块名')导入使用
+                == 导入以后就可以使用模块里面定义的方法了
+                == 不能当命令行使用
+            2 全局安装
+                == 下载完成以后就是电脑里面的命令行工具了
+                == 可以再电脑里面的任意位置输入命令行使用
+                == 不能在项目中使用require('模块名')导入使用
+
+            3 如果即要当命令行使用，我项目里面有要使用它的方法
+                == 方法一:全局安装+本地安装
+                == 方法二：
+                    -- 现在当前项目中本地安装
+                    -- 然后使用npx把本地模块当成命令行运行
+                        -- 以前全局安装完成后输入指令: gulp
+                        -- 使用npx输入指令要在安装了本地模块的项目文件夹中:npx gulp
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background:pink;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <!-- 我是注释 -->
+    <h1>我是index.html</h1>
+    <input type="checkbox" checked="true">
+    <button>彩虹屁</button>
+    <button>百度百科</button>
+    <img src="../images/1.jpg" id="img">
+    <script src="../lib/jquery1.12.4.min.js"></script>
+    <script src="../js/a.js"></script>
+    <script src="../js/b.js"></script>
+    <script src="../js/index.js"></script>
+    <script>
+        console.log('我是index.html里面script标签里面的代码')
+        // sum() // 会报错，由于严格模式
+        // 测试代理
+        $('button:eq(0)').click(function(){
+            $.ajax({
+                url:'/caihongpi',
+                dataType:"json",
+                success:function(data){
+                    console.log(data)
+                }
+            })
+        })
+
+        $('button:eq(1)').click(function(){
+            $.ajax({
+                url:'/baike',
+                success:function(data){
+                    console.log(data)
+                }
+            })
+        })
+    </script>
+</body>
+</html>
