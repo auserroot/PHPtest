@@ -1,9 +1,8 @@
 {
-  "name": "cyrshop",
+  "name": "study",
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
@@ -23,7 +22,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "browserslist":[
+  "browserslist": [
     "last 2 versions",
     "IOS>7",
     "FireFox<20",
